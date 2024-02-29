@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, Image, Pressable } from 'react-native';
+import { View, StyleSheet, Text, Image, Pressable, TextInput, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
@@ -30,9 +30,18 @@ function HomeScreen({ navigation }) {
 
 function StandsScreen() {
   return (
-    <View style={styles.standsScoutingContainer}>
-      <Text>Hang yourself</Text>
-    </View>
+    <ScrollView style={styles.standsScoutingContainer}>
+      <View style={styles.criteriaContainer}>
+        <Text style={styles.criteriaTeamNumberText}>Team Number</Text>
+        <TextInput
+          style={styles.criteriaTeamNumberInput}
+          placeholder='4308'
+          placeholderTextColor='#959595'
+          keyboardType='numeric'
+          maxLength={4}
+        />
+      </View>
+    </ScrollView>
   );
 }
 
@@ -134,5 +143,24 @@ const styles = StyleSheet.create({
     },
     textShadowColor: 'rgba(0, 0, 0, 0.5)',
     textShadowRadius: 5, 
+  },
+
+  criteriaContainer: {
+    flex: 1,
+    padding: 20,
+  },
+
+  criteriaTeamNumberText: {
+    color: '#fff',
+    fontSize: 20,
+  },
+
+  criteriaTeamNumberInput: {
+    padding: 5,
+    paddingLeft: 12,
+    marginTop: 10,
+    color: '#fff',
+    borderWidth: 1,
+    borderColor: '#fff',
   }
 });
