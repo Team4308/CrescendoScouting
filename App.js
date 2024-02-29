@@ -32,13 +32,23 @@ function StandsScreen() {
   return (
     <ScrollView style={styles.standsScoutingContainer}>
       <View style={styles.criteriaContainer}>
-        <Text style={styles.criteriaTeamNumberText}>Team Number</Text>
+        <Text style={[styles.criteriaTeamNumberText, {marginTop: 8}]}>Team Number</Text>
         <TextInput
           style={styles.criteriaTeamNumberInput}
           placeholder='4308'
           placeholderTextColor='#959595'
           keyboardType='numeric'
           maxLength={4}
+        />
+      </View>
+      <View style={styles.criteriaContainer}>
+        <Text style={styles.criteriaMatchNumberText}>Match Number</Text>
+        <TextInput
+          style={styles.criteriaMatchNumberInput}
+          placeholder='69'
+          placeholderTextColor='#959595'
+          keyboardType='numeric'
+          maxLength={2}
         />
       </View>
     </ScrollView>
@@ -147,7 +157,8 @@ const styles = StyleSheet.create({
 
   criteriaContainer: {
     flex: 1,
-    padding: 20,
+    marginHorizontal: 20,
+    marginVertical: 10,
   },
 
   criteriaTeamNumberText: {
@@ -162,5 +173,19 @@ const styles = StyleSheet.create({
     color: '#fff',
     borderWidth: 1,
     borderColor: '#fff',
-  }
+  },
+  
+  criteriaMatchNumberText: {
+    color: '#fff',
+    fontSize: 20,
+  },
+
+  criteriaMatchNumberInput: {
+    padding: 5,
+    paddingLeft: 12,
+    marginTop: 10,
+    color: '#fff',
+    borderWidth: 1,
+    borderColor: '#fff',
+  },
 });
