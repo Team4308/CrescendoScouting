@@ -31,23 +31,133 @@ function HomeScreen({ navigation }) {
 function StandsScreen() {
   return (
     <ScrollView style={styles.standsScoutingContainer}>
+      <View style={styles.criteriaHorzContainer}>
+        <View style={styles.criteriaContainer}>
+          <Text style={[styles.criteriaText]}>Team Number</Text>
+          <TextInput
+            style={styles.criteriaTeamNumberInput}
+            placeholder='4308'
+            placeholderTextColor='#959595'
+            keyboardType='numeric'
+            maxLength={4}
+          />
+        </View>
+        <View style={styles.criteriaContainer}>
+          <Text style={styles.criteriaText}>Match Number</Text>
+          <TextInput
+            style={styles.criteriaMatchNumberInput}
+            placeholder='69'
+            placeholderTextColor='#959595'
+            keyboardType='numeric'
+            maxLength={2}
+          />
+        </View>
+      </View>
       <View style={styles.criteriaContainer}>
-        <Text style={[styles.criteriaTeamNumberText, {marginTop: 8}]}>Team Number</Text>
+        <Text style={styles.criteriaText}>Driver Skill</Text>
         <TextInput
-          style={styles.criteriaTeamNumberInput}
-          placeholder='4308'
+          style={styles.criteriaMatchNumberInput}
+          placeholder='Yes'
           placeholderTextColor='#959595'
-          keyboardType='numeric'
-          maxLength={4}
+          maxLength={2}
         />
       </View>
       <View style={styles.criteriaContainer}>
-        <Text style={styles.criteriaMatchNumberText}>Match Number</Text>
+        <Text style={styles.criteriaText}>Scoring Preference</Text>
         <TextInput
           style={styles.criteriaMatchNumberInput}
-          placeholder='69'
+          placeholder='Yes'
           placeholderTextColor='#959595'
-          keyboardType='numeric'
+          maxLength={2}
+        />
+      </View>
+      <View style={styles.criteriaContainer}>
+        <Text style={styles.criteriaText}>Strategy</Text>
+        <TextInput
+          style={styles.criteriaMatchNumberInput}
+          placeholder='Yes'
+          placeholderTextColor='#959595'
+          maxLength={2}
+        />
+      </View>
+      <View style={styles.criteriaContainer}>
+        <Text style={styles.criteriaText}>Scoring</Text>
+        <TextInput
+          style={styles.criteriaMatchNumberInput}
+          placeholder='Yes'
+          placeholderTextColor='#959595'
+          maxLength={2}
+        />
+      </View>
+      <View style={styles.criteriaContainer}>
+        <Text style={styles.criteriaText}>Penalties</Text>
+        <TextInput
+          style={styles.criteriaMatchNumberInput}
+          placeholder='Yes'
+          placeholderTextColor='#959595'
+          maxLength={2}
+        />
+      </View>
+      <View style={styles.criteriaContainer}>
+        <Text style={styles.criteriaText}>Comments</Text>
+        <TextInput
+          style={styles.criteriaMatchNumberInput}
+          placeholder='Yes'
+          placeholderTextColor='#959595'
+          maxLength={2}
+        />
+      </View>
+      <View style={styles.criteriaContainer}>
+        <Text style={styles.criteriaText}>Auto Speaker</Text>
+        <TextInput
+          style={styles.criteriaMatchNumberInput}
+          placeholder='Yes'
+          placeholderTextColor='#959595'
+          maxLength={2}
+        />
+      </View>
+      <View style={styles.criteriaContainer}>
+        <Text style={styles.criteriaText}>Auto Amp</Text>
+        <TextInput
+          style={styles.criteriaMatchNumberInput}
+          placeholder='Yes'
+          placeholderTextColor='#959595'
+          maxLength={2}
+        />
+      </View>
+      <View style={styles.criteriaContainer}>
+        <Text style={styles.criteriaText}>Tele Speaker</Text>
+        <TextInput
+          style={styles.criteriaMatchNumberInput}
+          placeholder='Yes'
+          placeholderTextColor='#959595'
+          maxLength={2}
+        />
+      </View>
+      <View style={styles.criteriaContainer}>
+        <Text style={styles.criteriaText}>Tele Amp</Text>
+        <TextInput
+          style={styles.criteriaMatchNumberInput}
+          placeholder='Yes'
+          placeholderTextColor='#959595'
+          maxLength={2}
+        />
+      </View>
+      <View style={styles.criteriaContainer}>
+        <Text style={styles.criteriaText}>Fumbled Speaker</Text>
+        <TextInput
+          style={styles.criteriaMatchNumberInput}
+          placeholder='Yes'
+          placeholderTextColor='#959595'
+          maxLength={2}
+        />
+      </View>
+      <View style={styles.criteriaContainer}>
+        <Text style={styles.criteriaText}>Fumbled Amp</Text>
+        <TextInput
+          style={styles.criteriaMatchNumberInput}
+          placeholder='Yes'
+          placeholderTextColor='#959595'
           maxLength={2}
         />
       </View>
@@ -74,9 +184,14 @@ export default function App() {
         <Stack.Screen name="standsScreen" component={StandsScreen} options={{
           title: 'Stands',
           headerRight: () => (
-            <Pressable style={styles.headerResetButton}>
-              <Text style={[styles.headerResetButtonText, {color: '#fff'}]}>Reset</Text>
-            </Pressable>
+            <View style={styles.headerButtonsContainer}>
+              <Pressable style={styles.headerPlayoffButton}>
+                <Text style={[styles.headerPlayoffButtonText, {color: '#fff'}]}>Is Playoff</Text>
+              </Pressable>
+              <Pressable style={styles.headerResetButton}>
+                <Text style={[styles.headerResetButtonText, {color: '#fff'}]}>Reset</Text>
+              </Pressable>
+            </View>
           ),
 
           headerStyle: {
@@ -161,7 +276,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
 
-  criteriaTeamNumberText: {
+  criteriaText: {
     color: '#fff',
     fontSize: 20,
   },
@@ -174,11 +289,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#fff',
   },
-  
-  criteriaMatchNumberText: {
-    color: '#fff',
-    fontSize: 20,
-  },
 
   criteriaMatchNumberInput: {
     padding: 5,
@@ -188,4 +298,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#fff',
   },
+
+  criteriaHorzContainer: {
+    flexDirection: 'row',
+    marginTop: 8,
+  }
 });
