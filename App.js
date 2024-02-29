@@ -53,16 +53,22 @@ function StandsScreen() {
           />
         </View>
       </View>
-      
-      <View style={styles.criteriaContainer}>
-        <Pressable>
 
+      <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]}>
+          <Text style={styles.generalText}>-5</Text>
+        </Pressable>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#7d0000'}]}>
+          <Text style={styles.generalText}>-2</Text>
         </Pressable>
 
-        <Text style={styles.criteriaText}>Tele Speaker</Text>
+        <Text style={styles.criteriaText}>Tele Speaker: 50</Text>
 
-        <Pressable>
-          
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#007d23'}]}>
+          <Text style={styles.generalText}>+2</Text>
+        </Pressable>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#00ab30'}]}>
+          <Text style={styles.generalText}>+5</Text>
         </Pressable>        
       </View>
       
@@ -189,7 +195,7 @@ export default function App() {
           title: 'Stands',
           headerRight: () => (
             <Pressable style={styles.headerResetButton}>
-              <Text style={[styles.headerResetButtonText, {color: '#fff'}]}>Playoffs</Text>
+              <Text style={[styles.generalText, {color: '#fff'}]}>Playoffs</Text>
             </Pressable>
           ),
 
@@ -260,7 +266,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#211a1e',
   },
 
-  headerResetButtonText: {
+  generalText: {
     color: '#fff',
     textShadowOffset: {
       height: 2,
@@ -300,5 +306,13 @@ const styles = StyleSheet.create({
 
   criteriaHorzContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
+  criteriaButton: {
+    backgroundColor: '#fff',
+    padding: '3%',
+    borderRadius: 10,
   },
 });
