@@ -33,7 +33,7 @@ function StandsScreen() {
     <ScrollView style={styles.standsScoutingContainer}>
       <View style={styles.criteriaHorzContainer}>
         <View style={styles.criteriaContainer}>
-          <Text style={[styles.criteriaText]}>Team Number</Text>
+          <Text style={[styles.criteriaText, {marginTop: '6%'}]}>Team Number</Text>
           <TextInput
             style={styles.criteriaTeamNumberInput}
             placeholder='4308'
@@ -43,7 +43,7 @@ function StandsScreen() {
           />
         </View>
         <View style={styles.criteriaContainer}>
-          <Text style={styles.criteriaText}>Match Number</Text>
+          <Text style={[styles.criteriaText, {marginTop: '6%'}]}>Match Number</Text>
           <TextInput
             style={styles.criteriaMatchNumberInput}
             placeholder='69'
@@ -53,6 +53,19 @@ function StandsScreen() {
           />
         </View>
       </View>
+      
+      <View style={styles.criteriaContainer}>
+        <Pressable>
+
+        </Pressable>
+
+        <Text style={styles.criteriaText}>Tele Speaker</Text>
+
+        <Pressable>
+          
+        </Pressable>        
+      </View>
+      
       <View style={styles.criteriaContainer}>
         <Text style={styles.criteriaText}>Driver Skill</Text>
         <TextInput
@@ -126,15 +139,6 @@ function StandsScreen() {
         />
       </View>
       <View style={styles.criteriaContainer}>
-        <Text style={styles.criteriaText}>Tele Speaker</Text>
-        <TextInput
-          style={styles.criteriaMatchNumberInput}
-          placeholder='Yes'
-          placeholderTextColor='#959595'
-          maxLength={2}
-        />
-      </View>
-      <View style={styles.criteriaContainer}>
         <Text style={styles.criteriaText}>Tele Amp</Text>
         <TextInput
           style={styles.criteriaMatchNumberInput}
@@ -184,14 +188,9 @@ export default function App() {
         <Stack.Screen name="standsScreen" component={StandsScreen} options={{
           title: 'Stands',
           headerRight: () => (
-            <View style={styles.headerButtonsContainer}>
-              <Pressable style={styles.headerPlayoffButton}>
-                <Text style={[styles.headerPlayoffButtonText, {color: '#fff'}]}>Is Playoff</Text>
-              </Pressable>
-              <Pressable style={styles.headerResetButton}>
-                <Text style={[styles.headerResetButtonText, {color: '#fff'}]}>Reset</Text>
-              </Pressable>
-            </View>
+            <Pressable style={styles.headerResetButton}>
+              <Text style={[styles.headerResetButtonText, {color: '#fff'}]}>Playoffs</Text>
+            </Pressable>
           ),
 
           headerStyle: {
@@ -249,7 +248,7 @@ const styles = StyleSheet.create({
   headerResetButton: {
     marginRight: '8%',
     backgroundColor: '#959595',
-    width: '30%',
+    width: '50%',
     height: '50%',
     justifyContent: 'center',
     alignItems: 'center',
@@ -301,6 +300,5 @@ const styles = StyleSheet.create({
 
   criteriaHorzContainer: {
     flexDirection: 'row',
-    marginTop: 8,
-  }
+  },
 });
