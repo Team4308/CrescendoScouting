@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
+import { Picker } from "@react-native-picker/picker";
 
 // >>> TABLE OF CONTENTS <<<
 // COMPONENTS
@@ -41,6 +42,31 @@ const ShortTextInput = ({
       keyboardType={keyboardType}
       maxLength={maxLength}
     />
+  </View>
+);
+
+const DropdownInput = ({
+  label,
+  options,
+  selectedOption,
+  setSelectedOption,
+}) => (
+  <View style={styles.criteriaContainer}>
+    <Text style={styles.criteriaText}>{label}</Text>
+    <View>
+      <Picker
+        selectedValue={selectedOption}
+        onValueChange={(itemValue, itemIndex) => setSelectedOption(itemValue)}
+      >
+        {options.map((option) => (
+          <Picker.Item
+            label={option}
+            value={option}
+            color="#fff"
+          />
+        ))}
+      </Picker>
+    </View>
   </View>
 );
 
@@ -303,7 +329,7 @@ function SettingsScreen({ navigation }) {
   const [newParam2, setNewParam2] = useState("");
 
   const updateParamsWithTextInput = () => {
-    console.log(newParam1, newParam2)
+    console.log(newParam1, newParam2);
     updateParams({
       userTeamNumber: newParam1 || userTeamNumber,
       competition: newParam2 || competition,
@@ -322,11 +348,17 @@ function SettingsScreen({ navigation }) {
         value={newParam1}
         maxLength={4}
       />
-      <ShortTextInput
+      {/* <ShortTextInput
         label="Competition"
         placeholder="Humber College"
         onChangeText={setNewParam2}
         value={newParam2}
+      /> */}
+      <DropdownInput
+        label="Competition"
+        options={["Humber College", "Centennial College", "McMaster University", "Provincial Championship"]}
+        selectedOption={newParam2}
+        setSelectedOption={setNewParam2}
       />
       <Pressable
         style={[styles.criteriaButton2, { marginTop: "5%" }]}
