@@ -18,6 +18,22 @@ const ShortTextInput = ({ label, placeholder, onChangeText, style, keyboardType,
   </View>
 );
 
+const IncrementDecrementButton = ({ title, value, increment, decrement, absolute}) => {
+  return (
+    <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
+      <Pressable style={[styles.criteriaButton, { backgroundColor: '#ad0000' }]} onPress={decrement}>
+        <Text style={styles.generalText}>-{absolute}</Text>
+      </Pressable>
+
+      <Text style={styles.criteriaText}>{title}: {value}</Text>
+
+      <Pressable style={[styles.criteriaButton, { backgroundColor: '#00ab30' }]} onPress={increment}>
+        <Text style={styles.generalText}>+{absolute}</Text>
+      </Pressable>
+    </View>
+  );
+};
+
 // Screen components
 function HomeScreen({ navigation }) {
   return (
@@ -80,41 +96,29 @@ function StandsScreen() {
         />
       </View>
 
-      <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
-        <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]} onPress={() => setAutoAmp(prev => prev - 2)}>
-          <Text style={styles.generalText}>-2</Text>
-        </Pressable>
+      <IncrementDecrementButton
+        title="Auto Amp"
+        value={autoAmp}
+        decrement={() => setAutoAmp(prev => prev - 2)}
+        increment={() => setAutoAmp(prev => prev + 2)}
+        absolute={2}
+      />
 
-        <Text style={styles.criteriaText}>Auto Amp: {autoAmp}</Text>
+      <IncrementDecrementButton
+        title="Auto Speaker"
+        value={autoSpeaker}
+        decrement={() => setAutoSpeaker(prev => prev - 5)}
+        increment={() => setAutoSpeaker(prev => prev + 5)}
+        absolute={5}
+      />
 
-        <Pressable style={[styles.criteriaButton, {backgroundColor: '#00ab30'}]}>
-          <Text style={styles.generalText}>+2</Text>
-        </Pressable>      
-      </View>
-
-      <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
-        <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]}>
-          <Text style={styles.generalText}>-5</Text>
-        </Pressable>
-
-        <Text style={styles.criteriaText}>Auto Speaker: {autoSpeaker}</Text>
-
-        <Pressable style={[styles.criteriaButton, {backgroundColor: '#00ab30'}]}>
-          <Text style={styles.generalText}>+5</Text>
-        </Pressable>      
-      </View>
-
-      <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
-        <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]}>
-          <Text style={styles.generalText}>-1</Text>
-        </Pressable>
-
-        <Text style={styles.criteriaText}>Tele Amp: {teleAmp}</Text>
-
-        <Pressable style={[styles.criteriaButton, {backgroundColor: '#00ab30'}]}>
-          <Text style={styles.generalText}>+1</Text>
-        </Pressable>    
-      </View>
+      <IncrementDecrementButton
+        title="Tele Amp"
+        value={teleAmp}
+        decrement={() => setTeleAmp(prev => prev - 1)}
+        increment={() => setTeleAmp(prev => prev + 1)}
+        absolute={1}
+      />
       
       <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
         <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]}>
@@ -134,29 +138,21 @@ function StandsScreen() {
         </Pressable>        
       </View>
 
-      <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
-        <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]}>
-          <Text style={styles.generalText}>-1</Text>
-        </Pressable>
+      <IncrementDecrementButton
+        title="Fum Amp"
+        value={fumAmp}
+        decrement={() => setFumAmp(prev => prev - 1)}
+        increment={() => setFumAmp(prev => prev + 1)}
+        absolute={1}
+      />
 
-        <Text style={styles.criteriaText}>Fum Amp: {fumAmp}</Text>
-
-        <Pressable style={[styles.criteriaButton, {backgroundColor: '#00ab30'}]}>
-          <Text style={styles.generalText}>+1</Text>
-        </Pressable>      
-      </View>
-
-      <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
-        <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]}>
-          <Text style={styles.generalText}>-1</Text>
-        </Pressable>
-
-        <Text style={styles.criteriaText}>Fum Speaker: {fumSpeaker}</Text>
-
-        <Pressable style={[styles.criteriaButton, {backgroundColor: '#00ab30'}]}>
-          <Text style={styles.generalText}>+1</Text>
-        </Pressable>      
-      </View>
+      <IncrementDecrementButton
+        title="Fum Speaker"
+        value={fumSpeaker}
+        decrement={() => setFumSpeaker(prev => prev - 1)}
+        increment={() => setFumSpeaker(prev => prev + 1)}
+        absolute={1}
+      />
 
       <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
         <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]}>
