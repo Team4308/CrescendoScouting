@@ -10,23 +10,23 @@ Feature requests can be submitted as an issue.
 
 ## To-Do
 
-### Urgent/Target
-- [x] !!! REACT CONTEXT FOR GLOBAL VARIABLES !!!
-- [x] Settings page for user name, user team, and current competition
-- [ ] [All] Standardization of naming (for literally everything...)
-- [ ] [All] Components and pages abstracted away into seperate js files
-- [ ] [Gordon] Pits... :(
-- [x] [All] userTeamNumber is not updating but competition is
-- [ ] [Jasmehar] Variable renaming and missing component additions
-- [ ] Add scoring preference (speaker or amp) input
+### Urgent!
+- [ ] QR Code Generation (Jasmehar)
+- [ ] Dropdown component for Android (Ayaan)
+
+### Target
+- [ ] Naming conventions (Jasmehar)
+- [ ] Missing criteria (Jasmehar)
 
 ### Low Priority
-- [ ] [Kavya] Useless CSS rules/CSS Optimization
-- [ ] [Kavya] Colors defined as CSS variables
-- [ ] [Kavya] Tune CSS spacing to be compatible with several screen sizes & resolutions
-- [ ] [Kavya] Dynamic button interaction responses
-- [ ] [Kavya] Theme Design (Light/dark mode, colors, accents)
-- [ ] [Ben] Switcing display of points in grid
+- [ ] Useless CSS rules/CSS Optimization (Kavya)
+- [ ] Colors defined as CSS variables (Kavya)
+- [ ] Tune CSS spacing to be compatible with several screen sizes & resolutions (Kavya)
+- [ ] Dynamic button interaction responses (Kavya)
+- [ ] Theme Design (Light/dark mode, colors, accents) (Kavya)
+- [ ] Switcing display of points in grid (Ben)
+- [ ] Components and pages abstracted away into seperate js files
 
 ### Hold
 - [ ] Migrate settings page to front screen (and remove the crescendo logo)
+- [ ] Pits page (delayed due to unfinished dropdown component)
