@@ -1,8 +1,8 @@
+import React, { createContext, useContext, useState } from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 import { View, StyleSheet, Text, Image, Pressable, TextInput, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
 
 // >>> TABLE OF CONTENTS <<<
 // COMPONENTS
