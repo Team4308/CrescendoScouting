@@ -16,7 +16,11 @@ Feature requests can be submitted as an issue.
 
 ### Target
 - [x] Naming conventions (Jasmehar)
-- [ ] Missing criteria (Jasmehar)
+- [ ] Missing criteria
+  - [ ] Add scoringPreference (amp or speaker)
+  - [ ] Add scoredTrap (boolean) 
+  - [ ] Add spotlight (boolean)
+  - [ ] Add scouterName (string)
 - [ ] Pits page (Aayan and Gordon)
 
 ### Low Priority
