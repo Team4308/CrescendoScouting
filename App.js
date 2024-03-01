@@ -4,6 +4,20 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 
+const ShortTextInput = ({ label, placeholder, onChangeText, style, keyboardType, maxLength }) => (
+  <View style={styles.criteriaContainer}>
+    <Text style={styles.criteriaText}>{label}</Text>
+    <TextInput
+      style={[styles.criteriaMatchNumberInput, style]}
+      placeholder={placeholder}
+      onChangeText={onChangeText}
+      placeholderTextColor='#959595'
+      keyboardType={keyboardType}
+      maxLength={maxLength}
+    />
+  </View>
+);
+
 // Screen components
 function HomeScreen({ navigation }) {
   return (
@@ -31,6 +45,7 @@ function HomeScreen({ navigation }) {
 
 function StandsScreen() {
   const [teamNumber, setTeamNumber] = useState('');
+  const [matchNumber, setMatchNumber] = useState('');
   const [autoAmp, setAutoAmp] = useState(0);
   const [autoSpeaker, setAutoSpeaker] = useState(0);
   const [teleAmp, setTeleAmp] = useState(0);
@@ -38,36 +53,35 @@ function StandsScreen() {
   const [fumAmp, setFumAmp] = useState(0);
   const [fumSpeaker, setFumSpeaker] = useState(0);
   const [penalties, setPenalties] = useState(0);
+  const [driverSkill, setDriverSkill] = useState('');
+  const [strategyDetails, setStrategyDetails] = useState('');
+  const [scoringDetails, setScoringDetails] = useState('');
+  const [comments, setComments] = useState('');
+
 
   return (
     <ScrollView style={styles.standsScoutingContainer}>
       <View style={styles.criteriaHorzContainer}>
-        <View style={styles.criteriaContainer}>
-          <Text style={[styles.criteriaText, {marginTop: '6%'}]}>Team Number</Text>
-          <TextInput
-            style={styles.criteriaTeamNumberInput}
-            value={teamNumber}
-            onChangeText={newText => setTeamNumber(newText)}
-            placeholder='4308'
-            placeholderTextColor='#959595'
-            keyboardType='numeric'
-            maxLength={4}
-          />
-        </View>
-        <View style={styles.criteriaContainer}>
-          <Text style={[styles.criteriaText, {marginTop: '6%'}]}>Match Number</Text>
-          <TextInput
-            style={styles.criteriaMatchNumberInput}
-            placeholder='69'
-            placeholderTextColor='#959595'
-            keyboardType='numeric'
-            maxLength={2}
-          />
-        </View>
+        <ShortTextInput 
+          label='Team Number'
+          placeholder='4308'
+          onChangeText={setTeamNumber}
+          style={{marginTop: '6%'}}
+          keyboardType='numeric'
+          maxLength={4}
+        />
+        <ShortTextInput 
+          label='Match Number'
+          placeholder='69'
+          onChangeText={setMatchNumber}
+          style={{marginTop: '6%'}}
+          keyboardType='numeric'
+          maxLength={2}
+        />
       </View>
 
       <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
-        <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]}>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]} onPress={() => setAutoAmp(prev => prev - 2)}>
           <Text style={styles.generalText}>-2</Text>
         </Pressable>
 
@@ -162,42 +176,28 @@ function StandsScreen() {
         </Pressable>        
       </View>
 
-      <View style={styles.criteriaContainer}>
-        <Text style={styles.criteriaText}>Driver Skill</Text>
-        <TextInput
-          style={styles.criteriaMatchNumberInput}
-          placeholder='Yes'
-          placeholderTextColor='#959595'
-          maxLength={2}
-        />
-      </View>
-      <View style={styles.criteriaContainer}>
-        <Text style={styles.criteriaText}>Strategy Details</Text>
-        <TextInput
-          style={styles.criteriaMatchNumberInput}
-          placeholder='Yes'
-          placeholderTextColor='#959595'
-          maxLength={2}
-        />
-      </View>
-      <View style={styles.criteriaContainer}>
-        <Text style={styles.criteriaText}>Scoring Details</Text>
-        <TextInput
-          style={styles.criteriaMatchNumberInput}
-          placeholder='Yes'
-          placeholderTextColor='#959595'
-          maxLength={2}
-        />
-      </View>
-      <View style={styles.criteriaContainer}>
-        <Text style={styles.criteriaText}>Comments</Text>
-        <TextInput
-          style={[styles.criteriaMatchNumberInput, {marginBottom: '4 %'}]}
-          placeholder='Yes'
-          placeholderTextColor='#959595'
-          maxLength={2}
-        />
-      </View>
+      <ShortTextInput
+        label="Driver Skill"
+        placeholder="Very good."
+        onChangeText={setDriverSkill}
+      />
+      <ShortTextInput
+        label="Strategy Details"
+        placeholder="Offensive."
+        onChangeText={setStrategyDetails}
+      />
+      <ShortTextInput
+        label="Scoring Details"
+        placeholder="Likes to amp."
+        onChangeText={setScoringDetails}
+      />
+      <ShortTextInput
+        label="Comments"
+        placeholder="N/A."
+        onChangeText={setComments}
+        style={{marginBottom: '5%'}}
+      />
+
     </ScrollView>
   );
 }
