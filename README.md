@@ -16,3 +16,4 @@ Feature requests can be submitted as an issue.
 - [ ] Components and pages abstracted away into seperate js files
 - [ ] Pits... :(
 - [ ] Dynamic button interaction responses
+- [ ] Tune CSS spacing to be compatible with several screen sizes & resolutions
