@@ -100,19 +100,19 @@ function StandsScreen() {
       />
       
       <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
-        <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]}>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]} onPress={() => setTeleSpeaker(prev => prev - 5)}>
           <Text style={styles.generalText}>-5</Text>
         </Pressable>
-        <Pressable style={[styles.criteriaButton, {backgroundColor: '#7d0000'}]}>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#7d0000'}]} onPress={() => setTeleSpeaker(prev => prev - 2)}>
           <Text style={styles.generalText}>-2</Text>
         </Pressable>
 
         <Text style={styles.criteriaText}>Tele Speaker: {teleSpeaker}</Text>
 
-        <Pressable style={[styles.criteriaButton, {backgroundColor: '#007d23'}]}>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#007d23'}]} onPress={() => setTeleSpeaker(prev => prev + 2)}>
           <Text style={styles.generalText}>+2</Text>
         </Pressable>
-        <Pressable style={[styles.criteriaButton, {backgroundColor: '#00ab30'}]}>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#00ab30'}]} onPress={() => setTeleSpeaker(prev => prev + 5)}>
           <Text style={styles.generalText}>+5</Text>
         </Pressable>        
       </View>
@@ -134,19 +134,19 @@ function StandsScreen() {
       />
 
       <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
-        <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]}>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]} onPress={() => setPenalties(prev => prev - 5)}>
           <Text style={styles.generalText}>-5</Text>
         </Pressable>
-        <Pressable style={[styles.criteriaButton, {backgroundColor: '#7d0000'}]}>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#7d0000'}]} onPress={() => setPenalties(prev => prev - 2)}>
           <Text style={styles.generalText}>-2</Text>
         </Pressable>
 
         <Text style={styles.criteriaText}>Penalties: {penalties}</Text>
 
-        <Pressable style={[styles.criteriaButton, {backgroundColor: '#007d23'}]}>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#007d23'}]} onPress={() => setPenalties(prev => prev + 2)}>
           <Text style={styles.generalText}>+2</Text>
         </Pressable>
-        <Pressable style={[styles.criteriaButton, {backgroundColor: '#00ab30'}]}>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#00ab30'}]} onPress={() => setPenalties(prev => prev + 5)}>
           <Text style={styles.generalText}>+5</Text>
         </Pressable>        
       </View>
