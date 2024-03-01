@@ -15,8 +15,8 @@ Feature requests can be submitted as an issue.
 - [x] Dropdown component for Android (Ayaan)
 
 ### Target
-- [ ] Naming conventions (Jasmehar)
-- [x] Missing criteria (Jasmehar)
+- [x] Naming conventions (Jasmehar)
+- [] Missing criteria (Jasmehar)
 
 ### Low Priority
 - [ ] Useless CSS rules/CSS Optimization (Kavya)
