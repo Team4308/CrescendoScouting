@@ -9,7 +9,7 @@ Bug fixes, optimizations, and refactors PRs are also welcome.
 Feature requests can be submitted as an issue.
 
 ## To-Do
-- [ ] !!! REACT CONTEXT FOR GLOBAL VARIABLES !!!
+- [x] !!! REACT CONTEXT FOR GLOBAL VARIABLES !!!
 - [x] Settings page for user name, user team, and current competition
 - [ ] Useless CSS rules/CSS Optimization
 - [ ] Standardization of naming (for literally everything...)
