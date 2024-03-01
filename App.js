@@ -1,5 +1,5 @@
 import { View, StyleSheet, Text, Image, Pressable, TextInput, ScrollView } from 'react-native';
-import { NavigationContainer, useScrollToTop } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
@@ -9,6 +9,7 @@ import { useState } from 'react';
 // SCREENS
 // --> STANDS SCREEN
 // --> PITS SCREEN
+// --> SETTINGS SCREEN
 // NAVIGATION
 // STYLES
 
@@ -64,7 +65,7 @@ function StandsScreen() {
 
 
   return (
-    <ScrollView style={styles.standsScoutingContainer}>
+    <ScrollView style={styles.scoutingScreenContainer}>
       <View style={styles.criteriaHorzContainer}>
         <ShortTextInput 
           label='Team Number'
@@ -197,9 +198,39 @@ function StandsScreen() {
 
 function PitsScreen() {
   return (
-    <View style={styles.standsScoutingContainer}>
-      <Text>You are on the second screen.</Text>
+    <View style={styles.scoutingScreenContainer}>
+      <Text>You are on the pits scouting screen.</Text>
     </View>
+  );
+}
+
+// >>> --> SETTINGS SCREEN <<<
+
+function SettingsScreen() {
+  const [userName, setUserName] = useState('')
+  const [userTeamNumber, setUserTeamNumber] = useState(0)
+  const [competition, setCompetition] = useState('')
+
+  return (
+    <ScrollView style={styles.scoutingScreenContainer}>
+      <ShortTextInput
+        label='Scouter Name'
+        placeholder='Benjamin "100" Lu'
+        onChangeText={setUserName}
+      />
+      <ShortTextInput
+        label='Scouter Team'
+        placeholder='4308'
+        onChangeText={setUserTeamNumber}
+        keyboardType='numeric'
+        maxLength={4}
+      />
+      <ShortTextInput
+        label='Competition'
+        placeholder='Humber College'
+        onChangeText={setCompetition}
+      />
+    </ScrollView>
   );
 }
 
@@ -224,7 +255,7 @@ function HomeScreen({ navigation }) {
           <Text style={styles.homeNavigationButtonText}>Pits</Text>
         </Pressable>
 
-        <Pressable style={[styles.homeNavigationButton, {backgroundColor: '#959595'}]}>
+        <Pressable style={[styles.homeNavigationButton, {backgroundColor: '#959595'}]} onPress={() => navigation.navigate('settingsScreen')}>
           <Text style={styles.homeNavigationButtonText}>Settings</Text>
         </Pressable>
       </View>
@@ -267,6 +298,17 @@ export default function App() {
           headerTintColor: '#fff',
       }} />
         <Stack.Screen name="pitsScreen" component={PitsScreen} options={{ title: 'Pits' }} />
+        <Stack.Screen name="settingsScreen" component={SettingsScreen} options={{
+          title: 'Stands',
+
+          headerStyle: {
+            backgroundColor: '#191919',
+            borderBottomColor: '#fff',
+            borderWidth: 1,
+          },
+
+          headerTintColor: '#fff',
+      }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -321,9 +363,9 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   
-  standsScoutingContainer: {
+  scoutingScreenContainer: {
     flex: 1,
-    backgroundColor: '#211a1e',
+    backgroundColor: '#191919',
   },
 
   generalText: {
