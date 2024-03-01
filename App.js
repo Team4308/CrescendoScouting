@@ -10,7 +10,7 @@ const ShortTextInput = ({ label, placeholder, onChangeText, style, keyboardType,
   <View style={styles.criteriaContainer}>
     <Text style={styles.criteriaText}>{label}</Text>
     <TextInput
-      style={[styles.criteriaMatchNumberInput, style]}
+      style={[styles.criteriaTextInput, style]}
       placeholder={placeholder}
       onChangeText={onChangeText}
       placeholderTextColor='#959595'
@@ -166,12 +166,19 @@ function StandsScreen() {
         placeholder="Likes to amp."
         onChangeText={setScoringDetails}
       />
-      <ShortTextInput
-        label="Comments"
-        placeholder="N/A."
-        onChangeText={setComments}
-        style={{marginBottom: '5%'}}
-      />
+      <View style={styles.criteriaContainer}>
+        <Text style={styles.criteriaText}>Comments</Text>
+        <TextInput
+          style={[styles.criteriaTextInput, {marginBottom: '5%'}]}
+          placeholder={'N/A.'}
+          onChangeText={setComments}
+          placeholderTextColor='#959595'
+          multiline={true}
+          numberOfLines={4}
+          textAlignVertical='top'
+        />
+      </View>
+
 
     </ScrollView>
   );
@@ -326,7 +333,7 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
   },
 
-  criteriaMatchNumberInput: {
+  criteriaTextInput: {
     padding: 5,
     paddingLeft: 12,
     marginTop: 10,
