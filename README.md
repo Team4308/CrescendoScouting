@@ -18,3 +18,5 @@ Feature requests can be submitted as an issue.
 - [ ] Pits... :(
 - [ ] Dynamic button interaction responses
 - [ ] Tune CSS spacing to be compatible with several screen sizes & resolutions
+- [ ] userTeamNumber is not updating but competition is. Fix it.
+- [ ] Migrate settings page to front screen (and remove the crescendo logo)
