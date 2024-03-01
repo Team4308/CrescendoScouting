@@ -62,7 +62,8 @@ function StandsScreen() {
   const [strategyDetails, setStrategyDetails] = useState('');
   const [scoringDetails, setScoringDetails] = useState('');
   const [comments, setComments] = useState('');
-
+  
+  const { userTeamNumber, competition, updateParams } = useContext(MyContext);
 
   return (
     <ScrollView style={styles.scoutingScreenContainer}>
@@ -189,7 +190,7 @@ function StandsScreen() {
         />
       </View>
 
-      <Pressable style={[styles.criteriaButton2, {marginBottom: '5%'}]}>
+      <Pressable style={[styles.criteriaButton2, {marginBottom: '5%'}]} onPress={() => console.log({userTeamNumber}, {competition})}>
         <Text>Generate QR</Text>
       </Pressable>
 
@@ -236,12 +237,19 @@ function PitsScreen() {
 // >>> --> SETTINGS SCREEN <<<
 
 function SettingsScreen({ navigation }) {
-  const [userName, setUserName] = useState('')
-  const [userTeamNumber, setUserTeamNumber] = useState('')
-  const [competition, setCompetition] = useState('')
+  const { userTeamNumber, competition, updateParams } = useContext(MyContext);
 
-  const saveSettings = () => {
-    navigation.navigate('homeScreen', { userTeamNumber, competition });
+  const [newParam1, setNewParam1] = useState('');
+  const [newParam2, setNewParam2] = useState('');
+
+  const updateParamsWithTextInput = () => {
+    if (newParam1 !== '') {
+      updateParams({ userTeamNumber: newParam1, competition });
+    }
+    if (newParam2 !== '') {
+      updateParams({ userTeamNumber, competition: newParam2 });
+    }
+    navigation.navigate('homeScreen')
   };
 
   return (
@@ -249,21 +257,22 @@ function SettingsScreen({ navigation }) {
       <ShortTextInput
         label='Scouter Name'
         placeholder='Benjamin "100" Lu'
-        onChangeText={setUserName}
       />
       <ShortTextInput
         label='Scouter Team'
         placeholder='4308'
-        onChangeText={setUserTeamNumber}
         keyboardType='numeric'
+        onChangeText={setNewParam1}
+        value={newParam1}
         maxLength={4}
       />
       <ShortTextInput
         label='Competition'
         placeholder='Humber College'
-        onChangeText={setCompetition}
+        onChangeText={setNewParam2}
+        value={newParam2}
       />
-      <Pressable style={[styles.criteriaButton2, {marginTop: '5%'}]} onPress={saveSettings}>
+      <Pressable style={[styles.criteriaButton2, {marginTop: '5%'}]} onPress={updateParamsWithTextInput}>
         <Text>Save Settings</Text>
       </Pressable>
     </ScrollView>
@@ -272,8 +281,8 @@ function SettingsScreen({ navigation }) {
 
 // >>> NAVIGATION <<<
 
-function HomeScreen({ navigation, route }) {
-  const { userTeamNumber, competition } = route.params;
+function HomeScreen({ navigation }) {
+  const { userTeamNumber, competition, updateParams } = useContext(MyContext);
 
   return (
     <View style={styles.homeContainer}>
@@ -304,18 +313,25 @@ function HomeScreen({ navigation, route }) {
 }
 
 const Stack = createStackNavigator();
+const MyContext = createContext();
 
 export default function App() {
+  const [params, setParams] = useState({ userTeamNumber: '9999', competition: 'Woodlands Asylum' });
   const [playoffs, setPlayoffs] = useState(false)
+
+  const updateParams = (newParams) => {
+    setParams({ ...params, ...newParams });
+  };
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="settingsScreen">
-        <Stack.Screen name="homeScreen" component={HomeScreen} options={{title: 'Home', headerShown: false}} />
-        <Stack.Screen name="standsScreen" component={StandsScreen} options={{
-          title: 'Stands',
-          headerRight: () => (
-            <Pressable
+      <MyContext.Provider value={{ ...params, updateParams }}>
+        <Stack.Navigator initialRouteName="settingsScreen">
+          <Stack.Screen name="homeScreen" component={HomeScreen} options={{title: 'Home', headerShown: false}} />
+          <Stack.Screen name="standsScreen" component={StandsScreen} options={{
+            title: 'Stands',
+            headerRight: () => (
+              <Pressable
               style={[
                 styles.headerResetButton,
                 {
@@ -323,41 +339,42 @@ export default function App() {
                 },
               ]}
               onPress={() => setPlayoffs(!playoffs)}>
-              <Text style={[styles.generalText, { color: '#fff' }]}>Playoffs</Text>
-            </Pressable>
-          ),
-
-          headerStyle: {
-            backgroundColor: '#191919',
-            borderBottomColor: '#fff',
-            borderWidth: 1,
-          },
-
-          headerTintColor: '#fff',
-      }} />
-        <Stack.Screen name="pitsScreen" component={PitsScreen} options={{
-          title: 'Pits',
-          
-          headerStyle: {
-            backgroundColor: '#191919',
-            borderBottomColor: '#fff',
-            borderWidth: 1,
-          },
-
-          headerTintColor: '#fff',
-        }} />
-        <Stack.Screen name="settingsScreen" component={SettingsScreen} options={{
-          title: 'Settings',
-
-          headerStyle: {
-            backgroundColor: '#191919',
-            borderBottomColor: '#fff',
-            borderWidth: 1,
-          },
-
-          headerTintColor: '#fff',
-      }} />
-      </Stack.Navigator>
+                <Text style={[styles.generalText, { color: '#fff' }]}>Playoffs</Text>
+              </Pressable>
+            ),
+            
+            headerStyle: {
+              backgroundColor: '#191919',
+              borderBottomColor: '#fff',
+              borderWidth: 1,
+            },
+            
+            headerTintColor: '#fff',
+          }} />
+          <Stack.Screen name="pitsScreen" component={PitsScreen} options={{
+            title: 'Pits',
+            
+            headerStyle: {
+              backgroundColor: '#191919',
+              borderBottomColor: '#fff',
+              borderWidth: 1,
+            },
+            
+            headerTintColor: '#fff',
+          }} />
+          <Stack.Screen name="settingsScreen" component={SettingsScreen} options={{
+            title: 'Settings',
+            
+            headerStyle: {
+              backgroundColor: '#191919',
+              borderBottomColor: '#fff',
+              borderWidth: 1,
+            },
+            
+            headerTintColor: '#fff',
+          }} />
+        </Stack.Navigator>
+      </MyContext.Provider>
     </NavigationContainer>
   );
 }
