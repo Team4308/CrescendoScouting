@@ -17,6 +17,7 @@ Feature requests can be submitted as an issue.
 - [ ] [All] Components and pages abstracted away into seperate js files
 - [ ] [Gordon] Pits... :(
 - [x] [All] userTeamNumber is not updating but competition is
+- [ ] [Jasmehar] Variable renaming and missing component additions
 
 ### Low Priority
 - [ ] [Kavya] Useless CSS rules/CSS Optimization
