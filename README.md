@@ -12,7 +12,7 @@ Feature requests can be submitted as an issue.
 
 ### Urgent!
 - [ ] QR Code Generation (Jasmehar)
-- [ ] Dropdown component for Android (Ayaan)
+- [x] Dropdown component for Android (Ayaan)
 
 ### Target
 - [ ] Naming conventions (Jasmehar)
