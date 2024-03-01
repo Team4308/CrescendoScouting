@@ -4,6 +4,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 
+// >>> TABLE OF CONTENTS <<<
+// COMPONENTS
+// SCREENS
+// --> STANDS SCREEN
+// --> PITS SCREEN
+// NAVIGATION
+// STYLES
+
 // >>> COMPONENTS <<<
 
 const ShortTextInput = ({ label, placeholder, onChangeText, style, keyboardType, maxLength }) => (
@@ -36,7 +44,8 @@ const IncrementDecrementButton = ({ title, value, increment, decrement, absolute
   );
 };
 
-// >>> STANDS SCREEN <<<
+// >>> SCREENS <<<
+// >>> --> STANDS SCREEN <<<
 
 function StandsScreen() {
   const [teamNumber, setTeamNumber] = useState('');
@@ -184,7 +193,7 @@ function StandsScreen() {
   );
 }
 
-// >>> PITS SCREEN <<<
+// >>> --> PITS SCREEN <<<
 
 function PitsScreen() {
   return (
@@ -199,8 +208,13 @@ function PitsScreen() {
 function HomeScreen({ navigation }) {
   return (
     <View style={styles.homeContainer}>
-      <Image style={styles.homeCrescendoImage} source={require('./assets/images/crescendo.png')} />
+        <Image style={styles.homeCrescendoImage} source={require('./assets/images/crescendo.png')} />
       
+      <View style={[styles.generalText, styles.homeTitleText]}>
+        <Text style={[styles.generalText, {fontSize: 55, fontWeight: 'bold'}]}>4308</Text>
+        <Text style={[styles.generalText, {fontSize: 30}]}>Humber College</Text>
+      </View>
+
       <View style={styles.homeNavigationButtonContainer}>
         <Pressable style={[styles.homeNavigationButton, {backgroundColor: '#c3423f'}]} onPress={() => navigation.navigate('standsScreen')}>
           <Text style={styles.homeNavigationButtonText}>Stands</Text>
@@ -268,15 +282,14 @@ const styles = StyleSheet.create({
   },
   
   homeCrescendoImage: {
-    flex: 1,
-    marginTop: '10%',
+    flex: 3,
+    top: 30,
     width: '80%',
-    height: '20%',
     objectFit: 'contain',
   },
   
   homeNavigationButtonContainer: {
-    flex: 1,
+    flex: 3,
     width: '80%',
     justifyContent: 'space-evenly',
   },
@@ -361,5 +374,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: '3%',
     borderRadius: 10,
+  },
+
+  homeTitleText: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: '10%',
   },
 });
