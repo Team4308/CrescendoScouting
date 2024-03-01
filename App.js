@@ -4,6 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 
+// >>> COMPONENTS <<<
+
 const ShortTextInput = ({ label, placeholder, onChangeText, style, keyboardType, maxLength }) => (
   <View style={styles.criteriaContainer}>
     <Text style={styles.criteriaText}>{label}</Text>
@@ -34,30 +36,7 @@ const IncrementDecrementButton = ({ title, value, increment, decrement, absolute
   );
 };
 
-// Screen components
-function HomeScreen({ navigation }) {
-  return (
-    <View style={styles.homeContainer}>
-      <Image style={styles.homeCrescendoImage} source={require('./assets/images/crescendo.png')} />
-      
-      <View style={styles.homeNavigationButtonContainer}>
-        <Pressable style={[styles.homeNavigationButton, {backgroundColor: '#c3423f'}]} onPress={() => navigation.navigate('standsScreen')}>
-          <Text style={styles.homeNavigationButtonText}>Stands</Text>
-        </Pressable>
-
-        <Pressable style={[styles.homeNavigationButton, {backgroundColor: '#5bc0eb'}]} onPress={() => navigation.navigate('pitsScreen')}>
-          <Text style={styles.homeNavigationButtonText}>Pits</Text>
-        </Pressable>
-
-        <Pressable style={[styles.homeNavigationButton, {backgroundColor: '#959595'}]}>
-          <Text style={styles.homeNavigationButtonText}>Reset</Text>
-        </Pressable>
-      </View>
-
-      <StatusBar barStyle='light-content' />
-    </View>
-  );
-}
+// >>> STANDS SCREEN <<<
 
 function StandsScreen() {
   const [teamNumber, setTeamNumber] = useState('');
@@ -198,6 +177,8 @@ function StandsScreen() {
   );
 }
 
+// >>> PITS SCREEN <<<
+
 function PitsScreen() {
   return (
     <View style={styles.standsScoutingContainer}>
@@ -206,7 +187,32 @@ function PitsScreen() {
   );
 }
 
-// Stack Navigator
+// >>> NAVIGATION <<<
+
+function HomeScreen({ navigation }) {
+  return (
+    <View style={styles.homeContainer}>
+      <Image style={styles.homeCrescendoImage} source={require('./assets/images/crescendo.png')} />
+      
+      <View style={styles.homeNavigationButtonContainer}>
+        <Pressable style={[styles.homeNavigationButton, {backgroundColor: '#c3423f'}]} onPress={() => navigation.navigate('standsScreen')}>
+          <Text style={styles.homeNavigationButtonText}>Stands</Text>
+        </Pressable>
+
+        <Pressable style={[styles.homeNavigationButton, {backgroundColor: '#5bc0eb'}]} onPress={() => navigation.navigate('pitsScreen')}>
+          <Text style={styles.homeNavigationButtonText}>Pits</Text>
+        </Pressable>
+
+        <Pressable style={[styles.homeNavigationButton, {backgroundColor: '#959595'}]}>
+          <Text style={styles.homeNavigationButtonText}>Reset</Text>
+        </Pressable>
+      </View>
+
+      <StatusBar barStyle='light-content' />
+    </View>
+  );
+}
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -235,6 +241,8 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+// >>> STYLES <<<
 
 const styles = StyleSheet.create({
   homeContainer: {
