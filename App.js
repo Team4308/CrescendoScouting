@@ -206,10 +206,14 @@ function PitsScreen() {
 
 // >>> --> SETTINGS SCREEN <<<
 
-function SettingsScreen() {
+function SettingsScreen({ navigation }) {
   const [userName, setUserName] = useState('')
-  const [userTeamNumber, setUserTeamNumber] = useState(0)
+  const [userTeamNumber, setUserTeamNumber] = useState('')
   const [competition, setCompetition] = useState('')
+
+  const saveSettings = () => {
+    navigation.navigate('homeScreen', { userTeamNumber, competition });
+  };
 
   return (
     <ScrollView style={styles.scoutingScreenContainer}>
@@ -230,20 +234,25 @@ function SettingsScreen() {
         placeholder='Humber College'
         onChangeText={setCompetition}
       />
+      <Pressable onPress={saveSettings}>
+        <Text>Save Settings</Text>
+      </Pressable>
     </ScrollView>
   );
 }
 
 // >>> NAVIGATION <<<
 
-function HomeScreen({ navigation }) {
+function HomeScreen({ navigation, route }) {
+  const { userTeamNumber, competition } = route.params;
+
   return (
     <View style={styles.homeContainer}>
-        <Image style={styles.homeCrescendoImage} source={require('./assets/images/crescendo.png')} />
+      <Image style={styles.homeCrescendoImage} source={require('./assets/images/crescendo.png')} />
       
       <View style={[styles.generalText, styles.homeTitleText]}>
-        <Text style={[styles.generalText, {fontSize: 55, fontWeight: 'bold'}]}>4308</Text>
-        <Text style={[styles.generalText, {fontSize: 30}]}>Humber College</Text>
+        <Text style={[styles.generalText, { fontSize: 55, fontWeight: 'bold' }]}>{userTeamNumber}</Text>
+        <Text style={[styles.generalText, { fontSize: 30 }]}>{competition}</Text>
       </View>
 
       <View style={styles.homeNavigationButtonContainer}>
@@ -272,7 +281,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="settingsScreen">
         <Stack.Screen name="homeScreen" component={HomeScreen} options={{title: 'Home', headerShown: false}} />
         <Stack.Screen name="standsScreen" component={StandsScreen} options={{
           title: 'Stands',
