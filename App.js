@@ -223,6 +223,8 @@ function HomeScreen({ navigation }) {
 const Stack = createStackNavigator();
 
 export default function App() {
+  const [playoffs, setPlayoffs] = useState(false)
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
@@ -230,8 +232,15 @@ export default function App() {
         <Stack.Screen name="standsScreen" component={StandsScreen} options={{
           title: 'Stands',
           headerRight: () => (
-            <Pressable style={styles.headerResetButton}>
-              <Text style={[styles.generalText, {color: '#fff'}]}>Playoffs</Text>
+            <Pressable
+              style={[
+                styles.headerResetButton,
+                {
+                  backgroundColor: playoffs ? '#007d23' : '#7d0000',
+                },
+              ]}
+              onPress={() => setPlayoffs(!playoffs)}>
+              <Text style={[styles.generalText, { color: '#fff' }]}>Playoffs</Text>
             </Pressable>
           ),
 
