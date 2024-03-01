@@ -25,6 +25,7 @@ Feature requests can be submitted as an issue.
 - [ ] [Kavya] Tune CSS spacing to be compatible with several screen sizes & resolutions
 - [ ] [Kavya] Dynamic button interaction responses
 - [ ] [Kavya] Theme Design (Light/dark mode, colors, accents)
+- [ ] [Ben] Switcing display of points in grid
 
 ### Hold
 - [ ] Migrate settings page to front screen (and remove the crescendo logo)
