@@ -26,7 +26,7 @@ Feature requests can be submitted as an issue.
 - [ ] Dynamic button interaction responses (Kavya)
 - [ ] Theme Design (Light/dark mode, colors, accents) (Kavya)
 - [ ] Switcing display of points in grid (Ben)
-- [ ] Components and pages abstracted away into seperate js files
 
 ### Hold
-- [ ] Migrate settings page to front screen (and remove the crescendo logo)
+- [ ] Migrate settings page to front screen (Questionable utility)
+- [ ] Components and pages abstracted away into seperate js files (Questionable utility)
