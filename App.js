@@ -215,6 +215,8 @@ function PitsScreen() {
   const [scoringDetails, setScoringDetails] = useState('');
   const [comments, setComments] = useState('');
 
+  const { userTeamNumber, competition, updateParams } = useContext(MyContext);
+
   return (
     <ScrollView style={styles.scoutingScreenContainer}>
       <View>
@@ -226,7 +228,7 @@ function PitsScreen() {
             maxLength={4}
           />
 
-        <Pressable style={[styles.criteriaButton2, {marginTop: '5%'}]}>
+        <Pressable style={[styles.criteriaButton2, {marginTop: '5%'}]} onPress={() => console.log({userTeamNumber}, {competition})}>
           <Text>Generate QR</Text>
         </Pressable>
       </View>
