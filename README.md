@@ -17,6 +17,7 @@ Feature requests can be submitted as an issue.
 ### Target
 - [x] Naming conventions (Jasmehar)
 - [ ] Missing criteria (Jasmehar)
+- [ ] Pits page (Aayan and Gordon)
 
 ### Low Priority
 - [ ] Useless CSS rules/CSS Optimization (Kavya)
