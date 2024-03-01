@@ -24,7 +24,7 @@ Feature requests can be submitted as an issue.
 - [ ] Pits page (Aayan and Gordon)
 
 ### Low Priority
-- [ ] Useless CSS rules/CSS Optimization (Kavya)
+- [ ] CSS rules/CSS Optimization (Kavya)
 - [ ] Colors defined as CSS variables (Kavya)
 - [ ] Tune CSS spacing to be compatible with several screen sizes & resolutions (Kavya)
 - [ ] Dynamic button interaction responses (Kavya)
