@@ -56,10 +56,11 @@ const DropdownInput = ({
     <View>
       <Picker
         selectedValue={selectedOption}
-        onValueChange={(itemValue, itemIndex) => setSelectedOption(itemValue)}
+        onValueChange={(itemValue) => setSelectedOption(itemValue)}
       >
-        {options.map((option) => (
+        {options.map((option, index) => (
           <Picker.Item
+            key={index}
             label={option}
             value={option}
             color="#fff"
