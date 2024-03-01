@@ -16,7 +16,7 @@ Feature requests can be submitted as an issue.
 - [ ] [All] Standardization of naming (for literally everything...)
 - [ ] [All] Components and pages abstracted away into seperate js files
 - [ ] [Gordon] Pits... :(
-- [ ] [All] userTeamNumber is not updating but competition is
+- [x] [All] userTeamNumber is not updating but competition is
 
 ### Low Priority
 - [ ] [Kavya] Useless CSS rules/CSS Optimization
