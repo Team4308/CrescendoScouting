@@ -211,7 +211,7 @@ function HomeScreen({ navigation }) {
         </Pressable>
 
         <Pressable style={[styles.homeNavigationButton, {backgroundColor: '#959595'}]}>
-          <Text style={styles.homeNavigationButtonText}>Reset</Text>
+          <Text style={styles.homeNavigationButtonText}>Settings</Text>
         </Pressable>
       </View>
 
