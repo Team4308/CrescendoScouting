@@ -53,7 +53,11 @@ const DropdownInput = ({
 }) => (
   <View style={styles.criteriaContainer}>
     <Text style={styles.criteriaText}>{label}</Text>
-    <View>
+    <View style={{
+      backgroundColor: "#fff",
+      marginTop: 10,
+      borderRadius: 10,
+    }}>
       <Picker
         selectedValue={selectedOption}
         onValueChange={(itemValue) => setSelectedOption(itemValue)}
@@ -63,7 +67,6 @@ const DropdownInput = ({
             key={index}
             label={option}
             value={option}
-            color="#fff"
           />
         ))}
       </Picker>
