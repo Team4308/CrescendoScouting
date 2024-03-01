@@ -16,7 +16,7 @@ Feature requests can be submitted as an issue.
 
 ### Target
 - [x] Naming conventions (Jasmehar)
-- [] Missing criteria (Jasmehar)
+- [ ] Missing criteria (Jasmehar)
 
 ### Low Priority
 - [ ] Useless CSS rules/CSS Optimization (Kavya)
