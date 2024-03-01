@@ -23,6 +23,7 @@ Feature requests can be submitted as an issue.
 - [ ] [Kavya] Colors defined as CSS variables
 - [ ] [Kavya] Tune CSS spacing to be compatible with several screen sizes & resolutions
 - [ ] [Kavya] Dynamic button interaction responses
+- [ ] [Kavya] Theme Design (Light/dark mode, colors, accents)
 
 ### Hold
 - [ ] Migrate settings page to front screen (and remove the crescendo logo)
