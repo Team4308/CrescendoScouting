@@ -9,14 +9,20 @@ Bug fixes, optimizations, and refactors PRs are also welcome.
 Feature requests can be submitted as an issue.
 
 ## To-Do
+
+### Urgent/Target
 - [x] !!! REACT CONTEXT FOR GLOBAL VARIABLES !!!
 - [x] Settings page for user name, user team, and current competition
+- [ ] [All] Standardization of naming (for literally everything...)
+- [ ] [All] Components and pages abstracted away into seperate js files
+- [ ] [Gordon] Pits... :(
+- [ ] [All] userTeamNumber is not updating but competition is
+
+### Low Priority
 - [ ] Useless CSS rules/CSS Optimization
-- [ ] Standardization of naming (for literally everything...)
 - [ ] Colors defined as CSS variables
-- [ ] Components and pages abstracted away into seperate js files
-- [ ] Pits... :(
-- [ ] Dynamic button interaction responses
 - [ ] Tune CSS spacing to be compatible with several screen sizes & resolutions
-- [ ] userTeamNumber is not updating but competition is. Fix it.
+- [ ] Dynamic button interaction responses
+
+### Hold
 - [ ] Migrate settings page to front screen (and remove the crescendo logo)
