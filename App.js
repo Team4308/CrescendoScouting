@@ -189,6 +189,9 @@ function StandsScreen() {
         />
       </View>
 
+      <Pressable style={[styles.criteriaButton2, {marginBottom: '5%'}]}>
+        <Text>Generate QR</Text>
+      </Pressable>
 
     </ScrollView>
   );
@@ -197,10 +200,36 @@ function StandsScreen() {
 // >>> --> PITS SCREEN <<<
 
 function PitsScreen() {
+  const [teamNumber, setTeamNumber] = useState('');
+  const [matchNumber, setMatchNumber] = useState('');
+  const [autoAmp, setAutoAmp] = useState(0);
+  const [autoSpeaker, setAutoSpeaker] = useState(0);
+  const [teleAmp, setTeleAmp] = useState(0);
+  const [teleSpeaker, setTeleSpeaker] = useState(0);
+  const [fumAmp, setFumAmp] = useState(0);
+  const [fumSpeaker, setFumSpeaker] = useState(0);
+  const [penalties, setPenalties] = useState(0);
+  const [driverSkill, setDriverSkill] = useState('');
+  const [strategyDetails, setStrategyDetails] = useState('');
+  const [scoringDetails, setScoringDetails] = useState('');
+  const [comments, setComments] = useState('');
+
   return (
-    <View style={styles.scoutingScreenContainer}>
-      <Text>You are on the pits scouting screen.</Text>
-    </View>
+    <ScrollView style={styles.scoutingScreenContainer}>
+      <View>
+          <ShortTextInput 
+            label='Team Number'
+            placeholder='4308'
+            onChangeText={setTeamNumber}
+            keyboardType='numeric'
+            maxLength={4}
+          />
+
+        <Pressable style={[styles.criteriaButton2, {marginTop: '5%'}]}>
+          <Text>Generate QR</Text>
+        </Pressable>
+      </View>
+    </ScrollView>
   );
 }
 
@@ -234,7 +263,7 @@ function SettingsScreen({ navigation }) {
         placeholder='Humber College'
         onChangeText={setCompetition}
       />
-      <Pressable style={[styles.criteriaButton, {width: '90%', alignSelf: 'center', marginTop: '5%'}]} onPress={saveSettings}>
+      <Pressable style={[styles.criteriaButton2, {marginTop: '5%'}]} onPress={saveSettings}>
         <Text>Save Settings</Text>
       </Pressable>
     </ScrollView>
@@ -299,16 +328,26 @@ export default function App() {
           ),
 
           headerStyle: {
-            backgroundColor: '#211a1e',
+            backgroundColor: '#191919',
             borderBottomColor: '#fff',
             borderWidth: 1,
           },
 
           headerTintColor: '#fff',
       }} />
-        <Stack.Screen name="pitsScreen" component={PitsScreen} options={{ title: 'Pits' }} />
+        <Stack.Screen name="pitsScreen" component={PitsScreen} options={{
+          title: 'Pits',
+          
+          headerStyle: {
+            backgroundColor: '#191919',
+            borderBottomColor: '#fff',
+            borderWidth: 1,
+          },
+
+          headerTintColor: '#fff',
+        }} />
         <Stack.Screen name="settingsScreen" component={SettingsScreen} options={{
-          title: 'Stands',
+          title: 'Settings',
 
           headerStyle: {
             backgroundColor: '#191919',
@@ -433,4 +472,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: '10%',
   },
+
+  criteriaButton2: {
+    backgroundColor: '#fff',
+    padding: '3%',
+    borderRadius: 10,
+    width: '90%',
+    alignSelf: 'center',
+  }
 });
