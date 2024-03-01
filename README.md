@@ -30,4 +30,3 @@ Feature requests can be submitted as an issue.
 
 ### Hold
 - [ ] Migrate settings page to front screen (and remove the crescendo logo)
-- [ ] Pits page (delayed due to unfinished dropdown component)
