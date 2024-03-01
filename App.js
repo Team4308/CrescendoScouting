@@ -1,7 +1,8 @@
 import { View, StyleSheet, Text, Image, Pressable, TextInput, ScrollView } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useScrollToTop } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 
 // Screen components
 function HomeScreen({ navigation }) {
@@ -29,6 +30,15 @@ function HomeScreen({ navigation }) {
 }
 
 function StandsScreen() {
+  const [teamNumber, setTeamNumber] = useState('');
+  const [autoAmp, setAutoAmp] = useState(0);
+  const [autoSpeaker, setAutoSpeaker] = useState(0);
+  const [teleAmp, setTeleAmp] = useState(0);
+  const [teleSpeaker, setTeleSpeaker] = useState(0);
+  const [fumAmp, setFumAmp] = useState(0);
+  const [fumSpeaker, setFumSpeaker] = useState(0);
+  const [penalties, setPenalties] = useState(0);
+
   return (
     <ScrollView style={styles.standsScoutingContainer}>
       <View style={styles.criteriaHorzContainer}>
@@ -36,6 +46,8 @@ function StandsScreen() {
           <Text style={[styles.criteriaText, {marginTop: '6%'}]}>Team Number</Text>
           <TextInput
             style={styles.criteriaTeamNumberInput}
+            value={teamNumber}
+            onChangeText={newText => setTeamNumber(newText)}
             placeholder='4308'
             placeholderTextColor='#959595'
             keyboardType='numeric'
@@ -56,13 +68,49 @@ function StandsScreen() {
 
       <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
         <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]}>
+          <Text style={styles.generalText}>-2</Text>
+        </Pressable>
+
+        <Text style={styles.criteriaText}>Auto Amp: {autoAmp}</Text>
+
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#00ab30'}]}>
+          <Text style={styles.generalText}>+2</Text>
+        </Pressable>      
+      </View>
+
+      <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]}>
+          <Text style={styles.generalText}>-5</Text>
+        </Pressable>
+
+        <Text style={styles.criteriaText}>Auto Speaker: {autoSpeaker}</Text>
+
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#00ab30'}]}>
+          <Text style={styles.generalText}>+5</Text>
+        </Pressable>      
+      </View>
+
+      <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]}>
+          <Text style={styles.generalText}>-1</Text>
+        </Pressable>
+
+        <Text style={styles.criteriaText}>Tele Amp: {teleAmp}</Text>
+
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#00ab30'}]}>
+          <Text style={styles.generalText}>+1</Text>
+        </Pressable>    
+      </View>
+      
+      <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]}>
           <Text style={styles.generalText}>-5</Text>
         </Pressable>
         <Pressable style={[styles.criteriaButton, {backgroundColor: '#7d0000'}]}>
           <Text style={styles.generalText}>-2</Text>
         </Pressable>
 
-        <Text style={styles.criteriaText}>Tele Speaker: 50</Text>
+        <Text style={styles.criteriaText}>Tele Speaker: {teleSpeaker}</Text>
 
         <Pressable style={[styles.criteriaButton, {backgroundColor: '#007d23'}]}>
           <Text style={styles.generalText}>+2</Text>
@@ -71,7 +119,49 @@ function StandsScreen() {
           <Text style={styles.generalText}>+5</Text>
         </Pressable>        
       </View>
-      
+
+      <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]}>
+          <Text style={styles.generalText}>-1</Text>
+        </Pressable>
+
+        <Text style={styles.criteriaText}>Fum Amp: {fumAmp}</Text>
+
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#00ab30'}]}>
+          <Text style={styles.generalText}>+1</Text>
+        </Pressable>      
+      </View>
+
+      <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]}>
+          <Text style={styles.generalText}>-1</Text>
+        </Pressable>
+
+        <Text style={styles.criteriaText}>Fum Speaker: {fumSpeaker}</Text>
+
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#00ab30'}]}>
+          <Text style={styles.generalText}>+1</Text>
+        </Pressable>      
+      </View>
+
+      <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#ad0000'}]}>
+          <Text style={styles.generalText}>-5</Text>
+        </Pressable>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#7d0000'}]}>
+          <Text style={styles.generalText}>-2</Text>
+        </Pressable>
+
+        <Text style={styles.criteriaText}>Penalties: {penalties}</Text>
+
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#007d23'}]}>
+          <Text style={styles.generalText}>+2</Text>
+        </Pressable>
+        <Pressable style={[styles.criteriaButton, {backgroundColor: '#00ab30'}]}>
+          <Text style={styles.generalText}>+5</Text>
+        </Pressable>        
+      </View>
+
       <View style={styles.criteriaContainer}>
         <Text style={styles.criteriaText}>Driver Skill</Text>
         <TextInput
@@ -82,7 +172,7 @@ function StandsScreen() {
         />
       </View>
       <View style={styles.criteriaContainer}>
-        <Text style={styles.criteriaText}>Scoring Preference</Text>
+        <Text style={styles.criteriaText}>Strategy Details</Text>
         <TextInput
           style={styles.criteriaMatchNumberInput}
           placeholder='Yes'
@@ -91,25 +181,7 @@ function StandsScreen() {
         />
       </View>
       <View style={styles.criteriaContainer}>
-        <Text style={styles.criteriaText}>Strategy</Text>
-        <TextInput
-          style={styles.criteriaMatchNumberInput}
-          placeholder='Yes'
-          placeholderTextColor='#959595'
-          maxLength={2}
-        />
-      </View>
-      <View style={styles.criteriaContainer}>
-        <Text style={styles.criteriaText}>Scoring</Text>
-        <TextInput
-          style={styles.criteriaMatchNumberInput}
-          placeholder='Yes'
-          placeholderTextColor='#959595'
-          maxLength={2}
-        />
-      </View>
-      <View style={styles.criteriaContainer}>
-        <Text style={styles.criteriaText}>Penalties</Text>
+        <Text style={styles.criteriaText}>Scoring Details</Text>
         <TextInput
           style={styles.criteriaMatchNumberInput}
           placeholder='Yes'
@@ -120,52 +192,7 @@ function StandsScreen() {
       <View style={styles.criteriaContainer}>
         <Text style={styles.criteriaText}>Comments</Text>
         <TextInput
-          style={styles.criteriaMatchNumberInput}
-          placeholder='Yes'
-          placeholderTextColor='#959595'
-          maxLength={2}
-        />
-      </View>
-      <View style={styles.criteriaContainer}>
-        <Text style={styles.criteriaText}>Auto Speaker</Text>
-        <TextInput
-          style={styles.criteriaMatchNumberInput}
-          placeholder='Yes'
-          placeholderTextColor='#959595'
-          maxLength={2}
-        />
-      </View>
-      <View style={styles.criteriaContainer}>
-        <Text style={styles.criteriaText}>Auto Amp</Text>
-        <TextInput
-          style={styles.criteriaMatchNumberInput}
-          placeholder='Yes'
-          placeholderTextColor='#959595'
-          maxLength={2}
-        />
-      </View>
-      <View style={styles.criteriaContainer}>
-        <Text style={styles.criteriaText}>Tele Amp</Text>
-        <TextInput
-          style={styles.criteriaMatchNumberInput}
-          placeholder='Yes'
-          placeholderTextColor='#959595'
-          maxLength={2}
-        />
-      </View>
-      <View style={styles.criteriaContainer}>
-        <Text style={styles.criteriaText}>Fumbled Speaker</Text>
-        <TextInput
-          style={styles.criteriaMatchNumberInput}
-          placeholder='Yes'
-          placeholderTextColor='#959595'
-          maxLength={2}
-        />
-      </View>
-      <View style={styles.criteriaContainer}>
-        <Text style={styles.criteriaText}>Fumbled Amp</Text>
-        <TextInput
-          style={styles.criteriaMatchNumberInput}
+          style={[styles.criteriaMatchNumberInput, {marginBottom: '4 %'}]}
           placeholder='Yes'
           placeholderTextColor='#959595'
           maxLength={2}
