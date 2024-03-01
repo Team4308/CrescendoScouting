@@ -234,7 +234,7 @@ function SettingsScreen({ navigation }) {
         placeholder='Humber College'
         onChangeText={setCompetition}
       />
-      <Pressable onPress={saveSettings}>
+      <Pressable style={[styles.criteriaButton, {width: '90%', alignSelf: 'center', marginTop: '5%'}]} onPress={saveSettings}>
         <Text>Save Settings</Text>
       </Pressable>
     </ScrollView>
