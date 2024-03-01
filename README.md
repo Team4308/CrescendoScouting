@@ -19,10 +19,10 @@ Feature requests can be submitted as an issue.
 - [ ] [All] userTeamNumber is not updating but competition is
 
 ### Low Priority
-- [ ] Useless CSS rules/CSS Optimization
-- [ ] Colors defined as CSS variables
-- [ ] Tune CSS spacing to be compatible with several screen sizes & resolutions
-- [ ] Dynamic button interaction responses
+- [ ] [Kavya] Useless CSS rules/CSS Optimization
+- [ ] [Kavya] Colors defined as CSS variables
+- [ ] [Kavya] Tune CSS spacing to be compatible with several screen sizes & resolutions
+- [ ] [Kavya] Dynamic button interaction responses
 
 ### Hold
 - [ ] Migrate settings page to front screen (and remove the crescendo logo)
