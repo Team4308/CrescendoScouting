@@ -18,6 +18,7 @@ Feature requests can be submitted as an issue.
 - [ ] [Gordon] Pits... :(
 - [x] [All] userTeamNumber is not updating but competition is
 - [ ] [Jasmehar] Variable renaming and missing component additions
+- [ ] Add scoring preference (speaker or amp) input
 
 ### Low Priority
 - [ ] [Kavya] Useless CSS rules/CSS Optimization
