@@ -79,7 +79,6 @@ const IncrementDecrementButton = ({
   value,
   increment,
   decrement,
-  absolute,
 }) => {
   return (
     <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
