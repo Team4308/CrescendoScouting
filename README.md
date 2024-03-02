@@ -29,8 +29,8 @@ Feature requests can be submitted as an issue.
 - [ ] Tune CSS spacing to be compatible with several screen sizes & resolutions (Kavya)
 - [ ] Dynamic button interaction responses (Kavya)
 - [ ] Theme Design (Light/dark mode, colors, accents) (Kavya)
-- [ ] Switcing display of points in grid (Ben)
+- [x] Switcing display of points in grid (Ben)
 
-### Hold
+### Paused
 - [ ] Migrate settings page to front screen (Questionable utility)
 - [ ] Components and pages abstracted away into seperate js files (Questionable utility)
