@@ -124,6 +124,7 @@ function StandsScreen() {
   const [strategyDetails, setStrategyDetails] = useState("");
   const [scoringDetails, setScoringDetails] = useState("");
   const [comments, setComments] = useState("");
+  const [scoringPreference, setScoringPreference] = useState("Speaker") // DEFAULT VALUE MUST BE SPEAKER OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
 
   const { userTeamNumber, competition, updateParams } = useContext(MyContext);
 
@@ -226,6 +227,12 @@ function StandsScreen() {
         placeholder="Likes to amp."
         onChangeText={setScoringDetails}
       />
+      <DropdownInput
+        label="Scoring Preference"
+        options={["Speaker", "Amp"]}
+        selectedOption={scoringPreference}
+        setSelectedOption={setScoringPreference}
+      />
       <View style={styles.criteriaContainer}>
         <Text style={styles.criteriaText}>Comments</Text>
         <TextInput
@@ -241,7 +248,7 @@ function StandsScreen() {
 
       <Pressable
         style={[styles.criteriaButton2, { marginBottom: "5%" }]}
-        onPress={() => console.log({ userTeamNumber }, { competition })}
+        onPress={() => console.log({ competition })}
       >
         <Text>Generate QR</Text>
       </Pressable>
@@ -391,7 +398,7 @@ const MyContext = createContext();
 export default function App() {
   const [params, setParams] = useState({
     userTeamNumber: "9999",
-    competition: "Woodlands Asylum",
+    competition: "Humber College", // DEFAULT VALUE MUST BE HUMBER COLLEGE OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
   });
   const [playoffs, setPlayoffs] = useState(false);
 
