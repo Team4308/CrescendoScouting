@@ -15,7 +15,7 @@ Feature requests can be submitted as an issue.
 
 ### Target
 - [ ] Missing criteria (Ben)
-  - [ ] Add scoringPreference [amp or speaker
+  - [ ] Add scoringPreference [amp or speaker]
   - [ ] Add scoredTrap [boolean]
   - [ ] Add spotlight [boolean]
   - [ ] Add scouterName [string]
