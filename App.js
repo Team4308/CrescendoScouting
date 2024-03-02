@@ -84,10 +84,10 @@ const IncrementDecrementButton = ({
   return (
     <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
       <Pressable
-        style={[styles.criteriaButton, { backgroundColor: "#ad0000" }]}
+        style={[styles.criteriaButton, { backgroundColor: "#ad0000", width: '12%', alignItems: 'center'}]}
         onPress={decrement}
       >
-        <Text style={styles.generalText}>-{absolute}</Text>
+        <Text style={styles.generalText}>-</Text>
       </Pressable>
 
       <Text style={styles.criteriaText}>
@@ -95,10 +95,10 @@ const IncrementDecrementButton = ({
       </Text>
 
       <Pressable
-        style={[styles.criteriaButton, { backgroundColor: "#00ab30" }]}
+        style={[styles.criteriaButton, { backgroundColor: "#00ab30", width: '12%', alignItems: 'center' }]}
         onPress={increment}
       >
-        <Text style={styles.generalText}>+{absolute}</Text>
+        <Text style={styles.generalText}>+</Text>
       </Pressable>
     </View>
   );
@@ -114,9 +114,11 @@ function StandsScreen() {
   const [autoSpeaker, setAutoSpeaker] = useState(0);
   const [teleAmp, setTeleAmp] = useState(0);
   const [teleSpeaker, setTeleSpeaker] = useState(0);
+  const [ampedTeleSpeaker, setAmpedTeleSpeaker] = useState(0);
   const [fumAmp, setFumAmp] = useState(0);
   const [fumSpeaker, setFumSpeaker] = useState(0);
   const [penalties, setPenalties] = useState(0);
+  const [techPenalties, setTechPenalties] = useState(0);
   const [driverSkill, setDriverSkill] = useState("");
   const [strategyDetails, setStrategyDetails] = useState("");
   const [scoringDetails, setScoringDetails] = useState("");
@@ -148,17 +150,15 @@ function StandsScreen() {
       <IncrementDecrementButton
         title="Auto Amp"
         value={autoAmp}
-        decrement={() => setAutoAmp((prev) => prev - 2)}
-        increment={() => setAutoAmp((prev) => prev + 2)}
-        absolute={2}
+        decrement={() => setAutoAmp((prev) => prev - 1)}
+        increment={() => setAutoAmp((prev) => prev + 1)}
       />
 
       <IncrementDecrementButton
         title="Auto Speaker"
         value={autoSpeaker}
-        decrement={() => setAutoSpeaker((prev) => prev - 5)}
-        increment={() => setAutoSpeaker((prev) => prev + 5)}
-        absolute={5}
+        decrement={() => setAutoSpeaker((prev) => prev - 1)}
+        increment={() => setAutoSpeaker((prev) => prev + 1)}
       />
 
       <IncrementDecrementButton
@@ -166,45 +166,27 @@ function StandsScreen() {
         value={teleAmp}
         decrement={() => setTeleAmp((prev) => prev - 1)}
         increment={() => setTeleAmp((prev) => prev + 1)}
-        absolute={1}
       />
 
-      <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
-        <Pressable
-          style={[styles.criteriaButton, { backgroundColor: "#ad0000" }]}
-          onPress={() => setTeleSpeaker((prev) => prev - 5)}
-        >
-          <Text style={styles.generalText}>-5</Text>
-        </Pressable>
-        <Pressable
-          style={[styles.criteriaButton, { backgroundColor: "#7d0000" }]}
-          onPress={() => setTeleSpeaker((prev) => prev - 2)}
-        >
-          <Text style={styles.generalText}>-2</Text>
-        </Pressable>
+      <IncrementDecrementButton
+        title="Amped Tele Speaker"
+        value={ampedTeleSpeaker}
+        decrement={() => setAmpedTeleSpeaker((prev) => prev - 1)}
+        increment={() => setAmpedTeleSpeaker((prev) => prev + 1)}
+      />
 
-        <Text style={styles.criteriaText}>Tele Speaker: {teleSpeaker}</Text>
-
-        <Pressable
-          style={[styles.criteriaButton, { backgroundColor: "#007d23" }]}
-          onPress={() => setTeleSpeaker((prev) => prev + 2)}
-        >
-          <Text style={styles.generalText}>+2</Text>
-        </Pressable>
-        <Pressable
-          style={[styles.criteriaButton, { backgroundColor: "#00ab30" }]}
-          onPress={() => setTeleSpeaker((prev) => prev + 5)}
-        >
-          <Text style={styles.generalText}>+5</Text>
-        </Pressable>
-      </View>
+      <IncrementDecrementButton
+        title="Tele Speaker"
+        value={teleSpeaker}
+        decrement={() => setTeleSpeaker((prev) => prev - 1)}
+        increment={() => setTeleSpeaker((prev) => prev + 1)}
+      />
 
       <IncrementDecrementButton
         title="Fum Amp"
         value={fumAmp}
         decrement={() => setFumAmp((prev) => prev - 1)}
         increment={() => setFumAmp((prev) => prev + 1)}
-        absolute={1}
       />
 
       <IncrementDecrementButton
@@ -212,38 +194,21 @@ function StandsScreen() {
         value={fumSpeaker}
         decrement={() => setFumSpeaker((prev) => prev - 1)}
         increment={() => setFumSpeaker((prev) => prev + 1)}
-        absolute={1}
       />
 
-      <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
-        <Pressable
-          style={[styles.criteriaButton, { backgroundColor: "#ad0000" }]}
-          onPress={() => setPenalties((prev) => prev - 5)}
-        >
-          <Text style={styles.generalText}>-5</Text>
-        </Pressable>
-        <Pressable
-          style={[styles.criteriaButton, { backgroundColor: "#7d0000" }]}
-          onPress={() => setPenalties((prev) => prev - 2)}
-        >
-          <Text style={styles.generalText}>-2</Text>
-        </Pressable>
+      <IncrementDecrementButton
+        title="Penalties"
+        value={penalties}
+        decrement={() => setPenalties((prev) => prev - 1)}
+        increment={() => setPenalties((prev) => prev + 1)}
+      />
 
-        <Text style={styles.criteriaText}>Penalties: {penalties}</Text>
-
-        <Pressable
-          style={[styles.criteriaButton, { backgroundColor: "#007d23" }]}
-          onPress={() => setPenalties((prev) => prev + 2)}
-        >
-          <Text style={styles.generalText}>+2</Text>
-        </Pressable>
-        <Pressable
-          style={[styles.criteriaButton, { backgroundColor: "#00ab30" }]}
-          onPress={() => setPenalties((prev) => prev + 5)}
-        >
-          <Text style={styles.generalText}>+5</Text>
-        </Pressable>
-      </View>
+      <IncrementDecrementButton
+        title="Technical Penalties"
+        value={techPenalties}
+        decrement={() => setTechPenalties((prev) => prev - 1)}
+        increment={() => setTechPenalties((prev) => prev + 1)}
+      />
 
       <ShortTextInput
         label="Driver Skill"
