@@ -4,32 +4,26 @@ THE scouting app for the Crescendo (2024-2025) season of the FIRST Robotics Comp
 ## Contributions
 Create pull requests (PRs) with your implementations of items in the to-do list.
 
-Bug fixes, optimizations, and refactors PRs are also welcome.
+Bug fixes, optimizations, and refactor PRs are also welcome.
 
 Feature requests can be submitted as an issue.
 
 ## To-Do
 
 ### Urgent!
-- [ ] QR Code Generation (Jasmehar)
-- [x] Dropdown component for Android (Ayaan)
+- [ ] QR Code Generation (Ben)
 
 ### Target
-- [x] Naming conventions (Jasmehar)
-- [ ] Missing criteria
-  - [ ] Add scoringPreference (amp or speaker)
-  - [ ] Add scoredTrap (boolean) 
-  - [ ] Add spotlight (boolean)
-  - [ ] Add scouterName (string)
-- [ ] Pits page (Aayan and Gordon)
+- [ ] Missing criteria (Ben)
+  - [ ] Add scoringPreference [amp or speaker
+  - [ ] Add scoredTrap [boolean]
+  - [ ] Add spotlight [boolean]
+  - [ ] Add scouterName [string]
+- [ ] Pits page (Ben)
 
 ### Low Priority
-- [ ] CSS rules/CSS Optimization (Kavya)
-- [ ] Colors defined as CSS variables (Kavya)
-- [ ] Tune CSS spacing to be compatible with several screen sizes & resolutions (Kavya)
-- [ ] Dynamic button interaction responses (Kavya)
-- [ ] Theme Design (Light/dark mode, colors, accents) (Kavya)
-- [x] Switcing display of points in grid (Ben)
+- [ ] Colors/Theme standardized as CSS variables and consolidated (Kavya)
+- [ ] Dynamic button interaction responses (Ben)
 
 ### Paused
 - [ ] Migrate settings page to front screen (Questionable utility)
