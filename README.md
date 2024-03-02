@@ -12,11 +12,9 @@ Feature requests can be submitted as an issue.
 
 ### Urgent!
 - [ ] QR Code Generation (Ben)
+- [ ] QR Values & Format Confirmation {Jasmehar}
 
 ### Target
-- [ ] Missing criteria (Ben)
-  - [ ] Add scoredTrap [boolean]
-  - [ ] Add spotlight [boolean]
 - [ ] Pits page (Ben)
 
 ### Low Priority
