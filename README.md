@@ -17,7 +17,6 @@ Feature requests can be submitted as an issue.
 - [ ] Missing criteria (Ben)
   - [ ] Add scoredTrap [boolean]
   - [ ] Add spotlight [boolean]
-  - [ ] Add scouterName [string]
 - [ ] Pits page (Ben)
 
 ### Low Priority
