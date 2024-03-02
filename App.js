@@ -9,7 +9,7 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { Picker } from "@react-native-picker/picker";
 
@@ -126,7 +126,7 @@ function StandsScreen() {
   const [comments, setComments] = useState("");
   const [scoringPreference, setScoringPreference] = useState("Speaker") // DEFAULT VALUE MUST BE SPEAKER OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
 
-  const { userTeamNumber, competition, updateParams } = useContext(MyContext);
+  const { userName, userTeamNumber, competition } = useContext(MyContext);
 
   return (
     <ScrollView style={styles.scoutingScreenContainer}>
@@ -273,7 +273,7 @@ function PitsScreen() {
   const [scoringDetails, setScoringDetails] = useState("");
   const [comments, setComments] = useState("");
 
-  const { userTeamNumber, competition, updateParams } = useContext(MyContext);
+  const { userName, userTeamNumber, competition } = useContext(MyContext);
 
   return (
     <ScrollView style={styles.scoutingScreenContainer}>
@@ -300,36 +300,43 @@ function PitsScreen() {
 // >>> --> SETTINGS SCREEN <<<
 
 function SettingsScreen({ navigation }) {
-  const { userTeamNumber, competition, updateParams } = useContext(MyContext);
+  const { userName, userTeamNumber, competition, updateParams } = useContext(MyContext);
 
-  const [newParam1, setNewParam1] = useState(0);
-  const [newParam2, setNewParam2] = useState("");
+  const [newParam1, setNewParam1] = useState("");
+  const [newParam2, setNewParam2] = useState(0);
+  const [newParam3, setNewParam3] = useState("");
 
   const updateParamsWithTextInput = () => {
-    console.log(newParam1, newParam2);
+    console.log(newParam1, newParam2, newParam3);
     updateParams({
-      userTeamNumber: newParam1 || userTeamNumber,
-      competition: newParam2 || competition,
+      userName: newParam1 || userName,
+      userTeamNumber: newParam2 || userTeamNumber,
+      competition: newParam3 || competition,
     });
     navigation.navigate("homeScreen");
   };
 
   return (
     <ScrollView style={styles.scoutingScreenContainer}>
-      <ShortTextInput label="Scouter Name" placeholder='Benjamin "100" Lu' />
+      <ShortTextInput
+        label="Scouter Name"
+        placeholder="Benjamin Lu"
+        onChangeText={setNewParam1}
+        value={newParam1}
+      />
       <ShortTextInput
         label="Scouter Team"
         placeholder="4308"
         keyboardType="numeric"
-        onChangeText={setNewParam1}
-        value={newParam1}
+        onChangeText={setNewParam2}
+        value={newParam2}
         maxLength={4}
       />
       <DropdownInput
         label="Competition"
         options={["Humber College", "Centennial College", "McMaster University", "Provincial Championship"]}
-        selectedOption={newParam2}
-        setSelectedOption={setNewParam2}
+        selectedOption={newParam3}
+        setSelectedOption={setNewParam3}
       />
       <Pressable
         style={[styles.criteriaButton2, { marginTop: "5%" }]}
