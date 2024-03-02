@@ -35,7 +35,7 @@ const ShortTextInput = ({
   <View style={styles.criteriaContainer}>
     <Text style={styles.criteriaText}>{label}</Text>
     <TextInput
-      style={[styles.criteriaTextInput, style]}
+      style={styles.criteriaTextInput}
       placeholder={placeholder}
       onChangeText={onChangeText}
       placeholderTextColor="#959595"
