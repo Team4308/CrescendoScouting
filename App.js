@@ -28,7 +28,6 @@ const ShortTextInput = ({
   label,
   placeholder,
   onChangeText,
-  style,
   keyboardType,
   maxLength,
 }) => (
@@ -54,13 +53,16 @@ const DropdownInput = ({
   <View style={styles.criteriaContainer}>
     <Text style={styles.criteriaText}>{label}</Text>
     <View style={{
-      backgroundColor: "#fff",
+      borderWidth: 1,
+      borderColor: '#fff',
       marginTop: 10,
-      borderRadius: 10,
+      color: "#fff",
     }}>
       <Picker
         selectedValue={selectedOption}
         onValueChange={(itemValue) => setSelectedOption(itemValue)}
+        style={{color: '#fff'}}
+        dropdownIconColor={'#fff'}
       >
         {options.map((option, index) => (
           <Picker.Item
