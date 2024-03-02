@@ -318,12 +318,6 @@ function SettingsScreen({ navigation }) {
         value={newParam1}
         maxLength={4}
       />
-      {/* <ShortTextInput
-        label="Competition"
-        placeholder="Humber College"
-        onChangeText={setNewParam2}
-        value={newParam2}
-      /> */}
       <DropdownInput
         label="Competition"
         options={["Humber College", "Centennial College", "McMaster University", "Provincial Championship"]}
