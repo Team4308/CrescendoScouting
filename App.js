@@ -125,6 +125,8 @@ function StandsScreen() {
   const [scoringDetails, setScoringDetails] = useState("");
   const [comments, setComments] = useState("");
   const [scoringPreference, setScoringPreference] = useState("Speaker") // DEFAULT VALUE MUST BE SPEAKER OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
+  const [scoredTrap, setScoredTrap] = useState(false)
+  const [spotlight, setSpotlight] = useState(false)
 
   const { userName, userTeamNumber, competition } = useContext(MyContext);
 
@@ -211,6 +213,35 @@ function StandsScreen() {
         decrement={() => setTechPenalties((prev) => prev - 1)}
         increment={() => setTechPenalties((prev) => prev + 1)}
       />
+
+      <View style={styles.criteriaContainer}>
+        <View style={[styles.criteriaHorzContainer, {justifyContent: 'space-around'}]}>
+          <Pressable
+          style={{
+            backgroundColor: scoredTrap ? "#007d23" : "#7d0000",
+            padding: 10,
+            width: '30%',
+            alignItems: 'center',
+            borderRadius: 15
+          }}
+          onPress={() => setScoredTrap(!scoredTrap)}
+          >
+            <Text style={styles.generalText}>Trap</Text>
+          </Pressable>
+          <Pressable
+          style={{
+            backgroundColor: spotlight ? "#007d23" : "#7d0000",
+            padding: 10,
+            width: '30%',
+            alignItems: 'center',
+            borderRadius: 15
+          }}
+          onPress={() => setSpotlight(!spotlight)}
+          >
+            <Text style={styles.generalText}>Spotlight</Text>
+          </Pressable>
+        </View>
+      </View>
 
       <ShortTextInput
         label="Driver Skill"
