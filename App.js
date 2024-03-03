@@ -292,6 +292,8 @@ function StandsScreen() {
       >
         <Text>Generate QR</Text>
       </Pressable>
+      
+      <StatusBar barStyle="light-content" />
     </ScrollView>
   );
 }
@@ -407,6 +409,7 @@ function PitsScreen() {
         <Text>Generate QR</Text>
       </Pressable>
 
+      <StatusBar barStyle="light-content" />
     </ScrollView>
   );
 }
@@ -457,6 +460,8 @@ function SettingsScreen({ navigation }) {
       >
         <Text>Save Settings</Text>
       </Pressable>
+
+      <StatusBar barStyle="light-content" />
     </ScrollView>
   );
 }
@@ -530,7 +535,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <MyContext.Provider value={{ ...params, updateParams }}>
-        <Stack.Navigator initialRouteName="settingsScreen">
+        <Stack.Navigator initialRouteName="homeScreen">
           <Stack.Screen
             name="homeScreen"
             component={HomeScreen}
