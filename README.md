@@ -19,4 +19,4 @@ Feature requests can be submitted as an issue.
 ### Low Priority
 - [ ] BLE investigation as replacement for QR codes (Ben)
 - [ ] Colors/Theme standardized as CSS variables and consolidated (Kavya)
-- [ ] Dynamic button interaction responses (Ben)
+- [ ] Dynamic button interaction responses (Ayaan)
