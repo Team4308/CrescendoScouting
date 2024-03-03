@@ -494,7 +494,7 @@ function SettingsScreen({ navigation }) {
 // >>> NAVIGATION <<<
 
 function HomeScreen({ navigation }) {
-  const { userTeamNumber, competition, updateParams } = useContext(MyContext);
+  const { userTeamNumber, competition } = useContext(MyContext);
 
   return (
     <View style={styles.homeContainer}>
