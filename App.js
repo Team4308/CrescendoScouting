@@ -9,9 +9,10 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { Picker } from "@react-native-picker/picker";
+import QRCode from 'react-native-qrcode-svg';
 
 // >>> TABLE OF CONTENTS <<<
 // COMPONENTS
@@ -127,6 +128,7 @@ function StandsScreen() {
   const [scoringPreference, setScoringPreference] = useState("Speaker") // DEFAULT VALUE MUST BE SPEAKER OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
   const [scoredTrap, setScoredTrap] = useState(false)
   const [spotlight, setSpotlight] = useState(false)
+  const [QRData, setQRData] = useState("EMPTY QR")
 
   const { userName, userTeamNumber, competition } = useContext(MyContext);
 
@@ -255,7 +257,7 @@ function StandsScreen() {
       />
       <ShortTextInput
         label="Scoring Details"
-        placeholder="Likes to amp."
+        placeholder="Moves close to speaker."
         onChangeText={setScoringDetails}
       />
       <DropdownInput
@@ -267,8 +269,8 @@ function StandsScreen() {
       <View style={styles.criteriaContainer}>
         <Text style={styles.criteriaText}>Comments</Text>
         <TextInput
-          style={[styles.criteriaTextInput, { marginBottom: "5%" }]}
-          placeholder={"N/A."}
+          style={styles.criteriaTextInput}
+          placeholder={"I love 4308!"}
           onChangeText={setComments}
           placeholderTextColor="#959595"
           multiline={true}
@@ -277,9 +279,34 @@ function StandsScreen() {
         />
       </View>
 
+      <View style={[styles.criteriaContainer, {alignItems: 'center', backgroundColor: '#fff', padding: 20}]}>
+          <QRCode value={QRData} size={300} />
+      </View>
+
       <Pressable
-        style={[styles.criteriaButton2, { marginBottom: "5%" }]}
-        onPress={() => console.log({ competition })}
+        style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
+        onPress={
+          () => setQRData(`
+            ${teamNumber},
+            ${matchNumber},
+            ${autoAmp},
+            ${autoSpeaker},
+            ${teleSpeaker},
+            ${ampedTeleSpeaker},
+            ${teleSpeaker},
+            ${fumAmp},
+            ${fumSpeaker},
+            ${penalties},
+            ${techPenalties},
+            ${scoredTrap},
+            ${spotlight},
+            ${driverSkill},
+            ${strategyDetails},
+            ${scoringDetails},
+            ${scoringPreference},
+            ${comments}
+          `)
+        }
       >
         <Text>Generate QR</Text>
       </Pressable>
