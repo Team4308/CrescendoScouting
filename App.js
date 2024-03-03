@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React, { createContext, useContext, useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
@@ -109,7 +110,7 @@ const IncrementDecrementButton = ({
 // >>> SCREENS <<<
 // >>> --> STANDS SCREEN <<<
 
-function StandsScreen() {
+function StandsScreen({ navigation }) {
   const [teamNumber, setTeamNumber] = useState(0);
   const [matchNumber, setMatchNumber] = useState(0);
   const [autoAmp, setAutoAmp] = useState(0);
@@ -293,6 +294,7 @@ function StandsScreen() {
         <Text>Generate QR</Text>
       </Pressable>
       
+      <Pressable onPress={() => navigation.navigate("homeScreen")}><Text>DEBUG BUTTON</Text></Pressable>
       <StatusBar barStyle="light-content" />
     </ScrollView>
   );
@@ -300,7 +302,7 @@ function StandsScreen() {
 
 // >>> --> PITS SCREEN <<<
 
-function PitsScreen() {
+function PitsScreen({ navigation }) {
   const [teamNumber, setTeamNumber] = useState(0)
   const [drivetrain, setDrivetrain] = useState("Other")
   const [centerOfGravity, setCenterOfGravity] = useState("Middle") 
@@ -409,6 +411,7 @@ function PitsScreen() {
         <Text>Generate QR</Text>
       </Pressable>
 
+      <Pressable onPress={() => navigation.navigate("homeScreen")}><Text>DEBUG BUTTON</Text></Pressable>
       <StatusBar barStyle="light-content" />
     </ScrollView>
   );
