@@ -321,7 +321,7 @@ function StandsScreen() {
 
 function PitsScreen() {
   const [teamNumber, setTeamNumber] = useState(0)
-  const [drivetrain, setDrivetrain] = useState("")
+  const [drivetrain, setDrivetrain] = useState("Other")
   const [centerOfGravity, setCenterOfGravity] = useState("Middle") 
   const [length, setLength] = useState(0)
   const [width, setWidth] = useState(0)
@@ -344,10 +344,11 @@ function PitsScreen() {
         maxLength={4}
       />
 
-      <ShortTextInput
+      <DropdownInput
         label="Drivetrain"
-        placeholder="Tank."
-        onChangeText={setDrivetrain}
+        options={["Swerve", "Tank", "Other"]} // DEFAULT VALUE MUST BE OTHER OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
+        selectedOption={drivetrain}
+        setSelectedOption={setDrivetrain}
       />
 
       <DropdownInput
@@ -415,12 +416,16 @@ function PitsScreen() {
 
       <View style={[styles.criteriaContainer, {alignItems: 'center', backgroundColor: '#fff', padding: 20}]}>
           <QRCode value={QRData} size={300} />
+          <Text>{QRData}</Text>
       </View>
 
       <Pressable
         style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
         onPress={
           () => setQRData(`
+            ${userName},
+            ${userTeamNumber},
+            ${competition},  
             ${teamNumber},
             ${drivetrain},
             ${centerOfGravity},
