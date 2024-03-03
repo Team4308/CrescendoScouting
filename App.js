@@ -329,20 +329,20 @@ function PitsScreen() {
   const [scoringMech, setScoringMech] = useState("")
   const [canFitUnderStage, setCanFitUnderStage] = useState(false)
   const [canBuddyClimb, setCanBuddyClimb] = useState(false)
+  const [QRData, setQRData] = useState("EMPTY QR")
 
   const { userName, userTeamNumber, competition } = useContext(MyContext);
 
   return (
     <ScrollView style={styles.scoutingScreenContainer}>
-      <View>
-       <ShortTextInput
-          label="Team Number"
-          placeholder="4308"
-          onChangeText={setTeamNumber}
-          style={{ marginTop: "6%" }}
-          keyboardType="numeric"
-          maxLength={4}
-        />
+      <ShortTextInput
+        label="Team Number"
+        placeholder="4308"
+        onChangeText={setTeamNumber}
+        style={{ marginTop: "6%" }}
+        keyboardType="numeric"
+        maxLength={4}
+      />
 
       <ShortTextInput
         label="Drivetrain"
@@ -390,36 +390,52 @@ function PitsScreen() {
           style={{
             backgroundColor: canFitUnderStage ? "#007d23" : "#7d0000",
             padding: 10,
-            width: '40%',
+            width: '45%',
             alignItems: 'center',
             borderRadius: 15
           }}
           onPress={() => setCanFitUnderStage(!canFitUnderStage)}
           >
-            <Text style={styles.generalText}>Fit Under Stage</Text>
+            <Text style={styles.generalText}>Fits Under Stage</Text>
           </Pressable>
           <Pressable
           style={{
             backgroundColor: canBuddyClimb ? "#007d23" : "#7d0000",
             padding: 10,
-            width: '40%',
+            width: '45%',
             alignItems: 'center',
             borderRadius: 15
           }}
           onPress={() => setCanBuddyClimb(!canBuddyClimb)}
           >
-            <Text style={styles.generalText}>Buddy Climb</Text>
+            <Text style={styles.generalText}>Can Buddy Climb</Text>
           </Pressable>
         </View>
       </View>
 
-        <Pressable
-          style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: '3%' }]}
-          onPress={() => console.log({ userTeamNumber }, { competition })}
-        >
-          <Text>Generate QR</Text>
-        </Pressable>
+      <View style={[styles.criteriaContainer, {alignItems: 'center', backgroundColor: '#fff', padding: 20}]}>
+          <QRCode value={QRData} size={300} />
       </View>
+
+      <Pressable
+        style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
+        onPress={
+          () => setQRData(`
+            ${teamNumber},
+            ${drivetrain},
+            ${centerOfGravity},
+            ${length},
+            ${width},
+            ${height},
+            ${scoringMech},
+            ${canFitUnderStage},
+            ${canBuddyClimb},
+          `)
+        }
+      >
+        <Text>Generate QR</Text>
+      </Pressable>
+
     </ScrollView>
   );
 }
