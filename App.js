@@ -286,29 +286,8 @@ function StandsScreen() {
       <Pressable
         style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
         onPress={
-          () => setQRData(`
-            ${userName},
-            ${userTeamNumber},
-            ${competition},
-            ${teamNumber},
-            ${matchNumber},
-            ${autoAmp},
-            ${autoSpeaker},
-            ${teleSpeaker},
-            ${ampedTeleSpeaker},
-            ${teleSpeaker},
-            ${fumAmp},
-            ${fumSpeaker},
-            ${penalties},
-            ${techPenalties},
-            ${scoredTrap},
-            ${spotlight},
-            ${driverSkill},
-            ${strategyDetails},
-            ${scoringDetails},
-            ${scoringPreference},
-            ${comments}
-          `)
+          // DO NOT CHANGE FORMATTING, THIS IS A STRING LITERAL
+          () => setQRData(`\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{matchNum: ${matchNumber}\}, \{autonAmp: ${autoAmp}\}, \{autonSpeaker: ${autoSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{teleAmpedSpeaker: ${ampedTeleSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{fumbledAmp: ${fumAmp}\}, \{fumbledSpeaker: ${fumSpeaker}\}, \{penalties: ${penalties}\}, \{techPenalties: ${techPenalties}\}, \{scoredTrap: ${scoredTrap}\}, \{spotlight: ${spotlight}\}, \{driverSkill: ${driverSkill}\}, \{strategyDesc: ${strategyDetails}\}, \{scoringDesc: ${scoringDetails}\}, \{scoringPreference: ${scoringPreference}\}, \{comments: ${comments}\}`)
         }
       >
         <Text>Generate QR</Text>
@@ -416,26 +395,13 @@ function PitsScreen() {
 
       <View style={[styles.criteriaContainer, {alignItems: 'center', backgroundColor: '#fff', padding: 20}]}>
           <QRCode value={QRData} size={300} />
-          <Text>{QRData}</Text>
       </View>
 
       <Pressable
         style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
         onPress={
-          () => setQRData(`
-            ${userName},
-            ${userTeamNumber},
-            ${competition},  
-            ${teamNumber},
-            ${drivetrain},
-            ${centerOfGravity},
-            ${length},
-            ${width},
-            ${height},
-            ${scoringMech},
-            ${canFitUnderStage},
-            ${canBuddyClimb},
-          `)
+          // DO NOT CHANGE FORMATTING, THIS IS A STRING LITERAL
+          () => setQRData(`\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{driveTrain: ${drivetrain}\}, \{centerOfGravity: ${centerOfGravity}\}, \{length: ${length}\}, \{width: ${width}\}, \{height: ${height}\}, \{scoringMech: ${scoringMech}\}, \{canFitUnderStand: ${canFitUnderStage}\}, \{canBuddyClimb: ${canBuddyClimb}\}`)
         }
       >
         <Text>Generate QR</Text>
@@ -455,7 +421,6 @@ function SettingsScreen({ navigation }) {
   const [newParam3, setNewParam3] = useState("");
 
   const updateParamsWithTextInput = () => {
-    console.log(newParam1, newParam2, newParam3);
     updateParams({
       userName: newParam1 || userName,
       userTeamNumber: newParam2 || userTeamNumber,
