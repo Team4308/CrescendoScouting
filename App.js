@@ -547,6 +547,7 @@ const MyContext = createContext();
 
 export default function App() {
   const [params, setParams] = useState({
+    userName: "Satoshi Nakamoto",
     userTeamNumber: "9999",
     competition: "Humber College", // DEFAULT VALUE MUST BE HUMBER COLLEGE OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
   });
