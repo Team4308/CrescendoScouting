@@ -20,8 +20,3 @@ Feature requests can be submitted as an issue.
 - [ ] BLE investigation as replacement for QR codes (Ben)
 - [ ] Colors/Theme standardized as CSS variables and consolidated (Kavya)
 - [ ] Dynamic button interaction responses (Ben)
-- [ ] QR code values/format confirmation with Falcons (Jasmehar)
-
-### Paused
-- [ ] Migrate settings page to front screen (Questionable utility)
-- [ ] Components and pages abstracted away into seperate js files (Questionable utility)
