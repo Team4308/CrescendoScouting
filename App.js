@@ -111,7 +111,7 @@ const IncrementDecrementButton = ({
 
 function StandsScreen() {
   const [teamNumber, setTeamNumber] = useState(0);
-  const [matchNumber, setMatchNumber] = useState("");
+  const [matchNumber, setMatchNumber] = useState(0);
   const [autoAmp, setAutoAmp] = useState(0);
   const [autoSpeaker, setAutoSpeaker] = useState(0);
   const [teleAmp, setTeleAmp] = useState(0);
@@ -287,6 +287,9 @@ function StandsScreen() {
         style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
         onPress={
           () => setQRData(`
+            ${userName},
+            ${userTeamNumber},
+            ${competition},
             ${teamNumber},
             ${matchNumber},
             ${autoAmp},
@@ -317,35 +320,101 @@ function StandsScreen() {
 // >>> --> PITS SCREEN <<<
 
 function PitsScreen() {
-  const [teamNumber, setTeamNumber] = useState("");
-  const [matchNumber, setMatchNumber] = useState("");
-  const [autoAmp, setAutoAmp] = useState(0);
-  const [autoSpeaker, setAutoSpeaker] = useState(0);
-  const [teleAmp, setTeleAmp] = useState(0);
-  const [teleSpeaker, setTeleSpeaker] = useState(0);
-  const [fumAmp, setFumAmp] = useState(0);
-  const [fumSpeaker, setFumSpeaker] = useState(0);
-  const [penalties, setPenalties] = useState(0);
-  const [driverSkill, setDriverSkill] = useState("");
-  const [strategyDetails, setStrategyDetails] = useState("");
-  const [scoringDetails, setScoringDetails] = useState("");
-  const [comments, setComments] = useState("");
+  const [teamNumber, setTeamNumber] = useState(0)
+  const [drivetrain, setDrivetrain] = useState("")
+  const [centerOfGravity, setCenterOfGravity] = useState("Middle") 
+  const [length, setLength] = useState(0)
+  const [width, setWidth] = useState(0)
+  const [height, setHeight] = useState(0)
+  const [scoringMech, setScoringMech] = useState("")
+  const [canFitUnderStage, setCanFitUnderStage] = useState(false)
+  const [canBuddyClimb, setCanBuddyClimb] = useState(false)
 
   const { userName, userTeamNumber, competition } = useContext(MyContext);
 
   return (
     <ScrollView style={styles.scoutingScreenContainer}>
       <View>
-        <ShortTextInput
+       <ShortTextInput
           label="Team Number"
           placeholder="4308"
           onChangeText={setTeamNumber}
+          style={{ marginTop: "6%" }}
           keyboardType="numeric"
           maxLength={4}
         />
 
+      <ShortTextInput
+        label="Drivetrain"
+        placeholder="Tank."
+        onChangeText={setDrivetrain}
+      />
+
+      <DropdownInput
+        label="Center of Gravity"
+        options={["Very High", "High", "Middle", "Low", "Very low"]} // DEFAULT VALUE MUST BE MIDDLE OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
+        selectedOption={centerOfGravity}
+        setSelectedOption={setCenterOfGravity}
+      />
+
+      <ShortTextInput
+        label="Length"
+        placeholder="69"
+        onChangeText={setLength}
+        keyboardType="numeric"
+      />
+      
+      <ShortTextInput
+        label="Width"
+        placeholder="69"
+        onChangeText={setWidth}
+        keyboardType="numeric"
+      />
+      
+      <ShortTextInput
+        label="Height"
+        placeholder="69"
+        onChangeText={setHeight}
+        keyboardType="numeric"
+      />
+
+      <ShortTextInput
+        label="Scoring Mechanism"
+        placeholder="Sheer willpower."
+        onChangeText={setScoringMech}
+      />
+
+      <View style={styles.criteriaContainer}>
+        <View style={[styles.criteriaHorzContainer, {justifyContent: 'space-between'}]}>
+          <Pressable
+          style={{
+            backgroundColor: canFitUnderStage ? "#007d23" : "#7d0000",
+            padding: 10,
+            width: '40%',
+            alignItems: 'center',
+            borderRadius: 15
+          }}
+          onPress={() => setCanFitUnderStage(!canFitUnderStage)}
+          >
+            <Text style={styles.generalText}>Fit Under Stage</Text>
+          </Pressable>
+          <Pressable
+          style={{
+            backgroundColor: canBuddyClimb ? "#007d23" : "#7d0000",
+            padding: 10,
+            width: '40%',
+            alignItems: 'center',
+            borderRadius: 15
+          }}
+          onPress={() => setCanBuddyClimb(!canBuddyClimb)}
+          >
+            <Text style={styles.generalText}>Buddy Climb</Text>
+          </Pressable>
+        </View>
+      </View>
+
         <Pressable
-          style={[styles.criteriaButton2, { marginTop: "5%" }]}
+          style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: '3%' }]}
           onPress={() => console.log({ userTeamNumber }, { competition })}
         >
           <Text>Generate QR</Text>
