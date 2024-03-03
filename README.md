@@ -11,15 +11,16 @@ Feature requests can be submitted as an issue.
 ## To-Do
 
 ### Urgent!
-- [ ] QR Code Generation (Ben)
-- [ ] QR Values & Format Confirmation {Jasmehar}
+- All done :)
 
 ### Target
-- [ ] Pits page (Ben)
+- All done :)
 
 ### Low Priority
+- [ ] BLE investigation as replacement for QR codes (Ben)
 - [ ] Colors/Theme standardized as CSS variables and consolidated (Kavya)
 - [ ] Dynamic button interaction responses (Ben)
+- [ ] QR code values/format confirmation with Falcons (Jasmehar)
 
 ### Paused
 - [ ] Migrate settings page to front screen (Questionable utility)
