@@ -346,15 +346,11 @@ function StandsScreen({ navigation }) {
         style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
         onPress={
           // DO NOT CHANGE FORMATTING, THIS IS A STRING LITERAL
-          () => {setQRData(`\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{matchNum: ${matchNumber}\}, \{isPlayoffs: ${playoffs}\}, \{autonAmp: ${autoAmp}\}, \{autonSpeaker: ${autoSpeaker}\}, \{teleAmp: ${teleAmp}\}, \{teleAmpedSpeaker: ${ampedTeleSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{fumbledAmp: ${fumAmp}\}, \{fumbledSpeaker: ${fumSpeaker}\}, \{penalties: ${penalties}\}, \{techPenalties: ${techPenalties}\}, \{scoredTrap: ${scoredTrap}\}, \{spotlight: ${spotlight}\}, \{driverSkill: ${driverSkill}\}, \{strategyDesc: ${strategyDetails}\}, \{scoringDesc: ${scoringDetails}\}, \{scoringPreference: ${scoringPreference}\}, \{comments: ${comments}\}`); Vibration.vibrate(100)}
+          () => {setQRData(`\{scouterName: "${userName}"\}, \{scouterTeam: "${userTeamNumber}"\}, \{compName: "${competition}"\}, \{teamNum: "${teamNumber}"\}, \{matchNum: "${matchNumber}"\}, \{isPlayoffs: "${playoffs}"\}, \{autonAmp: "${autoAmp}"\}, \{autonSpeaker: "${autoSpeaker}"\}, \{teleAmp: "${teleAmp}"\}, \{teleAmpedSpeaker: "${ampedTeleSpeaker}"\}, \{teleSpeaker: "${teleSpeaker}"\}, \{fumbledAmp: "${fumAmp}"\}, \{fumbledSpeaker: "${fumSpeaker}"\}, \{penalties: "${penalties}"\}, \{techPenalties: "${techPenalties}"\}, \{scoredTrap: "${scoredTrap}"\}, \{"spotlight: "${spotlight}"\}, \{driverSkill: "${driverSkill}"\}, \{strategyDesc: "${strategyDetails}"\}, \{scoringDesc: "${scoringDetails}"\}, \{scoringPreference: "${scoringPreference}"\}, \{comments: "${comments}"\}`); Vibration.vibrate(100)}
         }
         android_ripple={{color: '#007d23'}}
       >
         <Text>Generate QR</Text>
-      </Pressable>
-      
-      <Pressable onPress={() => console.log(QRData)}>
-        <Text>DEBUG BUTTON</Text>
       </Pressable>
 
       <StatusBar barStyle="light-content" />
@@ -408,23 +404,26 @@ function PitsScreen({ navigation }) {
 
       <ShortTextInput
         label="Length"
-        placeholder="130"
+        placeholder="30 (in inches)"
         onChangeText={setLength}
         keyboardType="numeric"
+        maxLength={3}
       />
       
       <ShortTextInput
         label="Width"
-        placeholder="150"
+        placeholder="40 (in inches)"
         onChangeText={setWidth}
         keyboardType="numeric"
+        maxLength={3}
       />
       
       <ShortTextInput
         label="Height"
-        placeholder="125"
+        placeholder="120 (in inches)"
         onChangeText={setHeight}
         keyboardType="numeric"
+        maxLength={3}
       />
 
       <ShortTextInput
@@ -498,15 +497,11 @@ function PitsScreen({ navigation }) {
         style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
         onPress={
           // DO NOT CHANGE FORMATTING, THIS IS A STRING LITERAL
-          () => {setQRData(`\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{driveTrain: ${drivetrain}\}, \{centerOfGravity: ${centerOfGravity}\}, \{length: ${length}\}, \{width: ${width}\}, \{height: ${height}\}, \{intakeMechanism: ${intakeMech}\}, \{scoringMech: ${scoringMech}\}, \{scoringPreference: ${scoringPreference}\}, \{canFitUnderStage: ${canFitUnderStage}\}, \{canBuddyClimb: ${canBuddyClimb}\}, \{comments: ${comments}\}`); Vibration.vibrate(100)}
+          () => {setQRData(`\{scouterName: "${userName}"\}, \{scouterTeam: "${userTeamNumber}"\}, \{compName: "${competition}"\}, \{teamNum: "${teamNumber}"\}, \{driveTrain: "${drivetrain}"\}, \{centerOfGravity: "${centerOfGravity}"\}, \{length: "${length}"\}, \{width: "${width}"\}, \{height: "${height}"\}, \{intakeMechanism: "${intakeMech}"\}, \{scoringMech: "${scoringMech}"\}, \{scoringPreference: "${scoringPreference}"\}, \{canFitUnderStage: "${canFitUnderStage}"\}, \{canBuddyClimb: "${canBuddyClimb}"\}, \{comments: "${comments}"\}`); Vibration.vibrate(100)}
         }
         android_ripple={{color: '#007d23'}}
       >
         <Text>Generate QR</Text>
-      </Pressable>
-
-      <Pressable onPress={() => console.log(QRData)}>
-        <Text>DEBUG BUTTON</Text>
       </Pressable>
 
       <StatusBar barStyle="light-content" />
