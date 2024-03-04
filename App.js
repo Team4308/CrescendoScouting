@@ -154,7 +154,7 @@ function StandsScreen({ navigation }) {
           onChangeText={setMatchNumber}
           style={{ marginTop: "6%" }}
           keyboardType="numeric"
-          maxLength={2}
+          maxLength={3}
         />
       </View>
 
