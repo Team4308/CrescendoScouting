@@ -1,4 +1,4 @@
-import 'react-native-gesture-handler';
+import "react-native-gesture-handler";
 import React, { createContext, useContext, useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
@@ -14,7 +14,8 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { Picker } from "@react-native-picker/picker";
-import QRCode from 'react-native-qrcode-svg';
+import QRCode from "react-native-qrcode-svg";
+import * as Haptics from "expo-haptics";
 
 // >>> TABLE OF CONTENTS <<<
 // COMPONENTS
@@ -55,42 +56,39 @@ const DropdownInput = ({
 }) => (
   <View style={styles.criteriaContainer}>
     <Text style={styles.criteriaText}>{label}</Text>
-    <View style={{
-      borderWidth: 1,
-      borderColor: '#fff',
-      marginTop: 10,
-      color: "#fff",
-    }}>
+    <View
+      style={{
+        borderWidth: 1,
+        borderColor: "#fff",
+        marginTop: 10,
+        color: "#fff",
+      }}
+    >
       <Picker
         selectedValue={selectedOption}
         onValueChange={(itemValue) => setSelectedOption(itemValue)}
-        style={{color: '#fff'}}
-        dropdownIconColor={'#fff'}
+        style={{ color: "#fff" }}
+        dropdownIconColor={"#fff"}
       >
         {options.map((option, index) => (
-          <Picker.Item
-            key={index}
-            label={option}
-            value={option}
-          />
+          <Picker.Item key={index} label={option} value={option} />
         ))}
       </Picker>
     </View>
   </View>
 );
 
-const IncrementDecrementButton = ({
-  title,
-  value,
-  increment,
-  decrement,
-}) => {
+const IncrementDecrementButton = ({ title, value, increment, decrement }) => {
+  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   return (
     <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
       <Pressable
-        style={[styles.criteriaButton, { backgroundColor: "#ad0000", width: '12%', alignItems: 'center'}]}
+        style={[
+          styles.criteriaButton,
+          { backgroundColor: "#ad0000", width: "12%", alignItems: "center" },
+        ]}
         onPress={decrement}
-        android_ripple={{color: '#191919'}}
+        android_ripple={{ color: "#191919" }}
       >
         <Text style={styles.generalText}>-</Text>
       </Pressable>
@@ -100,9 +98,12 @@ const IncrementDecrementButton = ({
       </Text>
 
       <Pressable
-        style={[styles.criteriaButton, { backgroundColor: "#00ab30", width: '12%', alignItems: 'center' }]}
+        style={[
+          styles.criteriaButton,
+          { backgroundColor: "#00ab30", width: "12%", alignItems: "center" },
+        ]}
         onPress={increment}
-        android_ripple={{color: '#191919'}}
+        android_ripple={{ color: "#191919" }}
       >
         <Text style={styles.generalText}>+</Text>
       </Pressable>
@@ -129,10 +130,10 @@ function StandsScreen({ navigation }) {
   const [strategyDetails, setStrategyDetails] = useState("");
   const [scoringDetails, setScoringDetails] = useState("");
   const [comments, setComments] = useState("");
-  const [scoringPreference, setScoringPreference] = useState("Speaker") // DEFAULT VALUE MUST BE SPEAKER OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
-  const [scoredTrap, setScoredTrap] = useState(false)
-  const [spotlight, setSpotlight] = useState(false)
-  const [QRData, setQRData] = useState("EMPTY QR")
+  const [scoringPreference, setScoringPreference] = useState("Speaker"); // DEFAULT VALUE MUST BE SPEAKER OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
+  const [scoredTrap, setScoredTrap] = useState(false);
+  const [spotlight, setSpotlight] = useState(false);
+  const [QRData, setQRData] = useState("EMPTY QR");
 
   const { userName, userTeamNumber, competition } = useContext(MyContext);
 
@@ -162,7 +163,7 @@ function StandsScreen({ navigation }) {
         value={autoAmp}
         decrement={() => setAutoAmp((prev) => prev - 1)}
         increment={() => setAutoAmp((prev) => prev + 1)}
-        onPress={Vibration.vibrate(70)} // I have no clue how this manages to call for every other button on the screen, even the playoffs button that's defined in completely different function/component
+        onPress={() => Haptics.selectionAsync()} // I have no clue how this manages to call for every other button on the screen, even the playoffs button that's defined in completely different function/component
       />
 
       <IncrementDecrementButton
@@ -222,30 +223,35 @@ function StandsScreen({ navigation }) {
       />
 
       <View style={styles.criteriaContainer}>
-        <View style={[styles.criteriaHorzContainer, {justifyContent: 'space-between'}]}>
+        <View
+          style={[
+            styles.criteriaHorzContainer,
+            { justifyContent: "space-between" },
+          ]}
+        >
           <Pressable
-          style={{
-            backgroundColor: scoredTrap ? "#007d23" : "#7d0000",
-            padding: 10,
-            width: '40%',
-            alignItems: 'center',
-            borderRadius: 15
-          }}
-          android_ripple={{color: '#232323'}}
-          onPress={() => setScoredTrap(!scoredTrap)}
+            style={{
+              backgroundColor: scoredTrap ? "#007d23" : "#7d0000",
+              padding: 10,
+              width: "40%",
+              alignItems: "center",
+              borderRadius: 15,
+            }}
+            android_ripple={{ color: "#232323" }}
+            onPress={() => setScoredTrap(!scoredTrap)}
           >
             <Text style={styles.generalText}>Trap</Text>
           </Pressable>
           <Pressable
-          style={{
-            backgroundColor: spotlight ? "#007d23" : "#7d0000",
-            padding: 10,
-            width: '40%',
-            alignItems: 'center',
-            borderRadius: 15
-          }}
-          android_ripple={{color: '#232323'}}
-          onPress={() => setSpotlight(!spotlight)}
+            style={{
+              backgroundColor: spotlight ? "#007d23" : "#7d0000",
+              padding: 10,
+              width: "40%",
+              alignItems: "center",
+              borderRadius: 15,
+            }}
+            android_ripple={{ color: "#232323" }}
+            onPress={() => setSpotlight(!spotlight)}
           >
             <Text style={styles.generalText}>Spotlight</Text>
           </Pressable>
@@ -286,21 +292,34 @@ function StandsScreen({ navigation }) {
         />
       </View>
 
-      <View style={[styles.criteriaContainer, {alignItems: 'center', backgroundColor: '#fff', padding: 20}]}>
-          <QRCode value={QRData} size={300} />
+      <View
+        style={[
+          styles.criteriaContainer,
+          { alignItems: "center", backgroundColor: "#fff", padding: 20 },
+        ]}
+      >
+        <QRCode value={QRData} size={300} />
       </View>
 
       <Pressable
-        style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
+        style={[
+          styles.criteriaButton2,
+          { marginBottom: "5%", marginTop: "3%" },
+        ]}
         onPress={
           // DO NOT CHANGE FORMATTING, THIS IS A STRING LITERAL
-          () => {setQRData(`\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{matchNum: ${matchNumber}\}, \{autonAmp: ${autoAmp}\}, \{autonSpeaker: ${autoSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{teleAmpedSpeaker: ${ampedTeleSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{fumbledAmp: ${fumAmp}\}, \{fumbledSpeaker: ${fumSpeaker}\}, \{penalties: ${penalties}\}, \{techPenalties: ${techPenalties}\}, \{scoredTrap: ${scoredTrap}\}, \{spotlight: ${spotlight}\}, \{driverSkill: ${driverSkill}\}, \{strategyDesc: ${strategyDetails}\}, \{scoringDesc: ${scoringDetails}\}, \{scoringPreference: ${scoringPreference}\}, \{comments: ${comments}\}`); Vibration.vibrate(100)}
+          () => {
+            setQRData(
+              `\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{matchNum: ${matchNumber}\}, \{autonAmp: ${autoAmp}\}, \{autonSpeaker: ${autoSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{teleAmpedSpeaker: ${ampedTeleSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{fumbledAmp: ${fumAmp}\}, \{fumbledSpeaker: ${fumSpeaker}\}, \{penalties: ${penalties}\}, \{techPenalties: ${techPenalties}\}, \{scoredTrap: ${scoredTrap}\}, \{spotlight: ${spotlight}\}, \{driverSkill: ${driverSkill}\}, \{strategyDesc: ${strategyDetails}\}, \{scoringDesc: ${scoringDetails}\}, \{scoringPreference: ${scoringPreference}\}, \{comments: ${comments}\}`
+            );
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+          }
         }
-        android_ripple={{color: '#007d23'}}
+        android_ripple={{ color: "#007d23" }}
       >
         <Text>Generate QR</Text>
       </Pressable>
-      
+
       <StatusBar barStyle="light-content" />
     </ScrollView>
   );
@@ -309,16 +328,16 @@ function StandsScreen({ navigation }) {
 // >>> --> PITS SCREEN <<<
 
 function PitsScreen({ navigation }) {
-  const [teamNumber, setTeamNumber] = useState(0)
-  const [drivetrain, setDrivetrain] = useState("Other")
-  const [centerOfGravity, setCenterOfGravity] = useState("Middle") 
-  const [length, setLength] = useState(0)
-  const [width, setWidth] = useState(0)
-  const [height, setHeight] = useState(0)
-  const [scoringMech, setScoringMech] = useState("")
-  const [canFitUnderStage, setCanFitUnderStage] = useState(false)
-  const [canBuddyClimb, setCanBuddyClimb] = useState(false)
-  const [QRData, setQRData] = useState("EMPTY QR")
+  const [teamNumber, setTeamNumber] = useState(0);
+  const [drivetrain, setDrivetrain] = useState("Other");
+  const [centerOfGravity, setCenterOfGravity] = useState("Middle");
+  const [length, setLength] = useState(0);
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+  const [scoringMech, setScoringMech] = useState("");
+  const [canFitUnderStage, setCanFitUnderStage] = useState(false);
+  const [canBuddyClimb, setCanBuddyClimb] = useState(false);
+  const [QRData, setQRData] = useState("EMPTY QR");
 
   const { userName, userTeamNumber, competition } = useContext(MyContext);
 
@@ -353,14 +372,14 @@ function PitsScreen({ navigation }) {
         onChangeText={setLength}
         keyboardType="numeric"
       />
-      
+
       <ShortTextInput
         label="Width"
         placeholder="69"
         onChangeText={setWidth}
         keyboardType="numeric"
       />
-      
+
       <ShortTextInput
         label="Height"
         placeholder="69"
@@ -375,47 +394,71 @@ function PitsScreen({ navigation }) {
       />
 
       <View style={styles.criteriaContainer}>
-        <View style={[styles.criteriaHorzContainer, {justifyContent: 'space-between'}]}>
+        <View
+          style={[
+            styles.criteriaHorzContainer,
+            { justifyContent: "space-between" },
+          ]}
+        >
           <Pressable
-          style={{
-            backgroundColor: canFitUnderStage ? "#007d23" : "#7d0000",
-            padding: 10,
-            width: '45%',
-            alignItems: 'center',
-            borderRadius: 15
-          }}
-          onPress={() => {setCanFitUnderStage(!canFitUnderStage); Vibration.vibrate(70)}}
-          android_ripple={{color: '#232323'}}
+            style={{
+              backgroundColor: canFitUnderStage ? "#007d23" : "#7d0000",
+              padding: 10,
+              width: "45%",
+              alignItems: "center",
+              borderRadius: 15,
+            }}
+            onPress={() => {
+              setCanFitUnderStage(!canFitUnderStage);
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+            }}
+            android_ripple={{ color: "#232323" }}
           >
             <Text style={styles.generalText}>Fits Under Stage</Text>
           </Pressable>
           <Pressable
-          style={{
-            backgroundColor: canBuddyClimb ? "#007d23" : "#7d0000",
-            padding: 10,
-            width: '45%',
-            alignItems: 'center',
-            borderRadius: 15
-          }}
-          onPress={() => {setCanBuddyClimb(!canBuddyClimb); Vibration.vibrate(70)}}
-          android_ripple={{color: '#232323'}}
+            style={{
+              backgroundColor: canBuddyClimb ? "#007d23" : "#7d0000",
+              padding: 10,
+              width: "45%",
+              alignItems: "center",
+              borderRadius: 15,
+            }}
+            onPress={() => {
+              setCanBuddyClimb(!canBuddyClimb);
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+            }}
+            android_ripple={{ color: "#232323" }}
           >
             <Text style={styles.generalText}>Can Buddy Climb</Text>
           </Pressable>
         </View>
       </View>
 
-      <View style={[styles.criteriaContainer, {alignItems: 'center', backgroundColor: '#fff', padding: 20}]}>
-          <QRCode value={QRData} size={300} />
+      <View
+        style={[
+          styles.criteriaContainer,
+          { alignItems: "center", backgroundColor: "#fff", padding: 20 },
+        ]}
+      >
+        <QRCode value={QRData} size={300} />
       </View>
 
       <Pressable
-        style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
+        style={[
+          styles.criteriaButton2,
+          { marginBottom: "5%", marginTop: "3%" },
+        ]}
         onPress={
           // DO NOT CHANGE FORMATTING, THIS IS A STRING LITERAL
-          () => {setQRData(`\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{driveTrain: ${drivetrain}\}, \{centerOfGravity: ${centerOfGravity}\}, \{length: ${length}\}, \{width: ${width}\}, \{height: ${height}\}, \{scoringMech: ${scoringMech}\}, \{canFitUnderStand: ${canFitUnderStage}\}, \{canBuddyClimb: ${canBuddyClimb}\}`); Vibration.vibrate(100)}
+          () => {
+            setQRData(
+              `\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{driveTrain: ${drivetrain}\}, \{centerOfGravity: ${centerOfGravity}\}, \{length: ${length}\}, \{width: ${width}\}, \{height: ${height}\}, \{scoringMech: ${scoringMech}\}, \{canFitUnderStand: ${canFitUnderStage}\}, \{canBuddyClimb: ${canBuddyClimb}\}`
+            );
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+          }
         }
-        android_ripple={{color: '#007d23'}}
+        android_ripple={{ color: "#007d23" }}
       >
         <Text>Generate QR</Text>
       </Pressable>
@@ -428,7 +471,8 @@ function PitsScreen({ navigation }) {
 // >>> --> SETTINGS SCREEN <<<
 
 function SettingsScreen({ navigation }) {
-  const { userName, userTeamNumber, competition, updateParams } = useContext(MyContext);
+  const { userName, userTeamNumber, competition, updateParams } =
+    useContext(MyContext);
 
   const [newParam1, setNewParam1] = useState("");
   const [newParam2, setNewParam2] = useState(0);
@@ -441,7 +485,7 @@ function SettingsScreen({ navigation }) {
       competition: newParam3 || competition,
     });
     navigation.navigate("homeScreen");
-    Vibration.vibrate(100);
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
   };
 
   return (
@@ -462,14 +506,19 @@ function SettingsScreen({ navigation }) {
       />
       <DropdownInput
         label="Competition"
-        options={["Humber College", "Centennial College", "McMaster University", "Provincial Championship"]}
+        options={[
+          "Humber College",
+          "Centennial College",
+          "McMaster University",
+          "Provincial Championship",
+        ]}
         selectedOption={newParam3}
         setSelectedOption={setNewParam3}
       />
       <Pressable
         style={[styles.criteriaButton2, { marginTop: "5%" }]}
         onPress={updateParamsWithTextInput}
-        android_ripple={{color: '#007d23'}}
+        android_ripple={{ color: "#007d23" }}
       >
         <Text>Save Settings</Text>
       </Pressable>
@@ -505,24 +554,32 @@ function HomeScreen({ navigation }) {
       <View style={styles.homeNavigationButtonContainer}>
         <Pressable
           style={[styles.homeNavigationButton, { backgroundColor: "#c3423f" }]}
-          onPress={() => navigation.navigate("standsScreen")}
-          android_ripple={{color: '#000'}}
+          onPress={() => {
+            navigation.navigate("standsScreen");
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+          }}
+          android_ripple={{ color: "#000" }}
         >
           <Text style={styles.homeNavigationButtonText}>Stands</Text>
         </Pressable>
-
         <Pressable
           style={[styles.homeNavigationButton, { backgroundColor: "#5bc0eb" }]}
-          onPress={() => navigation.navigate("pitsScreen")}
-          android_ripple={{color: '#000'}}
+          onPress={() => {
+            navigation.navigate("pitsScreen");
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+          }}
+          android_ripple={{ color: "#000" }}
         >
           <Text style={styles.homeNavigationButtonText}>Pits</Text>
         </Pressable>
 
         <Pressable
           style={[styles.homeNavigationButton, { backgroundColor: "#959595" }]}
-          onPress={() => navigation.navigate("settingsScreen")}
-          android_ripple={{color: '#000'}}
+          onPress={() => {
+            navigation.navigate("settingsScreen");
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+          }}
+          android_ripple={{ color: "#000" }}
         >
           <Text style={styles.homeNavigationButtonText}>Settings</Text>
         </Pressable>
@@ -570,8 +627,11 @@ export default function App() {
                       backgroundColor: playoffs ? "#007d23" : "#7d0000",
                     },
                   ]}
-                  onPress={() => setPlayoffs(!playoffs)}
-                  android_ripple={{color: '#232323'}}
+                  onPress={() => {
+                    setPlayoffs(!playoffs);
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  }}
+                  android_ripple={{ color: "#232323" }}
                 >
                   <Text style={[styles.generalText, { color: "#fff" }]}>
                     Playoffs
