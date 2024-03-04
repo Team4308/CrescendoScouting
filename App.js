@@ -162,7 +162,7 @@ function StandsScreen({ navigation }) {
         value={autoAmp}
         decrement={() => setAutoAmp((prev) => prev - 1)}
         increment={() => setAutoAmp((prev) => prev + 1)}
-        onPress={Vibration.vibrate(50)}
+        onPress={Vibration.vibrate(70)} // I have no clue how this manages to call for every other button on the screen, even the playoffs button that's defined in completely different function/component
       />
 
       <IncrementDecrementButton
@@ -294,8 +294,7 @@ function StandsScreen({ navigation }) {
         style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
         onPress={
           // DO NOT CHANGE FORMATTING, THIS IS A STRING LITERAL
-          () =>
-          {setQRData(`\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{matchNum: ${matchNumber}\}, \{autonAmp: ${autoAmp}\}, \{autonSpeaker: ${autoSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{teleAmpedSpeaker: ${ampedTeleSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{fumbledAmp: ${fumAmp}\}, \{fumbledSpeaker: ${fumSpeaker}\}, \{penalties: ${penalties}\}, \{techPenalties: ${techPenalties}\}, \{scoredTrap: ${scoredTrap}\}, \{spotlight: ${spotlight}\}, \{driverSkill: ${driverSkill}\}, \{strategyDesc: ${strategyDetails}\}, \{scoringDesc: ${scoringDetails}\}, \{scoringPreference: ${scoringPreference}\}, \{comments: ${comments}\}`); Vibration.vibrate(70)}
+          () => {setQRData(`\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{matchNum: ${matchNumber}\}, \{autonAmp: ${autoAmp}\}, \{autonSpeaker: ${autoSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{teleAmpedSpeaker: ${ampedTeleSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{fumbledAmp: ${fumAmp}\}, \{fumbledSpeaker: ${fumSpeaker}\}, \{penalties: ${penalties}\}, \{techPenalties: ${techPenalties}\}, \{scoredTrap: ${scoredTrap}\}, \{spotlight: ${spotlight}\}, \{driverSkill: ${driverSkill}\}, \{strategyDesc: ${strategyDetails}\}, \{scoringDesc: ${scoringDetails}\}, \{scoringPreference: ${scoringPreference}\}, \{comments: ${comments}\}`); Vibration.vibrate(100)}
         }
         android_ripple={{color: '#007d23'}}
       >
@@ -385,7 +384,8 @@ function PitsScreen({ navigation }) {
             alignItems: 'center',
             borderRadius: 15
           }}
-          onPress={() => setCanFitUnderStage(!canFitUnderStage)}
+          onPress={() => {setCanFitUnderStage(!canFitUnderStage); Vibration.vibrate(70)}}
+          android_ripple={{color: '#232323'}}
           >
             <Text style={styles.generalText}>Fits Under Stage</Text>
           </Pressable>
@@ -397,7 +397,8 @@ function PitsScreen({ navigation }) {
             alignItems: 'center',
             borderRadius: 15
           }}
-          onPress={() => setCanBuddyClimb(!canBuddyClimb)}
+          onPress={() => {setCanBuddyClimb(!canBuddyClimb); Vibration.vibrate(70)}}
+          android_ripple={{color: '#232323'}}
           >
             <Text style={styles.generalText}>Can Buddy Climb</Text>
           </Pressable>
@@ -412,8 +413,9 @@ function PitsScreen({ navigation }) {
         style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
         onPress={
           // DO NOT CHANGE FORMATTING, THIS IS A STRING LITERAL
-          () => setQRData(`\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{driveTrain: ${drivetrain}\}, \{centerOfGravity: ${centerOfGravity}\}, \{length: ${length}\}, \{width: ${width}\}, \{height: ${height}\}, \{scoringMech: ${scoringMech}\}, \{canFitUnderStand: ${canFitUnderStage}\}, \{canBuddyClimb: ${canBuddyClimb}\}`)
+          () => {setQRData(`\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{driveTrain: ${drivetrain}\}, \{centerOfGravity: ${centerOfGravity}\}, \{length: ${length}\}, \{width: ${width}\}, \{height: ${height}\}, \{scoringMech: ${scoringMech}\}, \{canFitUnderStand: ${canFitUnderStage}\}, \{canBuddyClimb: ${canBuddyClimb}\}`); Vibration.vibrate(100)}
         }
+        android_ripple={{color: '#007d23'}}
       >
         <Text>Generate QR</Text>
       </Pressable>
@@ -439,6 +441,7 @@ function SettingsScreen({ navigation }) {
       competition: newParam3 || competition,
     });
     navigation.navigate("homeScreen");
+    Vibration.vibrate(100);
   };
 
   return (
@@ -466,6 +469,7 @@ function SettingsScreen({ navigation }) {
       <Pressable
         style={[styles.criteriaButton2, { marginTop: "5%" }]}
         onPress={updateParamsWithTextInput}
+        android_ripple={{color: '#007d23'}}
       >
         <Text>Save Settings</Text>
       </Pressable>
