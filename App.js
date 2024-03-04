@@ -1,4 +1,3 @@
-import 'react-native-gesture-handler';
 import React, { createContext, useContext, useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
@@ -6,14 +5,14 @@ import {
   StyleSheet,
   Text,
   Image,
-  Pressable,
   TextInput,
   ScrollView,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { Picker } from "@react-native-picker/picker";
-import QRCode from 'react-native-qrcode-svg';
+import Touchable from "./components/Touchable"
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 // >>> TABLE OF CONTENTS <<<
 // COMPONENTS
@@ -30,13 +29,14 @@ const ShortTextInput = ({
   label,
   placeholder,
   onChangeText,
+  style,
   keyboardType,
   maxLength,
 }) => (
   <View style={styles.criteriaContainer}>
     <Text style={styles.criteriaText}>{label}</Text>
     <TextInput
-      style={styles.criteriaTextInput}
+      style={[styles.criteriaTextInput, style]}
       placeholder={placeholder}
       onChangeText={onChangeText}
       placeholderTextColor="#959595"
@@ -54,55 +54,72 @@ const DropdownInput = ({
 }) => (
   <View style={styles.criteriaContainer}>
     <Text style={styles.criteriaText}>{label}</Text>
-    <View style={{
-      borderWidth: 1,
-      borderColor: '#fff',
-      marginTop: 10,
-      color: "#fff",
-    }}>
+    <View
+      style={{
+        backgroundColor: "#fff",
+        marginTop: 10,
+        borderRadius: 10,
+        height: 100,
+        // centering the picker
+        justifyContent: "center",
+      }}
+    >
       <Picker
         selectedValue={selectedOption}
         onValueChange={(itemValue) => setSelectedOption(itemValue)}
-        style={{color: '#fff'}}
-        dropdownIconColor={'#fff'}
       >
         {options.map((option, index) => (
-          <Picker.Item
-            key={index}
-            label={option}
-            value={option}
-          />
+          <Picker.Item key={index} label={option} value={option} />
         ))}
       </Picker>
     </View>
   </View>
 );
 
+const ToggleButton = ({ title, value, onPress }) => {
+  return (
+    <View style={[styles.criteriaContainer]}>
+      <Touchable
+        style={[
+          styles.criteriaButton,
+          {
+            backgroundColor: value ? "#00ab30" : "#7d0000",
+          },
+        ]}
+        onPress={onPress}
+      >
+        <Text style={styles.generalText}>{title}</Text>
+      </Touchable>
+    </View>
+  );
+};
+
 const IncrementDecrementButton = ({
   title,
   value,
   increment,
   decrement,
+  absolute,
 }) => {
   return (
     <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
-      <Pressable
-        style={[styles.criteriaButton, { backgroundColor: "#ad0000", width: '12%', alignItems: 'center'}]}
+      <Touchable
+        style={[styles.criteriaButton, { backgroundColor: "#ad0000" }]}
         onPress={decrement}
       >
-        <Text style={styles.generalText}>-</Text>
-      </Pressable>
+        <Text style={styles.generalText}>-{absolute}</Text>
+      </Touchable>
 
       <Text style={styles.criteriaText}>
         {title}: {value}
       </Text>
 
-      <Pressable
-        style={[styles.criteriaButton, { backgroundColor: "#00ab30", width: '12%', alignItems: 'center' }]}
+      <Touchable
+        style={[styles.criteriaButton, { backgroundColor: "#00ab30" }]}
         onPress={increment}
       >
-        <Text style={styles.generalText}>+</Text>
-      </Pressable>
+        <Text style={styles.generalText}>+{absolute}</Text>
+      </Touchable>
     </View>
   );
 };
@@ -110,28 +127,22 @@ const IncrementDecrementButton = ({
 // >>> SCREENS <<<
 // >>> --> STANDS SCREEN <<<
 
-function StandsScreen({ navigation }) {
+function StandsScreen() {
   const [teamNumber, setTeamNumber] = useState(0);
-  const [matchNumber, setMatchNumber] = useState(0);
+  const [matchNumber, setMatchNumber] = useState("");
   const [autoAmp, setAutoAmp] = useState(0);
   const [autoSpeaker, setAutoSpeaker] = useState(0);
   const [teleAmp, setTeleAmp] = useState(0);
   const [teleSpeaker, setTeleSpeaker] = useState(0);
-  const [ampedTeleSpeaker, setAmpedTeleSpeaker] = useState(0);
   const [fumAmp, setFumAmp] = useState(0);
   const [fumSpeaker, setFumSpeaker] = useState(0);
   const [penalties, setPenalties] = useState(0);
-  const [techPenalties, setTechPenalties] = useState(0);
   const [driverSkill, setDriverSkill] = useState("");
   const [strategyDetails, setStrategyDetails] = useState("");
   const [scoringDetails, setScoringDetails] = useState("");
   const [comments, setComments] = useState("");
-  const [scoringPreference, setScoringPreference] = useState("Speaker") // DEFAULT VALUE MUST BE SPEAKER OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
-  const [scoredTrap, setScoredTrap] = useState(false)
-  const [spotlight, setSpotlight] = useState(false)
-  const [QRData, setQRData] = useState("EMPTY QR")
 
-  const { userName, userTeamNumber, competition } = useContext(MyContext);
+  const { userTeamNumber, competition, updateParams } = useContext(MyContext);
 
   return (
     <ScrollView style={styles.scoutingScreenContainer}>
@@ -157,15 +168,17 @@ function StandsScreen({ navigation }) {
       <IncrementDecrementButton
         title="Auto Amp"
         value={autoAmp}
-        decrement={() => setAutoAmp((prev) => prev - 1)}
-        increment={() => setAutoAmp((prev) => prev + 1)}
+        decrement={() => setAutoAmp((prev) => prev - 2)}
+        increment={() => setAutoAmp((prev) => prev + 2)}
+        absolute={2}
       />
 
       <IncrementDecrementButton
         title="Auto Speaker"
         value={autoSpeaker}
-        decrement={() => setAutoSpeaker((prev) => prev - 1)}
-        increment={() => setAutoSpeaker((prev) => prev + 1)}
+        decrement={() => setAutoSpeaker((prev) => prev - 5)}
+        increment={() => setAutoSpeaker((prev) => prev + 5)}
+        absolute={5}
       />
 
       <IncrementDecrementButton
@@ -173,27 +186,45 @@ function StandsScreen({ navigation }) {
         value={teleAmp}
         decrement={() => setTeleAmp((prev) => prev - 1)}
         increment={() => setTeleAmp((prev) => prev + 1)}
+        absolute={1}
       />
 
-      <IncrementDecrementButton
-        title="Amped Tele Speaker"
-        value={ampedTeleSpeaker}
-        decrement={() => setAmpedTeleSpeaker((prev) => prev - 1)}
-        increment={() => setAmpedTeleSpeaker((prev) => prev + 1)}
-      />
+      <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
+        <Touchable
+          style={[styles.criteriaButton, { backgroundColor: "#ad0000" }]}
+          onPress={() => setTeleSpeaker((prev) => prev - 5)}
+        >
+          <Text style={styles.generalText}>-5</Text>
+        </Touchable>
+        <Touchable
+          style={[styles.criteriaButton, { backgroundColor: "#7d0000" }]}
+          onPress={() => setTeleSpeaker((prev) => prev - 2)}
+        >
+          <Text style={styles.generalText}>-2</Text>
+        </Touchable>
 
-      <IncrementDecrementButton
-        title="Tele Speaker"
-        value={teleSpeaker}
-        decrement={() => setTeleSpeaker((prev) => prev - 1)}
-        increment={() => setTeleSpeaker((prev) => prev + 1)}
-      />
+        <Text style={styles.criteriaText}>Tele Speaker: {teleSpeaker}</Text>
+
+        <Touchable
+          style={[styles.criteriaButton, { backgroundColor: "#007d23" }]}
+          onPress={() => setTeleSpeaker((prev) => prev + 2)}
+        >
+          <Text style={styles.generalText}>+2</Text>
+        </Touchable>
+        <Touchable
+          style={[styles.criteriaButton, { backgroundColor: "#00ab30" }]}
+          onPress={() => setTeleSpeaker((prev) => prev + 5)}
+        >
+          <Text style={styles.generalText}>+5</Text>
+        </Touchable>
+      </View>
 
       <IncrementDecrementButton
         title="Fum Amp"
         value={fumAmp}
         decrement={() => setFumAmp((prev) => prev - 1)}
         increment={() => setFumAmp((prev) => prev + 1)}
+        absolute={1}
       />
 
       <IncrementDecrementButton
@@ -201,49 +232,37 @@ function StandsScreen({ navigation }) {
         value={fumSpeaker}
         decrement={() => setFumSpeaker((prev) => prev - 1)}
         increment={() => setFumSpeaker((prev) => prev + 1)}
+        absolute={1}
       />
 
-      <IncrementDecrementButton
-        title="Penalties"
-        value={penalties}
-        decrement={() => setPenalties((prev) => prev - 1)}
-        increment={() => setPenalties((prev) => prev + 1)}
-      />
+      <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
+        <Touchable
+          style={[styles.criteriaButton, { backgroundColor: "#ad0000" }]}
+          onPress={() => setPenalties((prev) => prev - 5)}
+        >
+          <Text style={styles.generalText}>-5</Text>
+        </Touchable>
+        <Touchable
+          style={[styles.criteriaButton, { backgroundColor: "#7d0000" }]}
+          onPress={() => setPenalties((prev) => prev - 2)}
+        >
+          <Text style={styles.generalText}>-2</Text>
+        </Touchable>
 
-      <IncrementDecrementButton
-        title="Technical Penalties"
-        value={techPenalties}
-        decrement={() => setTechPenalties((prev) => prev - 1)}
-        increment={() => setTechPenalties((prev) => prev + 1)}
-      />
+        <Text style={styles.criteriaText}>Penalties: {penalties}</Text>
 
-      <View style={styles.criteriaContainer}>
-        <View style={[styles.criteriaHorzContainer, {justifyContent: 'space-around'}]}>
-          <Pressable
-          style={{
-            backgroundColor: scoredTrap ? "#007d23" : "#7d0000",
-            padding: 10,
-            width: '30%',
-            alignItems: 'center',
-            borderRadius: 15
-          }}
-          onPress={() => setScoredTrap(!scoredTrap)}
-          >
-            <Text style={styles.generalText}>Trap</Text>
-          </Pressable>
-          <Pressable
-          style={{
-            backgroundColor: spotlight ? "#007d23" : "#7d0000",
-            padding: 10,
-            width: '30%',
-            alignItems: 'center',
-            borderRadius: 15
-          }}
-          onPress={() => setSpotlight(!spotlight)}
-          >
-            <Text style={styles.generalText}>Spotlight</Text>
-          </Pressable>
-        </View>
+        <Touchable
+          style={[styles.criteriaButton, { backgroundColor: "#007d23" }]}
+          onPress={() => setPenalties((prev) => prev + 2)}
+        >
+          <Text style={styles.generalText}>+2</Text>
+        </Touchable>
+        <Touchable
+          style={[styles.criteriaButton, { backgroundColor: "#00ab30" }]}
+          onPress={() => setPenalties((prev) => prev + 5)}
+        >
+          <Text style={styles.generalText}>+5</Text>
+        </Touchable>
       </View>
 
       <ShortTextInput
@@ -258,20 +277,14 @@ function StandsScreen({ navigation }) {
       />
       <ShortTextInput
         label="Scoring Details"
-        placeholder="Moves close to speaker."
+        placeholder="Likes to amp."
         onChangeText={setScoringDetails}
-      />
-      <DropdownInput
-        label="Scoring Preference"
-        options={["Speaker", "Amp"]}
-        selectedOption={scoringPreference}
-        setSelectedOption={setScoringPreference}
       />
       <View style={styles.criteriaContainer}>
         <Text style={styles.criteriaText}>Comments</Text>
         <TextInput
-          style={styles.criteriaTextInput}
-          placeholder={"I love 4308!"}
+          style={[styles.criteriaTextInput, { marginBottom: "5%" }]}
+          placeholder={"N/A."}
           onChangeText={setComments}
           placeholderTextColor="#959595"
           multiline={true}
@@ -280,139 +293,120 @@ function StandsScreen({ navigation }) {
         />
       </View>
 
-      <View style={[styles.criteriaContainer, {alignItems: 'center', backgroundColor: '#fff', padding: 20}]}>
-          <QRCode value={QRData} size={300} />
-      </View>
-
-      <Pressable
-        style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
-        onPress={
-          // DO NOT CHANGE FORMATTING, THIS IS A STRING LITERAL
-          () => setQRData(`\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{matchNum: ${matchNumber}\}, \{autonAmp: ${autoAmp}\}, \{autonSpeaker: ${autoSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{teleAmpedSpeaker: ${ampedTeleSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{fumbledAmp: ${fumAmp}\}, \{fumbledSpeaker: ${fumSpeaker}\}, \{penalties: ${penalties}\}, \{techPenalties: ${techPenalties}\}, \{scoredTrap: ${scoredTrap}\}, \{spotlight: ${spotlight}\}, \{driverSkill: ${driverSkill}\}, \{strategyDesc: ${strategyDetails}\}, \{scoringDesc: ${scoringDetails}\}, \{scoringPreference: ${scoringPreference}\}, \{comments: ${comments}\}`)
-        }
+      <Touchable
+        style={[styles.criteriaButton2, { marginBottom: "5%" }]}
+        onPress={() => console.log({ userTeamNumber }, { competition })}
       >
         <Text>Generate QR</Text>
-      </Pressable>
-      
-      <Pressable onPress={() => navigation.navigate("homeScreen")}><Text>DEBUG BUTTON</Text></Pressable>
-      <StatusBar barStyle="light-content" />
+      </Touchable>
     </ScrollView>
   );
 }
 
 // >>> --> PITS SCREEN <<<
 
-function PitsScreen({ navigation }) {
-  const [teamNumber, setTeamNumber] = useState(0)
-  const [drivetrain, setDrivetrain] = useState("Other")
-  const [centerOfGravity, setCenterOfGravity] = useState("Middle") 
-  const [length, setLength] = useState(0)
-  const [width, setWidth] = useState(0)
-  const [height, setHeight] = useState(0)
-  const [scoringMech, setScoringMech] = useState("")
-  const [canFitUnderStage, setCanFitUnderStage] = useState(false)
-  const [canBuddyClimb, setCanBuddyClimb] = useState(false)
-  const [QRData, setQRData] = useState("EMPTY QR")
+function PitsScreen() {
+  const [teamNumber, setTeamNumber] = useState(0);
+  const [drivetrain, setDrivetrain] = useState("");
+  const [centerOfGravity, setCenterOfGravity] = useState("");
+  const [length, setLength] = useState("");
+  const [width, setWidth] = useState("");
+  const [height, setHeight] = useState("");
+  const [scoringMech, setScoringMech] = useState("");
+  const [canFitUnderStage, setCanFitUnderStage] = useState(false);
+  const [canBuddyClimb, setCanBuddyClimb] = useState(false);
 
-  const { userName, userTeamNumber, competition } = useContext(MyContext);
+  const { userTeamNumber, competition, updateParams } = useContext(MyContext);
 
   return (
     <ScrollView style={styles.scoutingScreenContainer}>
-      <ShortTextInput
-        label="Team Number"
-        placeholder="4308"
-        onChangeText={setTeamNumber}
-        style={{ marginTop: "6%" }}
-        keyboardType="numeric"
-        maxLength={4}
-      />
-
-      <DropdownInput
-        label="Drivetrain"
-        options={["Swerve", "Tank", "Other"]} // DEFAULT VALUE MUST BE OTHER OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
-        selectedOption={drivetrain}
-        setSelectedOption={setDrivetrain}
-      />
-
-      <DropdownInput
-        label="Center of Gravity"
-        options={["Very High", "High", "Middle", "Low", "Very low"]} // DEFAULT VALUE MUST BE MIDDLE OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
-        selectedOption={centerOfGravity}
-        setSelectedOption={setCenterOfGravity}
-      />
-
-      <ShortTextInput
-        label="Length"
-        placeholder="69"
-        onChangeText={setLength}
-        keyboardType="numeric"
-      />
-      
-      <ShortTextInput
-        label="Width"
-        placeholder="69"
-        onChangeText={setWidth}
-        keyboardType="numeric"
-      />
-      
-      <ShortTextInput
-        label="Height"
-        placeholder="69"
-        onChangeText={setHeight}
-        keyboardType="numeric"
-      />
-
-      <ShortTextInput
-        label="Scoring Mechanism"
-        placeholder="Sheer willpower."
-        onChangeText={setScoringMech}
-      />
-
-      <View style={styles.criteriaContainer}>
-        <View style={[styles.criteriaHorzContainer, {justifyContent: 'space-between'}]}>
-          <Pressable
-          style={{
-            backgroundColor: canFitUnderStage ? "#007d23" : "#7d0000",
-            padding: 10,
-            width: '45%',
-            alignItems: 'center',
-            borderRadius: 15
-          }}
-          onPress={() => setCanFitUnderStage(!canFitUnderStage)}
-          >
-            <Text style={styles.generalText}>Fits Under Stage</Text>
-          </Pressable>
-          <Pressable
-          style={{
-            backgroundColor: canBuddyClimb ? "#007d23" : "#7d0000",
-            padding: 10,
-            width: '45%',
-            alignItems: 'center',
-            borderRadius: 15
-          }}
-          onPress={() => setCanBuddyClimb(!canBuddyClimb)}
-          >
-            <Text style={styles.generalText}>Can Buddy Climb</Text>
-          </Pressable>
-        </View>
-      </View>
-
-      <View style={[styles.criteriaContainer, {alignItems: 'center', backgroundColor: '#fff', padding: 20}]}>
-          <QRCode value={QRData} size={300} />
-      </View>
-
-      <Pressable
-        style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
-        onPress={
-          // DO NOT CHANGE FORMATTING, THIS IS A STRING LITERAL
-          () => setQRData(`\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{driveTrain: ${drivetrain}\}, \{centerOfGravity: ${centerOfGravity}\}, \{length: ${length}\}, \{width: ${width}\}, \{height: ${height}\}, \{scoringMech: ${scoringMech}\}, \{canFitUnderStand: ${canFitUnderStage}\}, \{canBuddyClimb: ${canBuddyClimb}\}`)
-        }
+      <View
+        style={{
+          flex: 1,
+          marginVertical: 10,
+        }}
       >
-        <Text>Generate QR</Text>
-      </Pressable>
+        <ShortTextInput
+          label="Team Number"
+          placeholder="4308"
+          onChangeText={setTeamNumber}
+          keyboardType="numeric"
+          maxLength={4}
+        />
+        <DropdownInput
+          label="Drivetrain"
+          options={["Tank", "Swerve", "Mecanum", "H-Drive", "X-Drive", "Omni"]}
+          selectedOption={drivetrain}
+          setSelectedOption={setDrivetrain}
+        />
+        <DropdownInput
+          label="Center of Gravity"
+          options={["Low", "Medium", "High"]}
+          selectedOption={centerOfGravity}
+          setSelectedOption={setCenterOfGravity}
+        />
+        <ShortTextInput
+          label="Length"
+          placeholder="69"
+          onChangeText={setLength}
+          keyboardType="numeric"
+          maxLength={2}
+        />
+        <ShortTextInput
+          label="Width"
+          placeholder="69"
+          onChangeText={setWidth}
+          keyboardType="numeric"
+          maxLength={2}
+        />
+        <ShortTextInput
+          label="Height"
+          placeholder="69"
+          onChangeText={setHeight}
+          keyboardType="numeric"
+          maxLength={2}
+        />
+        <DropdownInput
+          label="Scoring Mechanism"
+          options={[
+            "Shooter",
+            "Dumper",
+            "Intake",
+            "Lift",
+            "Claw",
+            "Spinner",
+            "Hanger",
+          ]}
+          selectedOption={scoringMech}
+          setSelectedOption={setScoringMech}
+        />
+        <ToggleButton
+          title="Can Fit Under Stage"
+          value={canFitUnderStage}
+          onPress={() => setCanFitUnderStage((prev) => !prev)}
+        />
+        <ToggleButton
+          title="Can Buddy Climb"
+          value={canBuddyClimb}
+          onPress={() => setCanBuddyClimb((prev) => !prev)}
+        />
+      </View>
 
-      <Pressable onPress={() => navigation.navigate("homeScreen")}><Text>DEBUG BUTTON</Text></Pressable>
-      <StatusBar barStyle="light-content" />
+      <View
+        style={{
+          flex: 1,
+          marginBottom: 40,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Touchable
+          style={[styles.criteriaButton2, { marginTop: "5%" }]}
+          onPress={() => console.log({ userTeamNumber }, { competition })}
+        >
+          <Text>Generate QR</Text>
+        </Touchable>
+      </View>
     </ScrollView>
   );
 }
@@ -420,51 +414,54 @@ function PitsScreen({ navigation }) {
 // >>> --> SETTINGS SCREEN <<<
 
 function SettingsScreen({ navigation }) {
-  const { userName, userTeamNumber, competition, updateParams } = useContext(MyContext);
+  const { userTeamNumber, competition, updateParams } = useContext(MyContext);
 
-  const [newParam1, setNewParam1] = useState("");
-  const [newParam2, setNewParam2] = useState(0);
-  const [newParam3, setNewParam3] = useState("");
+  const [newParam1, setNewParam1] = useState(0);
+  const [newParam2, setNewParam2] = useState("");
 
   const updateParamsWithTextInput = () => {
+    console.log(newParam1, newParam2);
     updateParams({
-      userName: newParam1 || userName,
-      userTeamNumber: newParam2 || userTeamNumber,
-      competition: newParam3 || competition,
+      userTeamNumber: newParam1 || userTeamNumber,
+      competition: newParam2 || competition,
     });
     navigation.navigate("homeScreen");
   };
 
   return (
     <ScrollView style={styles.scoutingScreenContainer}>
-      <ShortTextInput
-        label="Scouter Name"
-        placeholder="Benjamin Lu"
-        onChangeText={setNewParam1}
-        value={newParam1}
-      />
+      <ShortTextInput label="Scouter Name" placeholder='Benjamin "100" Lu' />
       <ShortTextInput
         label="Scouter Team"
         placeholder="4308"
         keyboardType="numeric"
-        onChangeText={setNewParam2}
-        value={newParam2}
+        onChangeText={setNewParam1}
+        value={newParam1}
         maxLength={4}
       />
+      {/* <ShortTextInput
+        label="Competition"
+        placeholder="Humber College"
+        onChangeText={setNewParam2}
+        value={newParam2}
+      /> */}
       <DropdownInput
         label="Competition"
-        options={["Humber College", "Centennial College", "McMaster University", "Provincial Championship"]}
-        selectedOption={newParam3}
-        setSelectedOption={setNewParam3}
+        options={[
+          "Humber College",
+          "Centennial College",
+          "McMaster University",
+          "Provincial Championship",
+        ]}
+        selectedOption={newParam2}
+        setSelectedOption={setNewParam2}
       />
-      <Pressable
+      <Touchable
         style={[styles.criteriaButton2, { marginTop: "5%" }]}
         onPress={updateParamsWithTextInput}
       >
         <Text>Save Settings</Text>
-      </Pressable>
-
-      <StatusBar barStyle="light-content" />
+      </Touchable>
     </ScrollView>
   );
 }
@@ -472,7 +469,7 @@ function SettingsScreen({ navigation }) {
 // >>> NAVIGATION <<<
 
 function HomeScreen({ navigation }) {
-  const { userTeamNumber, competition } = useContext(MyContext);
+  const { userTeamNumber, competition, updateParams } = useContext(MyContext);
 
   return (
     <View style={styles.homeContainer}>
@@ -493,26 +490,26 @@ function HomeScreen({ navigation }) {
       </View>
 
       <View style={styles.homeNavigationButtonContainer}>
-        <Pressable
+        <Touchable
           style={[styles.homeNavigationButton, { backgroundColor: "#c3423f" }]}
           onPress={() => navigation.navigate("standsScreen")}
         >
           <Text style={styles.homeNavigationButtonText}>Stands</Text>
-        </Pressable>
+        </Touchable>
 
-        <Pressable
+        <Touchable
           style={[styles.homeNavigationButton, { backgroundColor: "#5bc0eb" }]}
           onPress={() => navigation.navigate("pitsScreen")}
         >
           <Text style={styles.homeNavigationButtonText}>Pits</Text>
-        </Pressable>
+        </Touchable>
 
-        <Pressable
+        <Touchable
           style={[styles.homeNavigationButton, { backgroundColor: "#959595" }]}
           onPress={() => navigation.navigate("settingsScreen")}
         >
           <Text style={styles.homeNavigationButtonText}>Settings</Text>
-        </Pressable>
+        </Touchable>
       </View>
 
       <StatusBar barStyle="light-content" />
@@ -525,9 +522,8 @@ const MyContext = createContext();
 
 export default function App() {
   const [params, setParams] = useState({
-    userName: "Satoshi Nakamoto",
     userTeamNumber: "9999",
-    competition: "Humber College", // DEFAULT VALUE MUST BE HUMBER COLLEGE OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
+    competition: "Woodlands Asylum",
   });
   const [playoffs, setPlayoffs] = useState(false);
 
@@ -537,8 +533,9 @@ export default function App() {
 
   return (
     <NavigationContainer>
+      <GestureHandlerRootView style={{ flex: 1 }}>
       <MyContext.Provider value={{ ...params, updateParams }}>
-        <Stack.Navigator initialRouteName="homeScreen">
+        <Stack.Navigator initialRouteName="settingsScreen">
           <Stack.Screen
             name="homeScreen"
             component={HomeScreen}
@@ -550,7 +547,7 @@ export default function App() {
             options={{
               title: "Stands",
               headerRight: () => (
-                <Pressable
+                <Touchable
                   style={[
                     styles.headerResetButton,
                     {
@@ -562,7 +559,7 @@ export default function App() {
                   <Text style={[styles.generalText, { color: "#fff" }]}>
                     Playoffs
                   </Text>
-                </Pressable>
+                </Touchable>
               ),
 
               headerStyle: {
@@ -606,6 +603,7 @@ export default function App() {
           />
         </Stack.Navigator>
       </MyContext.Provider>
+      </GestureHandlerRootView>
     </NavigationContainer>
   );
 }
@@ -629,11 +627,11 @@ const styles = StyleSheet.create({
   homeNavigationButtonContainer: {
     flex: 3,
     width: "80%",
-    justifyContent: "space-evenly",
+    justifyContent: "space-around",
   },
-
+  
   homeNavigationButton: {
-    height: "18%",
+    height: "40%",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 15,
@@ -650,13 +648,10 @@ const styles = StyleSheet.create({
   },
 
   headerResetButton: {
-    marginRight: "8%",
-    backgroundColor: "#959595",
-    width: "50%",
-    height: "50%",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 15,
+    paddingVertical: "5%",
+    paddingHorizontal: "5%",
+    borderRadius: 10,
+    marginRight: "8%"
   },
 
   scoutingScreenContainer: {
@@ -671,6 +666,7 @@ const styles = StyleSheet.create({
     },
     textShadowColor: "rgba(0, 0, 0, 0.5)",
     textShadowRadius: 5,
+    textAlign: "center"
   },
 
   criteriaContainer: {
@@ -710,7 +706,8 @@ const styles = StyleSheet.create({
 
   criteriaButton: {
     backgroundColor: "#fff",
-    padding: "3%",
+    paddingVertical: "10%",
+    paddingHorizontal: "5%",
     borderRadius: 10,
   },
 
