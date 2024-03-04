@@ -15,8 +15,8 @@ Feature requests can be submitted as an issue.
 
 ### Target
 - [ ] Storing scouted data in case of accidental deletage
-- [ ] Explanation of criteria after clicking input label text
+- [ ] Explanation of criteria after clicking input label text (use modal)
 
 ### Low Priority
-- [ ] BLE investigation as replacement for QR codes (Ben)
-- [ ] Colors/Theme standardized as CSS variables and consolidated (Kavya)
+- [ ] BLE investigation as replacement for QR codes
+- [ ] Colors/Theme standardized as CSS variables and consolidated
