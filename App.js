@@ -160,7 +160,11 @@ function StandsScreen({ navigation }) {
       <IncrementDecrementButton
         title="Auto Amp"
         value={autoAmp}
-        decrement={() => setAutoAmp((prev) => prev - 1)}
+        decrement={() => {
+          if (autoAmp > 0) {
+            setAutoAmp((prev) => prev - 1)
+          }
+        }}
         increment={() => setAutoAmp((prev) => prev + 1)}
         onPress={Vibration.vibrate(70)} // I have no clue how this manages to call for every other button on the screen, even the playoffs button that's defined in completely different function/component
       />
@@ -168,56 +172,88 @@ function StandsScreen({ navigation }) {
       <IncrementDecrementButton
         title="Auto Speaker"
         value={autoSpeaker}
-        decrement={() => setAutoSpeaker((prev) => prev - 1)}
+        decrement={() => {
+          if (autoSpeaker > 0) {
+            setAutoSpeaker((prev) => prev - 1)
+          }
+        }}
         increment={() => setAutoSpeaker((prev) => prev + 1)}
       />
 
       <IncrementDecrementButton
         title="Tele Amp"
         value={teleAmp}
-        decrement={() => setTeleAmp((prev) => prev - 1)}
+        decrement={() => {
+          if (teleAmp > 0) {
+            setTeleAmp((prev) => prev - 1)
+          }
+        }}
         increment={() => setTeleAmp((prev) => prev + 1)}
       />
 
       <IncrementDecrementButton
         title="Amped Tele Speaker"
         value={ampedTeleSpeaker}
-        decrement={() => setAmpedTeleSpeaker((prev) => prev - 1)}
+        decrement={() => {
+          if (ampedTeleSpeaker > 0) {
+            setAmpedTeleSpeaker((prev) => prev - 1)
+          }
+        }}
         increment={() => setAmpedTeleSpeaker((prev) => prev + 1)}
       />
 
       <IncrementDecrementButton
         title="Tele Speaker"
         value={teleSpeaker}
-        decrement={() => setTeleSpeaker((prev) => prev - 1)}
+        decrement={() => {
+          if (teleSpeaker > 0) {
+            setTeleSpeaker((prev) => prev - 1)
+          }
+        }}
         increment={() => setTeleSpeaker((prev) => prev + 1)}
       />
 
       <IncrementDecrementButton
         title="Fum Amp"
         value={fumAmp}
-        decrement={() => setFumAmp((prev) => prev - 1)}
+        decrement={() => {
+          if (fumAmp > 0) {
+            setFumAmp((prev) => prev - 1)
+          }
+        }}
         increment={() => setFumAmp((prev) => prev + 1)}
       />
 
       <IncrementDecrementButton
         title="Fum Speaker"
         value={fumSpeaker}
-        decrement={() => setFumSpeaker((prev) => prev - 1)}
+        decrement={() => {
+          if (fumSpeaker > 0) {
+            setFumSpeaker((prev) => prev - 1)
+          }
+        }}
         increment={() => setFumSpeaker((prev) => prev + 1)}
       />
 
       <IncrementDecrementButton
         title="Penalties"
         value={penalties}
-        decrement={() => setPenalties((prev) => prev - 1)}
+        decrement={() => {
+          if (penalties > 0) {
+            setPenalties((prev) => prev - 1)
+          }
+        }}
         increment={() => setPenalties((prev) => prev + 1)}
       />
 
       <IncrementDecrementButton
         title="Technical Penalties"
         value={techPenalties}
-        decrement={() => setTechPenalties((prev) => prev - 1)}
+        decrement={() => {
+          if (techPenalties > 0) {
+            setTechPenalties((prev) => prev - 1)
+          }
+        }}
         increment={() => setTechPenalties((prev) => prev + 1)}
       />
 
