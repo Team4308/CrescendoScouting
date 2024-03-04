@@ -116,6 +116,7 @@ const IncrementDecrementButton = ({
 function StandsScreen({ navigation }) {
   const [teamNumber, setTeamNumber] = useState(0);
   const [matchNumber, setMatchNumber] = useState(0);
+  const [playoffs, setPlayoffs] = useState(false);
   const [autoAmp, setAutoAmp] = useState(0);
   const [autoSpeaker, setAutoSpeaker] = useState(0);
   const [teleAmp, setTeleAmp] = useState(0);
@@ -156,6 +157,21 @@ function StandsScreen({ navigation }) {
           maxLength={2}
         />
       </View>
+
+      <Pressable
+        style={[
+          styles.headerResetButton, styles.criteriaContainer,
+          {
+            backgroundColor: playoffs ? "#007d23" : "#7d0000",
+          },
+        ]}
+        onPress={() => setPlayoffs(!playoffs)}
+        android_ripple={{color: '#232323'}}
+      >
+        <Text style={styles.generalText}>
+          Playoffs Game
+        </Text>
+      </Pressable>
 
       <IncrementDecrementButton
         title="Auto Amp"
@@ -305,7 +321,7 @@ function StandsScreen({ navigation }) {
       />
       <DropdownInput
         label="Scoring Preference"
-        options={["Speaker", "Amp"]}
+        options={["Speaker", "Amp", "Both", "Neither", "Other"]}
         selectedOption={scoringPreference}
         setSelectedOption={setScoringPreference}
       />
@@ -330,13 +346,17 @@ function StandsScreen({ navigation }) {
         style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
         onPress={
           // DO NOT CHANGE FORMATTING, THIS IS A STRING LITERAL
-          () => {setQRData(`\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{matchNum: ${matchNumber}\}, \{autonAmp: ${autoAmp}\}, \{autonSpeaker: ${autoSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{teleAmpedSpeaker: ${ampedTeleSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{fumbledAmp: ${fumAmp}\}, \{fumbledSpeaker: ${fumSpeaker}\}, \{penalties: ${penalties}\}, \{techPenalties: ${techPenalties}\}, \{scoredTrap: ${scoredTrap}\}, \{spotlight: ${spotlight}\}, \{driverSkill: ${driverSkill}\}, \{strategyDesc: ${strategyDetails}\}, \{scoringDesc: ${scoringDetails}\}, \{scoringPreference: ${scoringPreference}\}, \{comments: ${comments}\}`); Vibration.vibrate(100)}
+          () => {setQRData(`\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{matchNum: ${matchNumber}\}, \{isPlayoffs: ${playoffs}\}, \{autonAmp: ${autoAmp}\}, \{autonSpeaker: ${autoSpeaker}\}, \{teleAmp: ${teleAmp}\}, \{teleAmpedSpeaker: ${ampedTeleSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{fumbledAmp: ${fumAmp}\}, \{fumbledSpeaker: ${fumSpeaker}\}, \{penalties: ${penalties}\}, \{techPenalties: ${techPenalties}\}, \{scoredTrap: ${scoredTrap}\}, \{spotlight: ${spotlight}\}, \{driverSkill: ${driverSkill}\}, \{strategyDesc: ${strategyDetails}\}, \{scoringDesc: ${scoringDetails}\}, \{scoringPreference: ${scoringPreference}\}, \{comments: ${comments}\}`); Vibration.vibrate(100)}
         }
         android_ripple={{color: '#007d23'}}
       >
         <Text>Generate QR</Text>
       </Pressable>
       
+      <Pressable onPress={() => console.log(QRData)}>
+        <Text>DEBUG BUTTON</Text>
+      </Pressable>
+
       <StatusBar barStyle="light-content" />
     </ScrollView>
   );
@@ -351,9 +371,12 @@ function PitsScreen({ navigation }) {
   const [length, setLength] = useState(0)
   const [width, setWidth] = useState(0)
   const [height, setHeight] = useState(0)
+  const [intakeMech, setIntakeMech] = useState("")
   const [scoringMech, setScoringMech] = useState("")
+  const [scoringPreference, setScoringPreference] = useState("Speaker")
   const [canFitUnderStage, setCanFitUnderStage] = useState(false)
   const [canBuddyClimb, setCanBuddyClimb] = useState(false)
+  const [comments, setComments] = useState("")
   const [QRData, setQRData] = useState("EMPTY QR")
 
   const { userName, userTeamNumber, competition } = useContext(MyContext);
@@ -405,9 +428,22 @@ function PitsScreen({ navigation }) {
       />
 
       <ShortTextInput
+        label="Intake Mechanism"
+        placeholder="Rollers."
+        onChangeText={setIntakeMech}
+      />
+
+      <ShortTextInput
         label="Scoring Mechanism"
         placeholder="Shooter."
         onChangeText={setScoringMech}
+      />
+
+      <DropdownInput
+        label="Scoring Preference"
+        options={["Speaker", "Amp", "Both", "Neither", "Other"]}
+        selectedOption={scoringPreference}
+        setSelectedOption={setScoringPreference}
       />
 
       <View style={styles.criteriaContainer}>
@@ -441,6 +477,19 @@ function PitsScreen({ navigation }) {
         </View>
       </View>
 
+      <View style={styles.criteriaContainer}>
+        <Text style={styles.criteriaText}>Comments</Text>
+        <TextInput
+          style={styles.criteriaTextInput}
+          placeholder={"Bot has battery issues."}
+          onChangeText={setComments}
+          placeholderTextColor="#959595"
+          multiline={true}
+          numberOfLines={4}
+          textAlignVertical="top"
+        />
+      </View>
+
       <View style={[styles.criteriaContainer, {alignItems: 'center', backgroundColor: '#fff', padding: 20}]}>
           <QRCode value={QRData} size={300} />
       </View>
@@ -449,11 +498,15 @@ function PitsScreen({ navigation }) {
         style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
         onPress={
           // DO NOT CHANGE FORMATTING, THIS IS A STRING LITERAL
-          () => {setQRData(`\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{driveTrain: ${drivetrain}\}, \{centerOfGravity: ${centerOfGravity}\}, \{length: ${length}\}, \{width: ${width}\}, \{height: ${height}\}, \{scoringMech: ${scoringMech}\}, \{canFitUnderStand: ${canFitUnderStage}\}, \{canBuddyClimb: ${canBuddyClimb}\}`); Vibration.vibrate(100)}
+          () => {setQRData(`\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{driveTrain: ${drivetrain}\}, \{centerOfGravity: ${centerOfGravity}\}, \{length: ${length}\}, \{width: ${width}\}, \{height: ${height}\}, \{intakeMechanism: ${intakeMech}\}, \{scoringMech: ${scoringMech}\}, \{scoringPreference: ${scoringPreference}\}, \{canFitUnderStage: ${canFitUnderStage}\}, \{canBuddyClimb: ${canBuddyClimb}\}, \{comments: ${comments}\}`); Vibration.vibrate(100)}
         }
         android_ripple={{color: '#007d23'}}
       >
         <Text>Generate QR</Text>
+      </Pressable>
+
+      <Pressable onPress={() => console.log(QRData)}>
+        <Text>DEBUG BUTTON</Text>
       </Pressable>
 
       <StatusBar barStyle="light-content" />
@@ -469,6 +522,7 @@ function SettingsScreen({ navigation }) {
   const [newParam1, setNewParam1] = useState("");
   const [newParam2, setNewParam2] = useState(0);
   const [newParam3, setNewParam3] = useState("");
+  const [newParam4, setNewParam4] = useState(false);
 
   const updateParamsWithTextInput = () => {
     updateParams({
@@ -598,22 +652,6 @@ export default function App() {
             component={StandsScreen}
             options={{
               title: "Stands",
-              headerRight: () => (
-                <Pressable
-                  style={[
-                    styles.headerResetButton,
-                    {
-                      backgroundColor: playoffs ? "#007d23" : "#7d0000",
-                    },
-                  ]}
-                  onPress={() => setPlayoffs(!playoffs)}
-                  android_ripple={{color: '#232323'}}
-                >
-                  <Text style={[styles.generalText, { color: "#fff" }]}>
-                    Playoffs
-                  </Text>
-                </Pressable>
-              ),
 
               headerStyle: {
                 backgroundColor: "#191919",
@@ -700,13 +738,13 @@ const styles = StyleSheet.create({
   },
 
   headerResetButton: {
-    marginRight: "8%",
     backgroundColor: "#959595",
-    width: "50%",
-    height: "50%",
+    minHeight: '2%',
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 15,
+    flex: 1,
+    flexDirection: 'row',
   },
 
   scoutingScreenContainer: {
