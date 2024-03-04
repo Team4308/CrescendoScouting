@@ -11,7 +11,7 @@ Feature requests can be submitted as an issue.
 ## To-Do
 
 ### Urgent!
-- [ ] !!!Critical production crash bug!!! (ALL WITH HIGHEST PRIORITY)
+- All done :)
 
 ### Target
 - All done :)
