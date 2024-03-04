@@ -14,7 +14,10 @@ Feature requests can be submitted as an issue.
 - All done :)
 
 ### Target
-- All done :)
+- [ ] Storing scouted data in case of accidental deletage
+- [ ] Prevent users from imputting negative numbes
+- [ ] Additional criteria from Gerald's list
+- [ ] Explanation of criteria after clicking input label text
 
 ### Low Priority
 - [ ] BLE investigation as replacement for QR codes (Ben)
