@@ -15,7 +15,6 @@ Feature requests can be submitted as an issue.
 
 ### Target
 - [ ] Storing scouted data in case of accidental deletage
-- [ ] Additional criteria from Gerald's list
 - [ ] Explanation of criteria after clicking input label text
 
 ### Low Priority
