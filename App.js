@@ -343,7 +343,7 @@ function StandsScreen({ navigation }) {
       </View>
 
       <Pressable
-        style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
+        style={[styles.criteriaButton2, { marginBottom: "10%", marginTop: "3%" }]}
         onPress={
           // DO NOT CHANGE FORMATTING, THIS IS A STRING LITERAL
           () => {setQRData(`\{scouterName: "${userName}"\}, \{scouterTeam: "${userTeamNumber}"\}, \{compName: "${competition}"\}, \{teamNum: "${teamNumber}"\}, \{matchNum: "${matchNumber}"\}, \{isPlayoffs: "${playoffs}"\}, \{autonAmp: "${autoAmp}"\}, \{autonSpeaker: "${autoSpeaker}"\}, \{teleAmp: "${teleAmp}"\}, \{teleAmpedSpeaker: "${ampedTeleSpeaker}"\}, \{teleSpeaker: "${teleSpeaker}"\}, \{fumbledAmp: "${fumAmp}"\}, \{fumbledSpeaker: "${fumSpeaker}"\}, \{penalties: "${penalties}"\}, \{techPenalties: "${techPenalties}"\}, \{scoredTrap: "${scoredTrap}"\}, \{"spotlight: "${spotlight}"\}, \{driverSkill: "${driverSkill}"\}, \{strategyDesc: "${strategyDetails}"\}, \{scoringDesc: "${scoringDetails}"\}, \{scoringPreference: "${scoringPreference}"\}, \{comments: "${comments}"\}`); Vibration.vibrate(100)}
@@ -446,7 +446,7 @@ function PitsScreen({ navigation }) {
       />
 
       <View style={styles.criteriaContainer}>
-        <View style={[styles.criteriaHorzContainer, {justifyContent: 'space-between'}]}>
+        <View style={styles.criteriaHorzContainer}>
           <Pressable
           style={{
             backgroundColor: canFitUnderStage ? "#007d23" : "#7d0000",
@@ -598,7 +598,7 @@ function HomeScreen({ navigation }) {
 
         <Pressable
           style={[styles.homeNavigationButton, { backgroundColor: "#5bc0eb" }]}
-          onPress={() => navigation.navigate("pitsScreen")}
+          onPress={() => {navigation.navigate("pitsScreen"); Vibration.vibrate(100);}}
           android_ripple={{color: '#000'}}
         >
           <Text style={styles.homeNavigationButtonText}>Pits</Text>
@@ -606,7 +606,7 @@ function HomeScreen({ navigation }) {
 
         <Pressable
           style={[styles.homeNavigationButton, { backgroundColor: "#959595" }]}
-          onPress={() => navigation.navigate("settingsScreen")}
+          onPress={() => {navigation.navigate("settingsScreen"); Vibration.vibrate(100)}}
           android_ripple={{color: '#000'}}
         >
           <Text style={styles.homeNavigationButtonText}>Settings</Text>
