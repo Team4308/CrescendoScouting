@@ -9,6 +9,7 @@ import {
   Pressable,
   TextInput,
   ScrollView,
+  Vibration,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
@@ -89,6 +90,7 @@ const IncrementDecrementButton = ({
       <Pressable
         style={[styles.criteriaButton, { backgroundColor: "#ad0000", width: '12%', alignItems: 'center'}]}
         onPress={decrement}
+        android_ripple={{color: '#191919'}}
       >
         <Text style={styles.generalText}>-</Text>
       </Pressable>
@@ -100,6 +102,7 @@ const IncrementDecrementButton = ({
       <Pressable
         style={[styles.criteriaButton, { backgroundColor: "#00ab30", width: '12%', alignItems: 'center' }]}
         onPress={increment}
+        android_ripple={{color: '#191919'}}
       >
         <Text style={styles.generalText}>+</Text>
       </Pressable>
@@ -159,6 +162,7 @@ function StandsScreen({ navigation }) {
         value={autoAmp}
         decrement={() => setAutoAmp((prev) => prev - 1)}
         increment={() => setAutoAmp((prev) => prev + 1)}
+        onPress={Vibration.vibrate(50)}
       />
 
       <IncrementDecrementButton
@@ -227,6 +231,7 @@ function StandsScreen({ navigation }) {
             alignItems: 'center',
             borderRadius: 15
           }}
+          android_ripple={{color: '#232323'}}
           onPress={() => setScoredTrap(!scoredTrap)}
           >
             <Text style={styles.generalText}>Trap</Text>
@@ -239,6 +244,7 @@ function StandsScreen({ navigation }) {
             alignItems: 'center',
             borderRadius: 15
           }}
+          android_ripple={{color: '#232323'}}
           onPress={() => setSpotlight(!spotlight)}
           >
             <Text style={styles.generalText}>Spotlight</Text>
@@ -288,13 +294,14 @@ function StandsScreen({ navigation }) {
         style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
         onPress={
           // DO NOT CHANGE FORMATTING, THIS IS A STRING LITERAL
-          () => setQRData(`\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{matchNum: ${matchNumber}\}, \{autonAmp: ${autoAmp}\}, \{autonSpeaker: ${autoSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{teleAmpedSpeaker: ${ampedTeleSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{fumbledAmp: ${fumAmp}\}, \{fumbledSpeaker: ${fumSpeaker}\}, \{penalties: ${penalties}\}, \{techPenalties: ${techPenalties}\}, \{scoredTrap: ${scoredTrap}\}, \{spotlight: ${spotlight}\}, \{driverSkill: ${driverSkill}\}, \{strategyDesc: ${strategyDetails}\}, \{scoringDesc: ${scoringDetails}\}, \{scoringPreference: ${scoringPreference}\}, \{comments: ${comments}\}`)
+          () =>
+          {setQRData(`\{scouterName: ${userName}\}, \{scouterTeam: ${userTeamNumber}\}, \{compName: ${competition}\}, \{teamNum: ${teamNumber}\}, \{matchNum: ${matchNumber}\}, \{autonAmp: ${autoAmp}\}, \{autonSpeaker: ${autoSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{teleAmpedSpeaker: ${ampedTeleSpeaker}\}, \{teleSpeaker: ${teleSpeaker}\}, \{fumbledAmp: ${fumAmp}\}, \{fumbledSpeaker: ${fumSpeaker}\}, \{penalties: ${penalties}\}, \{techPenalties: ${techPenalties}\}, \{scoredTrap: ${scoredTrap}\}, \{spotlight: ${spotlight}\}, \{driverSkill: ${driverSkill}\}, \{strategyDesc: ${strategyDetails}\}, \{scoringDesc: ${scoringDetails}\}, \{scoringPreference: ${scoringPreference}\}, \{comments: ${comments}\}`); Vibration.vibrate(70)}
         }
+        android_ripple={{color: '#007d23'}}
       >
         <Text>Generate QR</Text>
       </Pressable>
       
-      <Pressable onPress={() => navigation.navigate("homeScreen")}><Text>DEBUG BUTTON</Text></Pressable>
       <StatusBar barStyle="light-content" />
     </ScrollView>
   );
@@ -411,7 +418,6 @@ function PitsScreen({ navigation }) {
         <Text>Generate QR</Text>
       </Pressable>
 
-      <Pressable onPress={() => navigation.navigate("homeScreen")}><Text>DEBUG BUTTON</Text></Pressable>
       <StatusBar barStyle="light-content" />
     </ScrollView>
   );
@@ -496,6 +502,7 @@ function HomeScreen({ navigation }) {
         <Pressable
           style={[styles.homeNavigationButton, { backgroundColor: "#c3423f" }]}
           onPress={() => navigation.navigate("standsScreen")}
+          android_ripple={{color: '#000'}}
         >
           <Text style={styles.homeNavigationButtonText}>Stands</Text>
         </Pressable>
@@ -503,6 +510,7 @@ function HomeScreen({ navigation }) {
         <Pressable
           style={[styles.homeNavigationButton, { backgroundColor: "#5bc0eb" }]}
           onPress={() => navigation.navigate("pitsScreen")}
+          android_ripple={{color: '#000'}}
         >
           <Text style={styles.homeNavigationButtonText}>Pits</Text>
         </Pressable>
@@ -510,6 +518,7 @@ function HomeScreen({ navigation }) {
         <Pressable
           style={[styles.homeNavigationButton, { backgroundColor: "#959595" }]}
           onPress={() => navigation.navigate("settingsScreen")}
+          android_ripple={{color: '#000'}}
         >
           <Text style={styles.homeNavigationButtonText}>Settings</Text>
         </Pressable>
@@ -558,6 +567,7 @@ export default function App() {
                     },
                   ]}
                   onPress={() => setPlayoffs(!playoffs)}
+                  android_ripple={{color: '#232323'}}
                 >
                   <Text style={[styles.generalText, { color: "#fff" }]}>
                     Playoffs
