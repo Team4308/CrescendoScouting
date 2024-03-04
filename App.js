@@ -141,7 +141,7 @@ function StandsScreen({ navigation }) {
       <View style={styles.criteriaHorzContainer}>
         <ShortTextInput
           label="Team Number"
-          placeholder="4308"
+          placeholder="8257"
           onChangeText={setTeamNumber}
           style={{ marginTop: "6%" }}
           keyboardType="numeric"
@@ -149,7 +149,7 @@ function StandsScreen({ navigation }) {
         />
         <ShortTextInput
           label="Match Number"
-          placeholder="69"
+          placeholder="24"
           onChangeText={setMatchNumber}
           style={{ marginTop: "6%" }}
           keyboardType="numeric"
@@ -277,7 +277,7 @@ function StandsScreen({ navigation }) {
         <Text style={styles.criteriaText}>Comments</Text>
         <TextInput
           style={styles.criteriaTextInput}
-          placeholder={"I love 4308!"}
+          placeholder={"Bot broke down for some seconds."}
           onChangeText={setComments}
           placeholderTextColor="#959595"
           multiline={true}
@@ -326,7 +326,7 @@ function PitsScreen({ navigation }) {
     <ScrollView style={styles.scoutingScreenContainer}>
       <ShortTextInput
         label="Team Number"
-        placeholder="4308"
+        placeholder="3161"
         onChangeText={setTeamNumber}
         style={{ marginTop: "6%" }}
         keyboardType="numeric"
@@ -349,28 +349,28 @@ function PitsScreen({ navigation }) {
 
       <ShortTextInput
         label="Length"
-        placeholder="69"
+        placeholder="130"
         onChangeText={setLength}
         keyboardType="numeric"
       />
       
       <ShortTextInput
         label="Width"
-        placeholder="69"
+        placeholder="150"
         onChangeText={setWidth}
         keyboardType="numeric"
       />
       
       <ShortTextInput
         label="Height"
-        placeholder="69"
+        placeholder="125"
         onChangeText={setHeight}
         keyboardType="numeric"
       />
 
       <ShortTextInput
         label="Scoring Mechanism"
-        placeholder="Sheer willpower."
+        placeholder="Shooter."
         onChangeText={setScoringMech}
       />
 
