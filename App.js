@@ -222,12 +222,12 @@ function StandsScreen({ navigation }) {
       />
 
       <View style={styles.criteriaContainer}>
-        <View style={[styles.criteriaHorzContainer, {justifyContent: 'space-around'}]}>
+        <View style={[styles.criteriaHorzContainer, {justifyContent: 'space-between'}]}>
           <Pressable
           style={{
             backgroundColor: scoredTrap ? "#007d23" : "#7d0000",
             padding: 10,
-            width: '30%',
+            width: '40%',
             alignItems: 'center',
             borderRadius: 15
           }}
@@ -240,7 +240,7 @@ function StandsScreen({ navigation }) {
           style={{
             backgroundColor: spotlight ? "#007d23" : "#7d0000",
             padding: 10,
-            width: '30%',
+            width: '40%',
             alignItems: 'center',
             borderRadius: 15
           }}
