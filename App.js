@@ -497,7 +497,7 @@ function PitsScreen({ navigation }) {
         style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
         onPress={
           // DO NOT CHANGE FORMATTING, THIS IS A STRING LITERAL
-          () => {setQRData(`\{scouterName: "${userName}"\}, \{scouterTeam: "${userTeamNumber}"\}, \{compName: "${competition}"\}, \{teamNum: "${teamNumber}"\}, \{driveTrain: "${drivetrain}"\}, \{centerOfGravity: "${centerOfGravity}"\}, \{length: "${length}"\}, \{width: "${width}"\}, \{height: "${height}"\}, \{intakeMechanism: "${intakeMech}"\}, \{scoringMech: "${scoringMech}"\}, \{scoringPreference: "${scoringPreference}"\}, \{canFitUnderStage: "${canFitUnderStage}"\}, \{canBuddyClimb: "${canBuddyClimb}"\}, \{comments: "${comments}"\}`); Vibration.vibrate(100)}
+          () => {setQRData(`\{scouterName: "${userName}"\}, \{scouterTeam: "${userTeamNumber}"\}, \{compName: "${competition}"\}, \{teamNum: "${teamNumber}"\}, \{drivetrain: "${drivetrain}"\}, \{centerOfGravity: "${centerOfGravity}"\}, \{length: "${length}"\}, \{width: "${width}"\}, \{height: "${height}"\}, \{intakeMechanism: "${intakeMech}"\}, \{scoringMechanism: "${scoringMech}"\}, \{scoringPreference: "${scoringPreference}"\}, \{canFitUnderStage: "${canFitUnderStage}"\}, \{canBuddyClimb: "${canBuddyClimb}"\}, \{comments: "${comments}"\}`); Vibration.vibrate(100)}
         }
         android_ripple={{color: '#007d23'}}
       >
