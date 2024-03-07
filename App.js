@@ -346,7 +346,31 @@ function StandsScreen({ navigation }) {
         style={[styles.criteriaButton2, { marginBottom: "10%", marginTop: "3%" }]}
         onPress={
           // DO NOT CHANGE FORMATTING, THIS IS A STRING LITERAL
-          () => {setQRData(`\{scouterName: "${userName}"\}, \{scouterTeam: "${userTeamNumber}"\}, \{compName: "${competition}"\}, \{teamNum: "${teamNumber}"\}, \{matchNum: "${matchNumber}"\}, \{isPlayoffs: "${playoffs}"\}, \{autonAmp: "${autoAmp}"\}, \{autonSpeaker: "${autoSpeaker}"\}, \{teleAmp: "${teleAmp}"\}, \{teleAmpedSpeaker: "${ampedTeleSpeaker}"\}, \{teleSpeaker: "${teleSpeaker}"\}, \{fumbledAmp: "${fumAmp}"\}, \{fumbledSpeaker: "${fumSpeaker}"\}, \{penalties: "${penalties}"\}, \{techPenalties: "${techPenalties}"\}, \{scoredTrap: "${scoredTrap}"\}, \{"spotlight: "${spotlight}"\}, \{driverSkill: "${driverSkill}"\}, \{strategyDesc: "${strategyDetails}"\}, \{scoringDesc: "${scoringDetails}"\}, \{scoringPreference: "${scoringPreference}"\}, \{comments: "${comments}"\}`); Vibration.vibrate(100)}
+          //() => {setQRData(`\{scouterName: "${userName}"\}, \{scouterTeam: "${userTeamNumber}"\}, \{compName: "${competition}"\}, \{teamNum: "${teamNumber}"\}, \{matchNum: "${matchNumber}"\}, \{isPlayoffs: "${playoffs}"\}, \{autonAmp: "${autoAmp}"\}, \{autonSpeaker: "${autoSpeaker}"\}, \{teleAmp: "${teleAmp}"\}, \{teleAmpedSpeaker: "${ampedTeleSpeaker}"\}, \{teleSpeaker: "${teleSpeaker}"\}, \{fumbledAmp: "${fumAmp}"\}, \{fumbledSpeaker: "${fumSpeaker}"\}, \{penalties: "${penalties}"\}, \{techPenalties: "${techPenalties}"\}, \{scoredTrap: "${scoredTrap}"\}, \{"spotlight: "${spotlight}"\}, \{driverSkill: "${driverSkill}"\}, \{strategyDesc: "${strategyDetails}"\}, \{scoringDesc: "${scoringDetails}"\}, \{scoringPreference: "${scoringPreference}"\}, \{comments: "${comments}"\}`); Vibration.vibrate(100)}
+          () => setQRData(JSON.stringify({
+            "scouterName": userName,
+            "scouterTeam": userTeamNumber,
+            "compName": competition,
+            "teamNum": teamNumber,
+            "matchNum": matchNumber,
+            "autonAmp": autoAmp,
+            "autonSpeaker": autoSpeaker,
+            "teleSpeaker": teleSpeaker,
+            "teleAmpedSpeaker": ampedTeleSpeaker,
+            "teleSpeaker": teleSpeaker,
+            "fumbledAmp": fumAmp,
+            "fumbledSpeaker": fumSpeaker,
+            "penalties": penalties,
+            "techPenalties": techPenalties,
+            "scoredTrap": scoredTrap,
+            "spotlight": spotlight,
+            "driverSkill": driverSkill,
+            "strategyDesc": strategyDetails,
+            "scoringDesc": scoringDetails,
+            "scoringPreference": scoringPreference,
+            "comments": comments,
+            "type": "stands",
+          }))
         }
         android_ripple={{color: '#007d23'}}
       >
@@ -497,7 +521,21 @@ function PitsScreen({ navigation }) {
         style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
         onPress={
           // DO NOT CHANGE FORMATTING, THIS IS A STRING LITERAL
-          () => {setQRData(`\{scouterName: "${userName}"\}, \{scouterTeam: "${userTeamNumber}"\}, \{compName: "${competition}"\}, \{teamNum: "${teamNumber}"\}, \{drivetrain: "${drivetrain}"\}, \{centerOfGravity: "${centerOfGravity}"\}, \{length: "${length}"\}, \{width: "${width}"\}, \{height: "${height}"\}, \{intakeMechanism: "${intakeMech}"\}, \{scoringMechanism: "${scoringMech}"\}, \{scoringPreference: "${scoringPreference}"\}, \{canFitUnderStage: "${canFitUnderStage}"\}, \{canBuddyClimb: "${canBuddyClimb}"\}, \{comments: "${comments}"\}`); Vibration.vibrate(100)}
+          //() => {setQRData(`\{scouterName: "${userName}"\}, \{scouterTeam: "${userTeamNumber}"\}, \{compName: "${competition}"\}, \{teamNum: "${teamNumber}"\}, \{drivetrain: "${drivetrain}"\}, \{centerOfGravity: "${centerOfGravity}"\}, \{length: "${length}"\}, \{width: "${width}"\}, \{height: "${height}"\}, \{intakeMechanism: "${intakeMech}"\}, \{scoringMechanism: "${scoringMech}"\}, \{scoringPreference: "${scoringPreference}"\}, \{canFitUnderStage: "${canFitUnderStage}"\}, \{canBuddyClimb: "${canBuddyClimb}"\}, \{comments: "${comments}"\}`); Vibration.vibrate(100)}
+          () => setQRData(JSON.stringify({
+            "scouterName": userName,
+            "scouterTeam": userTeamNumber,
+            "compName": competition,
+            "teamNum": teamNumber,
+            "drivetrain": drivetrain,
+            "centerOfGravity": centerOfGravity,
+            "length": length,
+            "width": width,
+            "height": height,
+            "scoringMech": scoringMech,
+            "canFitUnderStage": canFitUnderStage,
+            "canBuddyClimb": canBuddyClimb,
+          }))
         }
         android_ripple={{color: '#007d23'}}
       >
