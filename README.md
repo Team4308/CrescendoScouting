@@ -11,7 +11,10 @@ Feature requests can be submitted as an issue.
 ## To-Do
 
 ### Urgent!
-- All done :)
+- [ ] Add input for climb
+- [ ] Remove amped inputs
+- [ ] Add driver experience in pit scouting
+- [ ] Move center of gravity to stands scouting
 
 ### Target
 - [ ] Storing scouted data in case of accidental deletage
