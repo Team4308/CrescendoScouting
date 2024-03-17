@@ -121,18 +121,20 @@ function StandsScreen({ navigation }) {
   const [autoSpeaker, setAutoSpeaker] = useState(0);
   const [teleAmp, setTeleAmp] = useState(0);
   const [teleSpeaker, setTeleSpeaker] = useState(0);
-  const [ampedTeleSpeaker, setAmpedTeleSpeaker] = useState(0);
   const [fumAmp, setFumAmp] = useState(0);
   const [fumSpeaker, setFumSpeaker] = useState(0);
   const [penalties, setPenalties] = useState(0);
   const [techPenalties, setTechPenalties] = useState(0);
   const [driverSkill, setDriverSkill] = useState("");
+  const [centerOfGravity, setCenterOfGravity] = useState("Middle") 
   const [strategyDetails, setStrategyDetails] = useState("");
   const [scoringDetails, setScoringDetails] = useState("");
   const [comments, setComments] = useState("");
   const [scoringPreference, setScoringPreference] = useState("Speaker") // DEFAULT VALUE MUST BE SPEAKER OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
-  const [scoredTrap, setScoredTrap] = useState(false)
-  const [spotlight, setSpotlight] = useState(false)
+  const [climbed, setClimbed] = useState(false);
+  const [scoredTrap, setScoredTrap] = useState(false);
+  const [spotlight, setSpotlight] = useState(false);
+  
   const [QRData, setQRData] = useState("EMPTY QR")
 
   const { userName, userTeamNumber, competition } = useContext(MyContext);
@@ -208,17 +210,6 @@ function StandsScreen({ navigation }) {
       />
 
       <IncrementDecrementButton
-        title="Amped Tele Speaker"
-        value={ampedTeleSpeaker}
-        decrement={() => {
-          if (ampedTeleSpeaker > 0) {
-            setAmpedTeleSpeaker((prev) => prev - 1)
-          }
-        }}
-        increment={() => setAmpedTeleSpeaker((prev) => prev + 1)}
-      />
-
-      <IncrementDecrementButton
         title="Tele Speaker"
         value={teleSpeaker}
         decrement={() => {
@@ -273,8 +264,24 @@ function StandsScreen({ navigation }) {
         increment={() => setTechPenalties((prev) => prev + 1)}
       />
 
+      <Pressable
+        style={[
+          styles.headerResetButton, styles.criteriaContainer,
+          {
+            backgroundColor: climbed ? "#007d23" : "#7d0000",
+          },
+        ]}
+        onPress={() => setClimbed(!climbed)}
+        android_ripple={{color: '#232323'}}
+      >
+        <Text style={styles.generalText}>
+          Climb
+        </Text>
+      </Pressable>
       <View style={styles.criteriaContainer}>
+      
         <View style={[styles.criteriaHorzContainer, {justifyContent: 'space-between'}]}>
+
           <Pressable
           style={{
             backgroundColor: scoredTrap ? "#007d23" : "#7d0000",
@@ -325,6 +332,12 @@ function StandsScreen({ navigation }) {
         selectedOption={scoringPreference}
         setSelectedOption={setScoringPreference}
       />
+      <DropdownInput
+        label="Center of Gravity"
+        options={["Very High", "High", "Middle", "Low", "Very low"]} // DEFAULT VALUE MUST BE MIDDLE OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
+        selectedOption={centerOfGravity}
+        setSelectedOption={setCenterOfGravity}
+      />
       <View style={styles.criteriaContainer}>
         <Text style={styles.criteriaText}>Comments</Text>
         <TextInput
@@ -356,7 +369,6 @@ function StandsScreen({ navigation }) {
             "autonAmp": autoAmp,
             "autonSpeaker": autoSpeaker,
             "teleSpeaker": teleSpeaker,
-            "teleAmpedSpeaker": ampedTeleSpeaker,
             "teleSpeaker": teleSpeaker,
             "fumbledAmp": fumAmp,
             "fumbledSpeaker": fumSpeaker,
@@ -370,6 +382,8 @@ function StandsScreen({ navigation }) {
             "scoringPreference": scoringPreference,
             "comments": comments,
             "type": "stands",
+            "centerOfGravity": centerOfGravity,
+            "climbed": climbed,
           }))
         }
         android_ripple={{color: '#007d23'}}
@@ -387,7 +401,6 @@ function StandsScreen({ navigation }) {
 function PitsScreen({ navigation }) {
   const [teamNumber, setTeamNumber] = useState(0)
   const [drivetrain, setDrivetrain] = useState("Other")
-  const [centerOfGravity, setCenterOfGravity] = useState("Middle") 
   const [length, setLength] = useState(0)
   const [width, setWidth] = useState(0)
   const [height, setHeight] = useState(0)
@@ -398,6 +411,7 @@ function PitsScreen({ navigation }) {
   const [canBuddyClimb, setCanBuddyClimb] = useState(false)
   const [comments, setComments] = useState("")
   const [QRData, setQRData] = useState("EMPTY QR")
+  const [driverExperience, setDriverExperience] = useState("")
 
   const { userName, userTeamNumber, competition } = useContext(MyContext);
 
@@ -419,12 +433,6 @@ function PitsScreen({ navigation }) {
         setSelectedOption={setDrivetrain}
       />
 
-      <DropdownInput
-        label="Center of Gravity"
-        options={["Very High", "High", "Middle", "Low", "Very low"]} // DEFAULT VALUE MUST BE MIDDLE OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
-        selectedOption={centerOfGravity}
-        setSelectedOption={setCenterOfGravity}
-      />
 
       <ShortTextInput
         label="Length"
@@ -467,6 +475,12 @@ function PitsScreen({ navigation }) {
         options={["Speaker", "Amp", "Both", "Neither", "Other"]}
         selectedOption={scoringPreference}
         setSelectedOption={setScoringPreference}
+      />
+
+      <ShortTextInput
+        label="Driver Experience"
+        placeholder="Very experienced."
+        onChangeText={setDriverExperience}
       />
 
       <View style={styles.criteriaContainer}>
@@ -528,13 +542,13 @@ function PitsScreen({ navigation }) {
             "compName": competition,
             "teamNum": teamNumber,
             "drivetrain": drivetrain,
-            "centerOfGravity": centerOfGravity,
             "length": length,
             "width": width,
             "height": height,
             "scoringMech": scoringMech,
             "canFitUnderStage": canFitUnderStage,
             "canBuddyClimb": canBuddyClimb,
+            "driverExperience": driverExperience,
           }))
         }
         android_ripple={{color: '#007d23'}}
