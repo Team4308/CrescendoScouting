@@ -545,10 +545,12 @@ function PitsScreen({ navigation }) {
             "length": length,
             "width": width,
             "height": height,
+            "intakeMech": intakeMech,
             "scoringMech": scoringMech,
             "canFitUnderStage": canFitUnderStage,
             "canBuddyClimb": canBuddyClimb,
             "driverExperience": driverExperience,
+            "comments": comments,
           }))
         }
         android_ripple={{color: '#007d23'}}
