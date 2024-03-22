@@ -134,6 +134,7 @@ function StandsScreen({ navigation }) {
   const [climbed, setClimbed] = useState(false);
   const [scoredTrap, setScoredTrap] = useState(false);
   const [spotlight, setSpotlight] = useState(false);
+  const [taxi, setTaxi] = useState(false);
   
   const [QRData, setQRData] = useState("EMPTY QR")
 
@@ -160,20 +161,36 @@ function StandsScreen({ navigation }) {
         />
       </View>
 
-      <Pressable
-        style={[
-          styles.headerResetButton, styles.criteriaContainer,
-          {
+      <View style={styles.criteriaContainer}>
+        <View style={[styles.criteriaHorzContainer, {justifyContent: 'space-between'}]}>
+          <Pressable
+          style={{
             backgroundColor: playoffs ? "#007d23" : "#7d0000",
-          },
-        ]}
-        onPress={() => setPlayoffs(!playoffs)}
-        android_ripple={{color: '#232323'}}
-      >
-        <Text style={styles.generalText}>
-          Playoffs Game
-        </Text>
-      </Pressable>
+            padding: 10,
+            width: '44%',
+            alignItems: 'center',
+            borderRadius: 15
+          }}
+          android_ripple={{color: '#232323'}}
+          onPress={() => setPlayoffs(!playoffs)}
+          >
+            <Text style={styles.generalText}>Playoffs</Text>
+          </Pressable>
+          <Pressable
+          style={{
+            backgroundColor: taxi ? "#007d23" : "#7d0000",
+            padding: 10,
+            width: '44%',
+            alignItems: 'center',
+            borderRadius: 15
+          }}
+          android_ripple={{color: '#232323'}}
+          onPress={() => setTaxi(!taxi)}
+          >
+            <Text style={styles.generalText}>Taxi</Text>
+          </Pressable>
+        </View>
+      </View>
 
       <IncrementDecrementButton
         title="Auto Amp"
@@ -269,6 +286,9 @@ function StandsScreen({ navigation }) {
           styles.headerResetButton, styles.criteriaContainer,
           {
             backgroundColor: climbed ? "#007d23" : "#7d0000",
+            padding: 10,
+            alignItems: 'center',
+            borderRadius: 15
           },
         ]}
         onPress={() => setClimbed(!climbed)}
@@ -278,15 +298,14 @@ function StandsScreen({ navigation }) {
           Climb
         </Text>
       </Pressable>
-      <View style={styles.criteriaContainer}>
-      
-        <View style={[styles.criteriaHorzContainer, {justifyContent: 'space-between'}]}>
 
+      <View style={styles.criteriaContainer}>
+        <View style={[styles.criteriaHorzContainer, {justifyContent: 'space-between'}]}>
           <Pressable
           style={{
             backgroundColor: scoredTrap ? "#007d23" : "#7d0000",
             padding: 10,
-            width: '40%',
+            width: '44%',
             alignItems: 'center',
             borderRadius: 15
           }}
@@ -299,7 +318,7 @@ function StandsScreen({ navigation }) {
           style={{
             backgroundColor: spotlight ? "#007d23" : "#7d0000",
             padding: 10,
-            width: '40%',
+            width: '44%',
             alignItems: 'center',
             borderRadius: 15
           }}
