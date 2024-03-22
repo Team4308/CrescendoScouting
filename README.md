@@ -18,6 +18,7 @@ Feature requests can be submitted as an issue.
 - [ ] Accuracy of shots
 - [ ] General robot strength
 - [ ] Playstyle
+- [ ] Scouting app guide and shifts on **ONE** Google Docs
 
 ### Target
 - [ ] Storing scouted data in case of accidental deletage from leaving stands/pits page
