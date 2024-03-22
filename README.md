@@ -16,8 +16,8 @@ Feature requests can be submitted as an issue.
 - [ ] Fix missing criteria in JSON QR code
 - [ ] Bot reliability
 - [ ] Accuracy of shots
-- [ ] General robot strength
 - [ ] Playstyle
+- [ ] Cycle time
 - [ ] Scouting app guide and shifts on **ONE** Google Docs
 
 ### Target
