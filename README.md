@@ -12,6 +12,12 @@ Feature requests can be submitted as an issue.
 
 ### Urgent!
 - [ ] Fix missing criteria while keeping JSON QR code format
+- [ ] Include taxing in auton
+- [ ] Fix missing criteria in JSON QR code
+- [ ] Bot reliability
+- [ ] Accuracy of shots
+- [ ] General robot strength
+- [ ] Playstyle
 
 ### Target
 - [ ] Storing scouted data in case of accidental deletage from leaving stands/pits page
@@ -19,3 +25,8 @@ Feature requests can be submitted as an issue.
 
 ### Low Priority
 - [ ] BLE implementation as replacement for QR codes
+
+## Additional Information (Database)
+
+Instead of relying on 5032 (Falcons) for the database, Ayaan will be making an alternative to ToolJetDB in-house.
+This will result in a more reliable and easily updated data storage system for the upcoming Centennial competition.
