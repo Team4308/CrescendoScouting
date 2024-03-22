@@ -12,7 +12,6 @@ Feature requests can be submitted as an issue.
 
 ### Urgent!
 - [ ] Fix missing criteria while keeping JSON QR code format
-- [ ] Include taxing in auton
 - [ ] Fix missing criteria in JSON QR code
 - [ ] Bot reliability
 - [ ] Accuracy of shots
