@@ -88,18 +88,18 @@ function StandsScreen() {
   const [teamNumber, setTeamNumber] = useState(0);
   const [matchNumber, setMatchNumber] = useState(0);
   const [playoffs, setPlayoffs] = useState(false);
-  const [driverSkill, setDriverSkill] = useState("");
-  const [strategyDescription, setStrategyDetails] = useState("");
-  const [comments, setComments] = useState("");
-  const [scoringType, setScoringType] = useState("Speaker") // DEFAULT VALUE MUST BE SPEAKER OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
-  const [scoringAccuracy, setScoringAccuracy] = useState("Often misses")
-  const [intakeStrength, setIntakeStrength] = useState("Weak")
-  const [playstyle, setPlaystyle] = useState("Offensive")
-  const [cycleSpeed, setCycleSpeed] = useState("")
+  const [taxi, setTaxi] = useState(false);
   const [climb, setClimb] = useState(false);
   const [trap, setScoredTrap] = useState(false);
   const [spotlight, setSpotlight] = useState(false);
-  const [taxi, setTaxi] = useState(false);
+  const [driverSkill, setDriverSkill] = useState("");
+  const [strategyDescription, setStrategyDetails] = useState("");
+  const [scoringType, setScoringType] = useState("Speaker")
+  const [scoringAccuracy, setScoringAccuracy] = useState("Often misses")
+  const [intakeStrength, setIntakeStrength] = useState("Weak")
+  const [playstyle, setPlaystyle] = useState("Offensive")
+  const [cycleSpeed, setCycleSpeed] = useState("Very Quick (<10s)")
+  const [comments, setComments] = useState("");
   
   const [QRData, setQRData] = useState("EMPTY QR")
 
@@ -319,16 +319,17 @@ function PitsScreen() {
   const [width, setWidth] = useState(0)
   const [height, setHeight] = useState(0)
   const [scoringPreference, setScoringPreference] = useState("Speaker")
-  const [canFitUnderStage, setCanFitUnderStage] = useState(false)
-  const [canBuddyClimb, setCanBuddyClimb] = useState(false)
-  const [comments, setComments] = useState("")
-  const [QRData, setQRData] = useState("EMPTY QR")
   const [scoringAccuracy, setScoringAccuracy] = useState("Often misses")
   const [intakeStrength, setIntakeStrength] = useState("Weak")
   const [playstyle, setPlaystyle] = useState("Offensive")
-  const [cycleSpeed, setCycleSpeed] = useState("")
+  const [cycleSpeed, setCycleSpeed] = useState("Very quick (<10s)")
   const [autonStrategyDetails, setAutonStrategyDetails] = useState("")
   const [endgameStrategyDetails, setEndgameStrategyDetails] = useState("")
+  const [canFitUnderStage, setCanFitUnderStage] = useState(false)
+  const [canBuddyClimb, setCanBuddyClimb] = useState(false)
+  const [comments, setComments] = useState("")
+
+  const [QRData, setQRData] = useState("EMPTY QR")
 
   const { userName, userTeamNumber, competition } = useContext(MyContext);
 
@@ -345,7 +346,7 @@ function PitsScreen() {
 
       <DropdownInput
         label="Drivetrain"
-        options={["Swerve", "Tank", "Other"]} // DEFAULT VALUE MUST BE OTHER OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
+        options={["Swerve", "Tank", "Other"]}
         selectedOption={drivetrain}
         setSelectedOption={setDrivetrain}
       />
@@ -614,7 +615,7 @@ export default function App() {
   const [params, setParams] = useState({
     userName: "Satoshi Nakamoto",
     userTeamNumber: "9999",
-    competition: "Humber College", // DEFAULT VALUE MUST BE HUMBER COLLEGE OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
+    competition: "Humber College",
   });
   const [playoffs, setPlayoffs] = useState(false);
 
