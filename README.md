@@ -1,5 +1,5 @@
 # CrescendoScouting
-THE scouting app for the Crescendo (2024-2025) season of the FIRST Robotics Competition.
+Absolute Robotics' scouting app for the Crescendo (2024-2025) season of the FIRST Robotics Competition.
 
 ## How Do I Contribute?
 Create pull requests with your implementations of any item(s) in the to-do list.
@@ -15,9 +15,6 @@ Feature requests can be submitted as an issue.
 
 ### Target
 - [ ] Storing scouted data in case of accidental deletage from leaving stands/pits page
-
-### Low Priority
-- [ ] BLE implementation as replacement for QR codes
 
 ## Additional Information (Database)
 
