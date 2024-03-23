@@ -590,7 +590,6 @@ function SettingsScreen({ navigation }) {
   const [newParam1, setNewParam1] = useState("");
   const [newParam2, setNewParam2] = useState(0);
   const [newParam3, setNewParam3] = useState("");
-  const [newParam4, setNewParam4] = useState(false);
 
   const updateParamsWithTextInput = () => {
     updateParams({
