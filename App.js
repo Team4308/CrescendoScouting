@@ -239,7 +239,7 @@ function StandsScreen() {
 
       <DropdownInput
         label="Intake Strength"
-        options={["Strong", "Average", "Weak"]}
+        options={["Strong", "Average", "Weak", "Doesn't intake"]}
         selectedOption={intakeStrength}
         setSelectedOption={setIntakeStrength}
       />
@@ -262,7 +262,7 @@ function StandsScreen() {
         <Text style={styles.criteriaText}>Additional Comments</Text>
         <TextInput
           style={styles.criteriaTextInput}
-          placeholder={"Bot broke down for some seconds."}
+          placeholder={"Bot broke down for a few seconds."}
           onChangeText={setComments}
           placeholderTextColor="#959595"
           multiline={true}
@@ -318,13 +318,17 @@ function PitsScreen() {
   const [length, setLength] = useState(0)
   const [width, setWidth] = useState(0)
   const [height, setHeight] = useState(0)
-  const [intakeMech, setIntakeMech] = useState("")
-  const [scoringMech, setScoringMech] = useState("")
   const [scoringPreference, setScoringPreference] = useState("Speaker")
   const [canFitUnderStage, setCanFitUnderStage] = useState(false)
   const [canBuddyClimb, setCanBuddyClimb] = useState(false)
   const [comments, setComments] = useState("")
   const [QRData, setQRData] = useState("EMPTY QR")
+  const [scoringAccuracy, setScoringAccuracy] = useState("Often misses")
+  const [intakeStrength, setIntakeStrength] = useState("Weak")
+  const [playstyle, setPlaystyle] = useState("Offensive")
+  const [cycleSpeed, setCycleSpeed] = useState("")
+  const [autonStrategyDetails, setAutonStrategyDetails] = useState("")
+  const [endgameStrategyDetails, setEndgameStrategyDetails] = useState("")
 
   const { userName, userTeamNumber, competition } = useContext(MyContext);
 
@@ -351,7 +355,6 @@ function PitsScreen() {
         placeholder="30 (in inches)"
         onChangeText={setLength}
         keyboardType="numeric"
-        maxLength={3}
       />
       
       <ShortTextInput
@@ -359,7 +362,6 @@ function PitsScreen() {
         placeholder="40 (in inches)"
         onChangeText={setWidth}
         keyboardType="numeric"
-        maxLength={3}
       />
       
       <ShortTextInput
@@ -367,19 +369,6 @@ function PitsScreen() {
         placeholder="120 (in inches)"
         onChangeText={setHeight}
         keyboardType="numeric"
-        maxLength={3}
-      />
-
-      <ShortTextInput
-        label="Intake Mechanism"
-        placeholder="Rollers."
-        onChangeText={setIntakeMech}
-      />
-
-      <ShortTextInput
-        label="Scoring Mechanism"
-        placeholder="Shooter."
-        onChangeText={setScoringMech}
       />
 
       <DropdownInput
@@ -387,6 +376,46 @@ function PitsScreen() {
         options={["Speaker", "Amp", "Both", "Neither", "Other"]}
         selectedOption={scoringPreference}
         setSelectedOption={setScoringPreference}
+      />
+
+      <DropdownInput
+        label="Scoring Accuracy"
+        options={["Never misses", "Rarely misses", "Sometimes misses", "Often misses", "Never scores"]}
+        selectedOption={scoringAccuracy}
+        setSelectedOption={setScoringAccuracy}
+      />
+
+      <DropdownInput
+        label="Intake Strength"
+        options={["Strong", "Average", "Weak", "Doesn't intake"]}
+        selectedOption={intakeStrength}
+        setSelectedOption={setIntakeStrength}
+      />
+
+      <DropdownInput
+        label="Playstyle"
+        options={["Offensive", "Defensive", "Feeder", "Other"]}
+        selectedOption={playstyle}
+        setSelectedOption={setPlaystyle}
+      />
+
+      <DropdownInput
+        label="Cycle Speed"
+        options={["Very quick (<10s)", "Quick (10s-13s)", "Average (13s-17s)", "Slow (17s-21s)", "Very slow (>20s)", "Doesn't cycle"]}
+        selectedOption={cycleSpeed}
+        setSelectedOption={setCycleSpeed}
+      />
+
+      <ShortTextInput
+        label="Auton Strategy"
+        placeholder="Takes fed pieces and scores speaker."
+        onChangeText={setAutonStrategyDetails}
+      />
+
+      <ShortTextInput
+        label="Endgame Strategy"
+        placeholder="Takes fed pieces and scores speaker."
+        onChangeText={setEndgameStrategyDetails}
       />
 
       <View style={styles.criteriaContainer}>
@@ -421,7 +450,7 @@ function PitsScreen() {
       </View>
 
       <View style={styles.criteriaContainer}>
-        <Text style={styles.criteriaText}>Comments</Text>
+        <Text style={styles.criteriaText}>Additional Comments</Text>
         <TextInput
           style={styles.criteriaTextInput}
           placeholder={"Bot has battery issues."}
@@ -450,9 +479,13 @@ function PitsScreen() {
             "length": length,
             "width": width,
             "height": height,
-            "intakeMech": intakeMech,
-            "scoringMech": scoringMech,
             "scoringPreference": scoringPreference,
+            "scoringAccuracy": scoringAccuracy,
+            "intakeStrength": intakeStrength,
+            "playstyle": playstyle,
+            "cycleSpeed": cycleSpeed,
+            "autonStrategyDetails": autonStrategyDetails,
+            "endgameStrategyDetails": endgameStrategyDetails,
             "canFitUnderStage": canFitUnderStage,
             "canBuddyClimb": canBuddyClimb,
             "comments": comments,
