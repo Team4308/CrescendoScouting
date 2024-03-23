@@ -11,7 +11,6 @@ Feature requests can be submitted as an issue.
 ## To-Do
 
 ### Urgent!
-- [ ] Fix missing criteria in JSON QR code
 - [ ] Bot reliability
 - [ ] Accuracy of shots
 - [ ] Playstyle
