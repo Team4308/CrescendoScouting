@@ -115,7 +115,7 @@ const IncrementDecrementButton = ({
 // >>> SCREENS <<<
 // >>> --> STANDS SCREEN <<<
 
-function StandsScreen({ navigation }) {
+function StandsScreen() {
   const [teamNumber, setTeamNumber] = useState(0);
   const [matchNumber, setMatchNumber] = useState(0);
   const [playoffs, setPlayoffs] = useState(false);
@@ -129,12 +129,12 @@ function StandsScreen({ navigation }) {
   const [techPenalties, setTechPenalties] = useState(0);
   const [driverSkill, setDriverSkill] = useState("");
   const [centerOfGravity, setCenterOfGravity] = useState("Middle") 
-  const [strategyDetails, setStrategyDetails] = useState("");
-  const [scoringDetails, setScoringDetails] = useState("");
+  const [strategyDescription, setStrategyDetails] = useState("");
+  const [scoringDescription, setScoringDetails] = useState("");
   const [comments, setComments] = useState("");
   const [scoringPreference, setScoringPreference] = useState("Speaker") // DEFAULT VALUE MUST BE SPEAKER OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
-  const [climbed, setClimbed] = useState(false);
-  const [scoredTrap, setScoredTrap] = useState(false);
+  const [climb, setClimb] = useState(false);
+  const [trap, setScoredTrap] = useState(false);
   const [spotlight, setSpotlight] = useState(false);
   const [taxi, setTaxi] = useState(false);
   
@@ -287,13 +287,13 @@ function StandsScreen({ navigation }) {
         style={[
           styles.headerResetButton, styles.criteriaContainer,
           {
-            backgroundColor: climbed ? "#007d23" : "#7d0000",
+            backgroundColor: climb ? "#007d23" : "#7d0000",
             padding: 10,
             alignItems: 'center',
             borderRadius: 15
           },
         ]}
-        onPress={() => setClimbed(!climbed)}
+        onPress={() => setClimb(!climb)}
         android_ripple={{color: '#232323'}}
       >
         <Text style={styles.generalText}>
@@ -305,14 +305,14 @@ function StandsScreen({ navigation }) {
         <View style={[styles.criteriaHorzContainer, {justifyContent: 'space-between'}]}>
           <Pressable
           style={{
-            backgroundColor: scoredTrap ? "#007d23" : "#7d0000",
+            backgroundColor: trap ? "#007d23" : "#7d0000",
             padding: 10,
             width: '44%',
             alignItems: 'center',
             borderRadius: 15
           }}
           android_ripple={{color: '#232323'}}
-          onPress={() => setScoredTrap(!scoredTrap)}
+          onPress={() => setScoredTrap(!trap)}
           >
             <Text style={styles.generalText}>Trap</Text>
           </Pressable>
@@ -334,31 +334,36 @@ function StandsScreen({ navigation }) {
 
       <ShortTextInput
         label="Driver Skill"
-        placeholder="Very good."
+        placeholder="Efficient maneuvering."
         onChangeText={setDriverSkill}
       />
+
       <ShortTextInput
-        label="Strategy Details"
-        placeholder="Offensive."
+        label="Strategy Description"
+        placeholder="Takes fed pieces and scores speaker."
         onChangeText={setStrategyDetails}
       />
+
       <ShortTextInput
-        label="Scoring Details"
-        placeholder="Moves close to speaker."
+        label="Scoring Description"
+        placeholder="Scores with shooter from a distance."
         onChangeText={setScoringDetails}
       />
+
       <DropdownInput
         label="Scoring Preference"
-        options={["Speaker", "Amp", "Both", "Neither", "Other"]}
+        options={["Speaker", "Amp", "Both", "Neither"]}
         selectedOption={scoringPreference}
         setSelectedOption={setScoringPreference}
       />
+
       <DropdownInput
         label="Center of Gravity"
-        options={["Very High", "High", "Middle", "Low", "Very low"]} // DEFAULT VALUE MUST BE MIDDLE OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
+        options={["High", "Middle", "Low"]} // DEFAULT VALUE MUST BE MIDDLE OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
         selectedOption={centerOfGravity}
         setSelectedOption={setCenterOfGravity}
       />
+
       <View style={styles.criteriaContainer}>
         <Text style={styles.criteriaText}>Comments</Text>
         <TextInput
@@ -372,39 +377,39 @@ function StandsScreen({ navigation }) {
         />
       </View>
 
-      <View style={[styles.criteriaContainer, {alignItems: 'center', backgroundColor: '#fff', padding: 20}]}>
+      <View style={[styles.criteriaContainer, {alignItems: 'center', backgroundColor: '#fff', padding: 20, marginTop: "4%"}]}>
           <QRCode value={QRData} size={300} />
       </View>
 
       <Pressable
         style={[styles.criteriaButton2, { marginBottom: "10%", marginTop: "3%" }]}
         onPress={
-          // DO NOT CHANGE FORMATTING, THIS IS A STRING LITERAL
-          //() => {setQRData(`\{scouterName: "${userName}"\}, \{scouterTeam: "${userTeamNumber}"\}, \{compName: "${competition}"\}, \{teamNum: "${teamNumber}"\}, \{matchNum: "${matchNumber}"\}, \{isPlayoffs: "${playoffs}"\}, \{autonAmp: "${autoAmp}"\}, \{autonSpeaker: "${autoSpeaker}"\}, \{teleAmp: "${teleAmp}"\}, \{teleAmpedSpeaker: "${ampedTeleSpeaker}"\}, \{teleSpeaker: "${teleSpeaker}"\}, \{fumbledAmp: "${fumAmp}"\}, \{fumbledSpeaker: "${fumSpeaker}"\}, \{penalties: "${penalties}"\}, \{techPenalties: "${techPenalties}"\}, \{scoredTrap: "${scoredTrap}"\}, \{"spotlight: "${spotlight}"\}, \{driverSkill: "${driverSkill}"\}, \{strategyDesc: "${strategyDetails}"\}, \{scoringDesc: "${scoringDetails}"\}, \{scoringPreference: "${scoringPreference}"\}, \{comments: "${comments}"\}`); Vibration.vibrate(100)}
           () => setQRData(JSON.stringify({
+            "type": "stands",
             "scouterName": userName,
             "scouterTeam": userTeamNumber,
             "compName": competition,
             "teamNum": teamNumber,
             "matchNum": matchNumber,
-            "autonAmp": autoAmp,
-            "autonSpeaker": autoSpeaker,
+            "playoffs": playoffs,
+            "taxi": taxi,
+            "autoAmp": autoAmp,
+            "autoSpeaker": autoSpeaker,
+            "teleAmp": teleAmp,
             "teleSpeaker": teleSpeaker,
-            "teleSpeaker": teleSpeaker,
-            "fumbledAmp": fumAmp,
-            "fumbledSpeaker": fumSpeaker,
+            "fumAmp": fumAmp,
+            "fumSpeaker": fumSpeaker,
             "penalties": penalties,
             "techPenalties": techPenalties,
-            "scoredTrap": scoredTrap,
+            "climb": climb,
+            "trap": trap,
             "spotlight": spotlight,
             "driverSkill": driverSkill,
-            "strategyDesc": strategyDetails,
-            "scoringDesc": scoringDetails,
+            "strategyDesc": strategyDescription,
+            "scoringDesc": scoringDescription,
             "scoringPreference": scoringPreference,
-            "comments": comments,
-            "type": "stands",
             "centerOfGravity": centerOfGravity,
-            "climbed": climbed,
+            "comments": comments,
           }))
         }
         android_ripple={{color: '#007d23'}}
@@ -419,7 +424,7 @@ function StandsScreen({ navigation }) {
 
 // >>> --> PITS SCREEN <<<
 
-function PitsScreen({ navigation }) {
+function PitsScreen() {
   const [teamNumber, setTeamNumber] = useState(0)
   const [drivetrain, setDrivetrain] = useState("Other")
   const [length, setLength] = useState(0)
@@ -432,7 +437,6 @@ function PitsScreen({ navigation }) {
   const [canBuddyClimb, setCanBuddyClimb] = useState(false)
   const [comments, setComments] = useState("")
   const [QRData, setQRData] = useState("EMPTY QR")
-  const [driverExperience, setDriverExperience] = useState("")
 
   const { userName, userTeamNumber, competition } = useContext(MyContext);
 
@@ -453,7 +457,6 @@ function PitsScreen({ navigation }) {
         selectedOption={drivetrain}
         setSelectedOption={setDrivetrain}
       />
-
 
       <ShortTextInput
         label="Length"
@@ -498,14 +501,8 @@ function PitsScreen({ navigation }) {
         setSelectedOption={setScoringPreference}
       />
 
-      <ShortTextInput
-        label="Driver Experience"
-        placeholder="Very experienced."
-        onChangeText={setDriverExperience}
-      />
-
       <View style={styles.criteriaContainer}>
-        <View style={styles.criteriaHorzContainer}>
+        <View style={[styles.criteriaHorzContainer, {marginTop: "3%"}]}>
           <Pressable
           style={{
             backgroundColor: canFitUnderStage ? "#007d23" : "#7d0000",
@@ -517,7 +514,7 @@ function PitsScreen({ navigation }) {
           onPress={() => {setCanFitUnderStage(!canFitUnderStage); Vibration.vibrate(70)}}
           android_ripple={{color: '#232323'}}
           >
-            <Text style={styles.generalText}>Fits Under Stage</Text>
+            <Text style={styles.generalText}>Under Stage</Text>
           </Pressable>
           <Pressable
           style={{
@@ -530,7 +527,7 @@ function PitsScreen({ navigation }) {
           onPress={() => {setCanBuddyClimb(!canBuddyClimb); Vibration.vibrate(70)}}
           android_ripple={{color: '#232323'}}
           >
-            <Text style={styles.generalText}>Can Buddy Climb</Text>
+            <Text style={styles.generalText}>Buddy Climb</Text>
           </Pressable>
         </View>
       </View>
@@ -555,9 +552,8 @@ function PitsScreen({ navigation }) {
       <Pressable
         style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
         onPress={
-          // DO NOT CHANGE FORMATTING, THIS IS A STRING LITERAL
-          //() => {setQRData(`\{scouterName: "${userName}"\}, \{scouterTeam: "${userTeamNumber}"\}, \{compName: "${competition}"\}, \{teamNum: "${teamNumber}"\}, \{drivetrain: "${drivetrain}"\}, \{centerOfGravity: "${centerOfGravity}"\}, \{length: "${length}"\}, \{width: "${width}"\}, \{height: "${height}"\}, \{intakeMechanism: "${intakeMech}"\}, \{scoringMechanism: "${scoringMech}"\}, \{scoringPreference: "${scoringPreference}"\}, \{canFitUnderStage: "${canFitUnderStage}"\}, \{canBuddyClimb: "${canBuddyClimb}"\}, \{comments: "${comments}"\}`); Vibration.vibrate(100)}
           () => setQRData(JSON.stringify({
+            "type": "pits",
             "scouterName": userName,
             "scouterTeam": userTeamNumber,
             "compName": competition,
@@ -568,9 +564,9 @@ function PitsScreen({ navigation }) {
             "height": height,
             "intakeMech": intakeMech,
             "scoringMech": scoringMech,
+            "scoringPreference": scoringPreference,
             "canFitUnderStage": canFitUnderStage,
             "canBuddyClimb": canBuddyClimb,
-            "driverExperience": driverExperience,
             "comments": comments,
           }))
         }
