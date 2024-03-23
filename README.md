@@ -11,11 +11,10 @@ Feature requests can be submitted as an issue.
 ## To-Do
 
 ### Urgent!
-- [ ] Scouting app guide and shifts on **ONE** Google Docs
+- [ ] Scouting app guide and shifts on **ONE** Google Docs (Ben & Gerald)
 
 ### Target
 - [ ] Storing scouted data in case of accidental deletage from leaving stands/pits page
-- [ ] Explanation of criteria after clicking input label text (use modal)
 
 ### Low Priority
 - [ ] BLE implementation as replacement for QR codes
