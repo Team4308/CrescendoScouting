@@ -11,10 +11,11 @@ Feature requests can be submitted as an issue.
 ## To-Do
 
 ### Urgent!
+- [ ] Scoring accuracy
+- [ ] Intake strength
 - [ ] Bot reliability
-- [ ] Accuracy of shots
 - [ ] Playstyle
-- [ ] Cycle time
+- [ ] Cycle speed
 - [ ] Scouting app guide and shifts on **ONE** Google Docs
 
 ### Target
