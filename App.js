@@ -622,7 +622,7 @@ function SettingsScreen({ navigation }) {
       />
       <DropdownInput
         label="Competition"
-        options={["Humber College", "Centennial College", "McMaster University", "Provincial Championship"]}
+        options={["Humber College", "Centennial College", "McMaster University", "Provincial Championship", "FIRST Championship"]}
         selectedOption={competition}
         setSelectedOption={setNewParam3}
       />
