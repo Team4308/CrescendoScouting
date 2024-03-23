@@ -81,37 +81,6 @@ const DropdownInput = ({
   </View>
 );
 
-const IncrementDecrementButton = ({
-  title,
-  value,
-  increment,
-  decrement,
-}) => {
-  return (
-    <View style={[styles.criteriaContainer, styles.criteriaHorzContainer]}>
-      <Pressable
-        style={[styles.criteriaButton, { backgroundColor: "#ad0000", width: '12%', alignItems: 'center'}]}
-        onPress={decrement}
-        android_ripple={{color: '#191919'}}
-      >
-        <Text style={styles.generalText}>-</Text>
-      </Pressable>
-
-      <Text style={styles.criteriaText}>
-        {title}: {value}
-      </Text>
-
-      <Pressable
-        style={[styles.criteriaButton, { backgroundColor: "#00ab30", width: '12%', alignItems: 'center' }]}
-        onPress={increment}
-        android_ripple={{color: '#191919'}}
-      >
-        <Text style={styles.generalText}>+</Text>
-      </Pressable>
-    </View>
-  );
-};
-
 // >>> SCREENS <<<
 // >>> --> STANDS SCREEN <<<
 
@@ -119,18 +88,14 @@ function StandsScreen() {
   const [teamNumber, setTeamNumber] = useState(0);
   const [matchNumber, setMatchNumber] = useState(0);
   const [playoffs, setPlayoffs] = useState(false);
-  const [autoAmp, setAutoAmp] = useState(0);
-  const [autoSpeaker, setAutoSpeaker] = useState(0);
-  const [teleAmp, setTeleAmp] = useState(0);
-  const [teleSpeaker, setTeleSpeaker] = useState(0);
-  const [fumAmp, setFumAmp] = useState(0);
-  const [fumSpeaker, setFumSpeaker] = useState(0);
-  const [penalties, setPenalties] = useState(0);
-  const [techPenalties, setTechPenalties] = useState(0);
   const [driverSkill, setDriverSkill] = useState("");
   const [strategyDescription, setStrategyDetails] = useState("");
   const [comments, setComments] = useState("");
-  const [scoringPreference, setScoringPreference] = useState("Speaker") // DEFAULT VALUE MUST BE SPEAKER OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
+  const [scoringType, setScoringType] = useState("Speaker") // DEFAULT VALUE MUST BE SPEAKER OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
+  const [scoringAccuracy, setScoringAccuracy] = useState("Often misses")
+  const [intakeStrength, setIntakeStrength] = useState("Weak")
+  const [playstyle, setPlaystyle] = useState("Offensive")
+  const [cycleSpeed, setCycleSpeed] = useState("")
   const [climb, setClimb] = useState(false);
   const [trap, setScoredTrap] = useState(false);
   const [spotlight, setSpotlight] = useState(false);
@@ -161,125 +126,41 @@ function StandsScreen() {
         />
       </View>
 
-      <View style={styles.criteriaContainer}>
-        <View style={[styles.criteriaHorzContainer, {justifyContent: 'space-between'}]}>
-          <Pressable
-          style={{
+      <Pressable
+        style={[
+          styles.headerResetButton, styles.criteriaContainer,
+          {
             backgroundColor: playoffs ? "#007d23" : "#7d0000",
             padding: 10,
-            width: '44%',
             alignItems: 'center',
             borderRadius: 15
-          }}
-          android_ripple={{color: '#232323'}}
-          onPress={() => setPlayoffs(!playoffs)}
-          >
-            <Text style={styles.generalText}>Playoffs</Text>
-          </Pressable>
-          <Pressable
-          style={{
+          },
+        ]}
+        onPress={() => setPlayoffs(!playoffs)}
+        android_ripple={{color: '#232323'}}
+      >
+        <Text style={styles.generalText}>
+          Playoffs
+        </Text>
+      </Pressable>
+
+      <Pressable
+        style={[
+          styles.headerResetButton, styles.criteriaContainer,
+          {
             backgroundColor: taxi ? "#007d23" : "#7d0000",
             padding: 10,
-            width: '44%',
             alignItems: 'center',
             borderRadius: 15
-          }}
-          android_ripple={{color: '#232323'}}
-          onPress={() => setTaxi(!taxi)}
-          >
-            <Text style={styles.generalText}>Taxi</Text>
-          </Pressable>
-        </View>
-      </View>
-
-      <IncrementDecrementButton
-        title="Auto Amp"
-        value={autoAmp}
-        decrement={() => {
-          if (autoAmp > 0) {
-            setAutoAmp((prev) => prev - 1)
-          }
-        }}
-        increment={() => setAutoAmp((prev) => prev + 1)}
-        onPress={Vibration.vibrate(70)} // I have no clue how this manages to call for every other button on the screen, even the playoffs button that's defined in completely different function/component
-      />
-
-      <IncrementDecrementButton
-        title="Auto Speaker"
-        value={autoSpeaker}
-        decrement={() => {
-          if (autoSpeaker > 0) {
-            setAutoSpeaker((prev) => prev - 1)
-          }
-        }}
-        increment={() => setAutoSpeaker((prev) => prev + 1)}
-      />
-
-      <IncrementDecrementButton
-        title="Tele Amp"
-        value={teleAmp}
-        decrement={() => {
-          if (teleAmp > 0) {
-            setTeleAmp((prev) => prev - 1)
-          }
-        }}
-        increment={() => setTeleAmp((prev) => prev + 1)}
-      />
-
-      <IncrementDecrementButton
-        title="Tele Speaker"
-        value={teleSpeaker}
-        decrement={() => {
-          if (teleSpeaker > 0) {
-            setTeleSpeaker((prev) => prev - 1)
-          }
-        }}
-        increment={() => setTeleSpeaker((prev) => prev + 1)}
-      />
-
-      <IncrementDecrementButton
-        title="Fum Amp"
-        value={fumAmp}
-        decrement={() => {
-          if (fumAmp > 0) {
-            setFumAmp((prev) => prev - 1)
-          }
-        }}
-        increment={() => setFumAmp((prev) => prev + 1)}
-      />
-
-      <IncrementDecrementButton
-        title="Fum Speaker"
-        value={fumSpeaker}
-        decrement={() => {
-          if (fumSpeaker > 0) {
-            setFumSpeaker((prev) => prev - 1)
-          }
-        }}
-        increment={() => setFumSpeaker((prev) => prev + 1)}
-      />
-
-      <IncrementDecrementButton
-        title="Penalties"
-        value={penalties}
-        decrement={() => {
-          if (penalties > 0) {
-            setPenalties((prev) => prev - 1)
-          }
-        }}
-        increment={() => setPenalties((prev) => prev + 1)}
-      />
-
-      <IncrementDecrementButton
-        title="Technical Penalties"
-        value={techPenalties}
-        decrement={() => {
-          if (techPenalties > 0) {
-            setTechPenalties((prev) => prev - 1)
-          }
-        }}
-        increment={() => setTechPenalties((prev) => prev + 1)}
-      />
+          },
+        ]}
+        onPress={() => setTaxi(!taxi)}
+        android_ripple={{color: '#232323'}}
+      >
+        <Text style={styles.generalText}>
+          Taxi
+        </Text>
+      </Pressable>
 
       <Pressable
         style={[
@@ -343,10 +224,38 @@ function StandsScreen() {
       />
 
       <DropdownInput
-        label="Scoring Preference"
+        label="Scoring Type"
         options={["Speaker", "Amp", "Both", "Neither"]}
-        selectedOption={scoringPreference}
-        setSelectedOption={setScoringPreference}
+        selectedOption={scoringType}
+        setSelectedOption={setScoringType}
+      />
+
+      <DropdownInput
+        label="Scoring Accuracy"
+        options={["Never misses", "Rarely misses", "Sometimes misses", "Often misses", "Never scores"]}
+        selectedOption={scoringAccuracy}
+        setSelectedOption={setScoringAccuracy}
+      />
+
+      <DropdownInput
+        label="Intake Strength"
+        options={["Strong", "Average", "Weak"]}
+        selectedOption={intakeStrength}
+        setSelectedOption={setIntakeStrength}
+      />
+
+      <DropdownInput
+        label="Playstyle"
+        options={["Offensive", "Defensive", "Feeder", "Other"]}
+        selectedOption={playstyle}
+        setSelectedOption={setPlaystyle}
+      />
+
+      <DropdownInput
+        label="Cycle Speed"
+        options={["Very quick (<10s)", "Quick (10s-13s)", "Average (13s-17s)", "Slow (17s-21s)", "Very slow (>20s)", "Doesn't cycle"]}
+        selectedOption={cycleSpeed}
+        setSelectedOption={setCycleSpeed}
       />
 
       <View style={styles.criteriaContainer}>
@@ -378,20 +287,16 @@ function StandsScreen() {
             "matchNum": matchNumber,
             "playoffs": playoffs,
             "taxi": taxi,
-            "autoAmp": autoAmp,
-            "autoSpeaker": autoSpeaker,
-            "teleAmp": teleAmp,
-            "teleSpeaker": teleSpeaker,
-            "fumAmp": fumAmp,
-            "fumSpeaker": fumSpeaker,
-            "penalties": penalties,
-            "techPenalties": techPenalties,
             "climb": climb,
             "trap": trap,
             "spotlight": spotlight,
             "driverSkill": driverSkill,
             "strategyDesc": strategyDescription,
-            "scoringPreference": scoringPreference,
+            "scoringType": scoringType,
+            "scoringAccuracy": scoringAccuracy,
+            "intakeStrength": intakeStrength,
+            "playstyle": playstyle,
+            "cycleSpeed": cycleSpeed,
             "comments": comments,
           }))
         }
@@ -586,23 +491,20 @@ function SettingsScreen({ navigation }) {
     <ScrollView style={styles.scoutingScreenContainer}>
       <ShortTextInput
         label="Scouter Name"
-        placeholder="Benjamin Lu"
+        placeholder={userName}
         onChangeText={setNewParam1}
-        value={userName}
       />
       <ShortTextInput
         label="Scouter Team"
-        placeholder="4308"
         keyboardType="numeric"
-        onChangeText={setNewParam2}
-        value={userTeamNumber}
-        
         maxLength={4}
+        placeholder={userTeamNumber}
+        onChangeText={setNewParam2}        
       />
       <DropdownInput
         label="Competition"
         options={["Humber College", "Centennial College", "McMaster University", "Provincial Championship", "FIRST Championship"]}
-        selectedOption={competition}
+        selectedOption={newParam3}
         setSelectedOption={setNewParam3}
       />
       <Pressable
@@ -644,7 +546,7 @@ function HomeScreen({ navigation }) {
       <View style={styles.homeNavigationButtonContainer}>
         <Pressable
           style={[styles.homeNavigationButton, { backgroundColor: "#c3423f" }]}
-          onPress={() => navigation.navigate("standsScreen")}
+          onPress={() => {navigation.navigate("standsScreen"); Vibration.vibrate(100)}}
           android_ripple={{color: '#000'}}
         >
           <Text style={styles.homeNavigationButtonText}>Stands</Text>
@@ -652,7 +554,7 @@ function HomeScreen({ navigation }) {
 
         <Pressable
           style={[styles.homeNavigationButton, { backgroundColor: "#5bc0eb" }]}
-          onPress={() => {navigation.navigate("pitsScreen"); Vibration.vibrate(100);}}
+          onPress={() => {navigation.navigate("pitsScreen"); Vibration.vibrate(100)}}
           android_ripple={{color: '#000'}}
         >
           <Text style={styles.homeNavigationButtonText}>Pits</Text>
