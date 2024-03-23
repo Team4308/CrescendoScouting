@@ -130,7 +130,6 @@ function StandsScreen() {
   const [driverSkill, setDriverSkill] = useState("");
   const [centerOfGravity, setCenterOfGravity] = useState("Middle") 
   const [strategyDescription, setStrategyDetails] = useState("");
-  const [scoringDescription, setScoringDetails] = useState("");
   const [comments, setComments] = useState("");
   const [scoringPreference, setScoringPreference] = useState("Speaker") // DEFAULT VALUE MUST BE SPEAKER OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
   const [climb, setClimb] = useState(false);
@@ -344,12 +343,6 @@ function StandsScreen() {
         onChangeText={setStrategyDetails}
       />
 
-      <ShortTextInput
-        label="Scoring Description"
-        placeholder="Scores with shooter from a distance."
-        onChangeText={setScoringDetails}
-      />
-
       <DropdownInput
         label="Scoring Preference"
         options={["Speaker", "Amp", "Both", "Neither"]}
@@ -365,7 +358,7 @@ function StandsScreen() {
       />
 
       <View style={styles.criteriaContainer}>
-        <Text style={styles.criteriaText}>Comments</Text>
+        <Text style={styles.criteriaText}>Additional Comments</Text>
         <TextInput
           style={styles.criteriaTextInput}
           placeholder={"Bot broke down for some seconds."}
@@ -406,7 +399,6 @@ function StandsScreen() {
             "spotlight": spotlight,
             "driverSkill": driverSkill,
             "strategyDesc": strategyDescription,
-            "scoringDesc": scoringDescription,
             "scoringPreference": scoringPreference,
             "centerOfGravity": centerOfGravity,
             "comments": comments,
