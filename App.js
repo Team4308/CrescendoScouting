@@ -646,7 +646,7 @@ function HomeScreen({ navigation }) {
     <View style={styles.homeContainer}>
       <Image
         style={styles.homeCrescendoImage}
-        source={require("./assets/images/crescendo.png")}
+        source={require("./assets/crescendo.png")}
       />
 
       <View style={[styles.generalText, styles.homeTitleText]}>
