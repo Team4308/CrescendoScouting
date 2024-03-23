@@ -33,6 +33,7 @@ const ShortTextInput = ({
   onChangeText,
   keyboardType,
   maxLength,
+  value,
 }) => (
   <View style={styles.criteriaContainer}>
     <Text style={styles.criteriaText}>{label}</Text>
@@ -43,6 +44,7 @@ const ShortTextInput = ({
       placeholderTextColor="#959595"
       keyboardType={keyboardType}
       maxLength={maxLength}
+      value={value}
     />
   </View>
 );
@@ -588,7 +590,7 @@ function SettingsScreen({ navigation }) {
   const { userName, userTeamNumber, competition, updateParams } = useContext(MyContext);
 
   const [newParam1, setNewParam1] = useState("");
-  const [newParam2, setNewParam2] = useState(0);
+  const [newParam2, setNewParam2] = useState("");
   const [newParam3, setNewParam3] = useState("");
 
   const updateParamsWithTextInput = () => {
@@ -607,20 +609,21 @@ function SettingsScreen({ navigation }) {
         label="Scouter Name"
         placeholder="Benjamin Lu"
         onChangeText={setNewParam1}
-        value={newParam1}
+        value={userName}
       />
       <ShortTextInput
         label="Scouter Team"
         placeholder="4308"
         keyboardType="numeric"
         onChangeText={setNewParam2}
-        value={newParam2}
+        value={userTeamNumber}
+        
         maxLength={4}
       />
       <DropdownInput
         label="Competition"
         options={["Humber College", "Centennial College", "McMaster University", "Provincial Championship"]}
-        selectedOption={newParam3}
+        selectedOption={competition}
         setSelectedOption={setNewParam3}
       />
       <Pressable
