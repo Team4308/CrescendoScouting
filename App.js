@@ -128,7 +128,6 @@ function StandsScreen() {
   const [penalties, setPenalties] = useState(0);
   const [techPenalties, setTechPenalties] = useState(0);
   const [driverSkill, setDriverSkill] = useState("");
-  const [centerOfGravity, setCenterOfGravity] = useState("Middle") 
   const [strategyDescription, setStrategyDetails] = useState("");
   const [comments, setComments] = useState("");
   const [scoringPreference, setScoringPreference] = useState("Speaker") // DEFAULT VALUE MUST BE SPEAKER OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
@@ -350,13 +349,6 @@ function StandsScreen() {
         setSelectedOption={setScoringPreference}
       />
 
-      <DropdownInput
-        label="Center of Gravity"
-        options={["High", "Middle", "Low"]} // DEFAULT VALUE MUST BE MIDDLE OTHERWISE DROPDOWN REQUIRES EMPTY DEFAULT
-        selectedOption={centerOfGravity}
-        setSelectedOption={setCenterOfGravity}
-      />
-
       <View style={styles.criteriaContainer}>
         <Text style={styles.criteriaText}>Additional Comments</Text>
         <TextInput
@@ -400,7 +392,6 @@ function StandsScreen() {
             "driverSkill": driverSkill,
             "strategyDesc": strategyDescription,
             "scoringPreference": scoringPreference,
-            "centerOfGravity": centerOfGravity,
             "comments": comments,
           }))
         }
