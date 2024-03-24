@@ -98,7 +98,7 @@ function StandsScreen() {
   const [scoringAccuracy, setScoringAccuracy] = useState("Often misses")
   const [intakeStrength, setIntakeStrength] = useState("Weak")
   const [playstyle, setPlaystyle] = useState("Offensive")
-  const [cycleSpeed, setCycleSpeed] = useState("Very Quick (<10s)")
+  const [cycleSpeed, setCycleSpeed] = useState("Very quick (<10s)")
   const [comments, setComments] = useState("");
   
   const [QRData, setQRData] = useState("EMPTY QR")
@@ -253,7 +253,7 @@ function StandsScreen() {
 
       <DropdownInput
         label="Cycle Speed"
-        options={["Very quick (<10s)", "Quick (10s-13s)", "Average (13s-17s)", "Slow (17s-21s)", "Very slow (>20s)", "Doesn't cycle"]}
+        options={["Very quick (<10s)", "Quick (10s-13s)", "Average (13s-17s)", "Slow (17s-21s)", "Very slow (>21s)", "Doesn't cycle"]}
         selectedOption={cycleSpeed}
         setSelectedOption={setCycleSpeed}
       />
@@ -402,7 +402,7 @@ function PitsScreen() {
 
       <DropdownInput
         label="Cycle Speed"
-        options={["Very quick (<10s)", "Quick (10s-13s)", "Average (13s-17s)", "Slow (17s-21s)", "Very slow (>20s)", "Doesn't cycle"]}
+        options={["Very quick (<10s)", "Quick (10s-13s)", "Average (13s-17s)", "Slow (17s-21s)", "Very slow (>21s)", "Doesn't cycle"]}
         selectedOption={cycleSpeed}
         setSelectedOption={setCycleSpeed}
       />
