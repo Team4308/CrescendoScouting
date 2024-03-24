@@ -116,6 +116,7 @@ function StandsScreen() {
           keyboardType="numeric"
           maxLength={4}
         />
+
         <ShortTextInput
           label="Match Number"
           placeholder="24"
@@ -161,6 +162,53 @@ function StandsScreen() {
           Taxi
         </Text>
       </Pressable>
+
+      <DropdownInput
+        label="Playstyle"
+        options={["Offensive", "Defensive", "Feeder", "Other"]}
+        selectedOption={playstyle}
+        setSelectedOption={setPlaystyle}
+      />
+
+      <ShortTextInput
+        label="Strategy Description"
+        placeholder="Takes fed pieces and scores speaker."
+        onChangeText={setStrategyDetails}
+      />
+
+      <DropdownInput
+        label="Scoring Type"
+        options={["Speaker", "Amp", "Both", "Neither"]}
+        selectedOption={scoringType}
+        setSelectedOption={setScoringType}
+      />
+
+      <DropdownInput
+        label="Scoring Accuracy"
+        options={["Never misses", "Rarely misses", "Sometimes misses", "Often misses", "Never scores"]}
+        selectedOption={scoringAccuracy}
+        setSelectedOption={setScoringAccuracy}
+      />
+
+      <DropdownInput
+        label="Intake Strength"
+        options={["Strong", "Average", "Weak", "Doesn't intake"]}
+        selectedOption={intakeStrength}
+        setSelectedOption={setIntakeStrength}
+      />
+
+      <DropdownInput
+        label="Cycle Speed"
+        options={["Very quick (<10s)", "Quick (10s-13s)", "Average (13s-17s)", "Slow (17s-21s)", "Very slow (>21s)", "Doesn't cycle"]}
+        selectedOption={cycleSpeed}
+        setSelectedOption={setCycleSpeed}
+      />
+
+      <ShortTextInput
+        label="Driver Skill"
+        placeholder="Efficient maneuvering."
+        onChangeText={setDriverSkill}
+      />
 
       <Pressable
         style={[
@@ -210,53 +258,6 @@ function StandsScreen() {
           </Pressable>
         </View>
       </View>
-
-      <ShortTextInput
-        label="Driver Skill"
-        placeholder="Efficient maneuvering."
-        onChangeText={setDriverSkill}
-      />
-
-      <ShortTextInput
-        label="Strategy Description"
-        placeholder="Takes fed pieces and scores speaker."
-        onChangeText={setStrategyDetails}
-      />
-
-      <DropdownInput
-        label="Scoring Type"
-        options={["Speaker", "Amp", "Both", "Neither"]}
-        selectedOption={scoringType}
-        setSelectedOption={setScoringType}
-      />
-
-      <DropdownInput
-        label="Scoring Accuracy"
-        options={["Never misses", "Rarely misses", "Sometimes misses", "Often misses", "Never scores"]}
-        selectedOption={scoringAccuracy}
-        setSelectedOption={setScoringAccuracy}
-      />
-
-      <DropdownInput
-        label="Intake Strength"
-        options={["Strong", "Average", "Weak", "Doesn't intake"]}
-        selectedOption={intakeStrength}
-        setSelectedOption={setIntakeStrength}
-      />
-
-      <DropdownInput
-        label="Playstyle"
-        options={["Offensive", "Defensive", "Feeder", "Other"]}
-        selectedOption={playstyle}
-        setSelectedOption={setPlaystyle}
-      />
-
-      <DropdownInput
-        label="Cycle Speed"
-        options={["Very quick (<10s)", "Quick (10s-13s)", "Average (13s-17s)", "Slow (17s-21s)", "Very slow (>21s)", "Doesn't cycle"]}
-        selectedOption={cycleSpeed}
-        setSelectedOption={setCycleSpeed}
-      />
 
       <View style={styles.criteriaContainer}>
         <Text style={styles.criteriaText}>Additional Comments</Text>
@@ -373,7 +374,7 @@ function PitsScreen() {
       />
 
       <DropdownInput
-        label="Scoring Preference"
+        label="Scoring Type"
         options={["Speaker", "Amp", "Both", "Neither", "Other"]}
         selectedOption={scoringPreference}
         setSelectedOption={setScoringPreference}
