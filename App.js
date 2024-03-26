@@ -88,15 +88,15 @@ function StandsScreen() {
   const [teamNumber, setTeamNumber] = useState(0);
   const [matchNumber, setMatchNumber] = useState(0);
   const [playoffs, setPlayoffs] = useState(false);
-  const [taxi, setTaxi] = useState(false);
+  const [mobility, setMobility] = useState(false);
   const [climb, setClimb] = useState(false);
   const [trap, setScoredTrap] = useState(false);
   const [spotlight, setSpotlight] = useState(false);
   const [driverSkill, setDriverSkill] = useState("");
   const [strategyDescription, setStrategyDetails] = useState("");
   const [scoringType, setScoringType] = useState("Speaker")
-  const [scoringAccuracy, setScoringAccuracy] = useState("Often misses")
-  const [intakeStrength, setIntakeStrength] = useState("Weak")
+  const [scoringAccuracy, setScoringAccuracy] = useState("Sometimes misses")
+  const [intakeAbility, setIntakeAbility] = useState("Weak intake (often fumbles)")
   const [playstyle, setPlaystyle] = useState("Offensive")
   const [cycleSpeed, setCycleSpeed] = useState("Average (15s-20s)")
   const [comments, setComments] = useState("");
@@ -149,17 +149,17 @@ function StandsScreen() {
         style={[
           styles.headerResetButton, styles.criteriaContainer,
           {
-            backgroundColor: taxi ? "#007d23" : "#7d0000",
+            backgroundColor: mobility ? "#007d23" : "#7d0000",
             padding: 10,
             alignItems: 'center',
             borderRadius: 15
           },
         ]}
-        onPress={() => setTaxi(!taxi)}
+        onPress={() => setMobility(!mobility)}
         android_ripple={{color: '#232323'}}
       >
         <Text style={styles.generalText}>
-          Taxi
+          Mobility
         </Text>
       </Pressable>
 
@@ -191,10 +191,10 @@ function StandsScreen() {
       />
 
       <DropdownInput
-        label="Intake Strength"
-        options={["Strong", "Average", "Weak", "Doesn't intake"]}
-        selectedOption={intakeStrength}
-        setSelectedOption={setIntakeStrength}
+        label="Intake Ability"
+        options={["Quick intake (usually first try)", "Decent intake (occassional fumble)", "Weak intake (often fumbles)", "Doesn't intake"]}
+        selectedOption={intakeAbility}
+        setSelectedOption={setIntakeAbility}
       />
 
       <DropdownInput
@@ -287,7 +287,7 @@ function StandsScreen() {
             "teamNum": teamNumber,
             "matchNum": matchNumber,
             "playoffs": playoffs,
-            "taxi": taxi,
+            "mobility": mobility,
             "climb": climb,
             "trap": trap,
             "spotlight": spotlight,
@@ -295,7 +295,7 @@ function StandsScreen() {
             "strategyDesc": strategyDescription,
             "scoringType": scoringType,
             "scoringAccuracy": scoringAccuracy,
-            "intakeStrength": intakeStrength,
+            "intakeAbility": intakeAbility,
             "playstyle": playstyle,
             "cycleSpeed": cycleSpeed,
             "comments": comments,
@@ -315,19 +315,19 @@ function StandsScreen() {
 
 function PitsScreen() {
   const [teamNumber, setTeamNumber] = useState(0)
-  const [drivetrain, setDrivetrain] = useState("Other")
+  const [drivetrain, setDrivetrain] = useState("Swerve")
   const [length, setLength] = useState(0)
   const [width, setWidth] = useState(0)
   const [height, setHeight] = useState(0)
   const [scoringPreference, setScoringPreference] = useState("Speaker")
-  const [scoringAccuracy, setScoringAccuracy] = useState("Often misses")
-  const [intakeStrength, setIntakeStrength] = useState("Weak")
+  const [scoringAccuracy, setScoringAccuracy] = useState("Sometimes misses")
+  const [intakeAbility, setIntakeAbility] = useState("Weak intake (often fumbles)")
   const [playstyle, setPlaystyle] = useState("Offensive")
   const [cycleSpeed, setCycleSpeed] = useState("Average (15s-20s)")
   const [autonStrategyDetails, setAutonStrategyDetails] = useState("")
   const [endgameStrategyDetails, setEndgameStrategyDetails] = useState("")
   const [canFitUnderStage, setCanFitUnderStage] = useState(false)
-  const [canBuddyClimb, setCanBuddyClimb] = useState(false)
+  const [canHarmonize, setCanHarmonize] = useState(false)
   const [comments, setComments] = useState("")
 
   const [QRData, setQRData] = useState("EMPTY QR")
@@ -388,10 +388,10 @@ function PitsScreen() {
       />
 
       <DropdownInput
-        label="Intake Strength"
-        options={["Strong", "Average", "Weak", "Doesn't intake"]}
-        selectedOption={intakeStrength}
-        setSelectedOption={setIntakeStrength}
+        label="Intake Ability"
+        options={["Quick intake (usually first try)", "Decent intake (occassional fumble)", "Weak intake (often fumbles)", "Doesn't intake"]}
+        selectedOption={intakeAbility}
+        setSelectedOption={setIntakeAbility}
       />
 
       <DropdownInput
@@ -437,16 +437,16 @@ function PitsScreen() {
           </Pressable>
           <Pressable
           style={{
-            backgroundColor: canBuddyClimb ? "#007d23" : "#7d0000",
+            backgroundColor: canHarmonize ? "#007d23" : "#7d0000",
             padding: 10,
             width: '45%',
             alignItems: 'center',
             borderRadius: 15
           }}
-          onPress={() => {setCanBuddyClimb(!canBuddyClimb); Vibration.vibrate(70)}}
+          onPress={() => {setCanHarmonize(!canHarmonize); Vibration.vibrate(70)}}
           android_ripple={{color: '#232323'}}
           >
-            <Text style={styles.generalText}>Buddy Climb</Text>
+            <Text style={styles.generalText}>Harmonize</Text>
           </Pressable>
         </View>
       </View>
@@ -483,13 +483,13 @@ function PitsScreen() {
             "height": height,
             "scoringPreference": scoringPreference,
             "scoringAccuracy": scoringAccuracy,
-            "intakeStrength": intakeStrength,
+            "intakeAbility": intakeAbility,
             "playstyle": playstyle,
             "cycleSpeed": cycleSpeed,
             "autonStrategyDetails": autonStrategyDetails,
             "endgameStrategyDetails": endgameStrategyDetails,
             "canFitUnderStage": canFitUnderStage,
-            "canBuddyClimb": canBuddyClimb,
+            "canHarmonize": canHarmonize,
             "comments": comments,
           }))
         }
@@ -616,9 +616,8 @@ export default function App() {
   const [params, setParams] = useState({
     userName: "Satoshi Nakamoto",
     userTeamNumber: "9999",
-    competition: "Humber College",
+    competition: "McMaster University",
   });
-  const [playoffs, setPlayoffs] = useState(false);
 
   const updateParams = (newParams) => {
     setParams({ ...params, ...newParams });
