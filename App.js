@@ -15,6 +15,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { Picker } from "@react-native-picker/picker";
 import QRCode from 'react-native-qrcode-svg';
+import * as Haptics from 'expo-haptics';
 
 // >>> TABLE OF CONTENTS <<<
 // COMPONENTS
@@ -430,7 +431,7 @@ function PitsScreen() {
             alignItems: 'center',
             borderRadius: 15
           }}
-          onPress={() => {setCanFitUnderStage(!canFitUnderStage); Vibration.vibrate(70)}}
+          onPress={() => {setCanFitUnderStage(!canFitUnderStage); Haptics.selectionAsync()}}
           android_ripple={{color: '#232323'}}
           >
             <Text style={styles.generalText}>Under Stage</Text>
@@ -443,7 +444,7 @@ function PitsScreen() {
             alignItems: 'center',
             borderRadius: 15
           }}
-          onPress={() => {setCanHarmonize(!canHarmonize); Vibration.vibrate(70)}}
+          onPress={() => {setCanHarmonize(!canHarmonize); Haptics.selectionAsync()}}
           android_ripple={{color: '#232323'}}
           >
             <Text style={styles.generalText}>Harmonize</Text>
@@ -519,7 +520,7 @@ function SettingsScreen({ navigation }) {
       competition: newParam3 || competition,
     });
     navigation.navigate("homeScreen");
-    Vibration.vibrate(100);
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
   };
 
   return (
@@ -581,7 +582,7 @@ function HomeScreen({ navigation }) {
       <View style={styles.homeNavigationButtonContainer}>
         <Pressable
           style={[styles.homeNavigationButton, { backgroundColor: "#c3423f" }]}
-          onPress={() => {navigation.navigate("standsScreen"); Vibration.vibrate(100)}}
+          onPress={() => {navigation.navigate("standsScreen"); Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)}}
           android_ripple={{color: '#000'}}
         >
           <Text style={styles.homeNavigationButtonText}>Stands</Text>
@@ -589,7 +590,7 @@ function HomeScreen({ navigation }) {
 
         <Pressable
           style={[styles.homeNavigationButton, { backgroundColor: "#5bc0eb" }]}
-          onPress={() => {navigation.navigate("pitsScreen"); Vibration.vibrate(100)}}
+          onPress={() => {navigation.navigate("pitsScreen"); Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)}}
           android_ripple={{color: '#000'}}
         >
           <Text style={styles.homeNavigationButtonText}>Pits</Text>
@@ -597,7 +598,7 @@ function HomeScreen({ navigation }) {
 
         <Pressable
           style={[styles.homeNavigationButton, { backgroundColor: "#959595" }]}
-          onPress={() => {navigation.navigate("settingsScreen"); Vibration.vibrate(100)}}
+          onPress={() => {navigation.navigate("settingsScreen"); Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)}}
           android_ripple={{color: '#000'}}
         >
           <Text style={styles.homeNavigationButtonText}>Settings</Text>
