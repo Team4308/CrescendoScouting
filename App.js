@@ -92,16 +92,17 @@ function StandsScreen() {
   const [matchNumber, setMatchNumber] = useState(0);
   const [playoffs, setPlayoffs] = useState(false);
   const [mobility, setMobility] = useState(false);
+  const [autonStrategyDetails, setAutonStrategyDetails] = useState("");
+  const [playstyle, setPlaystyle] = useState("Offensive")
+  const [scoringType, setScoringType] = useState("Speaker")
+  const [strategyDescription, setStrategyDetails] = useState("");
+  const [scoringAccuracy, setScoringAccuracy] = useState("Sometimes misses")
+  const [intakeAbility, setIntakeAbility] = useState("Weak intake (often fumbles)")
+  const [cycleSpeed, setCycleSpeed] = useState("Average (15s-20s)")
+  const [driverSkill, setDriverSkill] = useState("");
   const [climb, setClimb] = useState(false);
   const [trap, setScoredTrap] = useState(false);
   const [spotlight, setSpotlight] = useState(false);
-  const [driverSkill, setDriverSkill] = useState("");
-  const [strategyDescription, setStrategyDetails] = useState("");
-  const [scoringType, setScoringType] = useState("Speaker")
-  const [scoringAccuracy, setScoringAccuracy] = useState("Sometimes misses")
-  const [intakeAbility, setIntakeAbility] = useState("Weak intake (often fumbles)")
-  const [playstyle, setPlaystyle] = useState("Offensive")
-  const [cycleSpeed, setCycleSpeed] = useState("Average (15s-20s)")
   const [comments, setComments] = useState("");
   
   const [QRData, setQRData] = useState("EMPTY QR")
@@ -166,6 +167,12 @@ function StandsScreen() {
         </Text>
       </Pressable>
 
+      <ShortTextInput
+        label="Auton Strategy"
+        placeholder="Scores preloaded note into speaker."
+        onChangeText={setAutonStrategyDetails}
+      />
+
       <DropdownInput
         label="Playstyle"
         options={["Offensive", "Defensive", "Feeder", "Other"]}
@@ -182,7 +189,7 @@ function StandsScreen() {
 
       <ShortTextInput
         label="Strategy Description"
-        placeholder="Takes fed pieces and scores speaker."
+        placeholder="Takes fed pieces and scores into speaker."
         onChangeText={setStrategyDetails}
       />
 
@@ -291,16 +298,17 @@ function StandsScreen() {
             "matchNum": matchNumber,
             "playoffs": playoffs,
             "mobility": mobility,
+            "autonStrategyDetails": autonStrategyDetails,
+            "playstyle": playstyle,
+            "scoringType": scoringType,
+            "strategyDesc": strategyDescription,
+            "scoringAccuracy": scoringAccuracy,
+            "intakeAbility": intakeAbility,
+            "cycleSpeed": cycleSpeed,
+            "driverSkill": driverSkill,
             "climb": climb,
             "trap": trap,
             "spotlight": spotlight,
-            "driverSkill": driverSkill,
-            "strategyDesc": strategyDescription,
-            "scoringType": scoringType,
-            "scoringAccuracy": scoringAccuracy,
-            "intakeAbility": intakeAbility,
-            "playstyle": playstyle,
-            "cycleSpeed": cycleSpeed,
             "comments": comments,
           }))
         }
