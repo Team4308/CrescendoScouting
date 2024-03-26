@@ -76,7 +76,7 @@ const DropdownInput = ({
             key={index}
             label={option}
             value={option}
-            color={Platform.OS === 'ios' ? '#fff' : undefined}
+            color='#fff'
           />
         ))}
       </Picker>
@@ -275,7 +275,7 @@ function StandsScreen() {
         />
       </View>
 
-      <View style={[styles.criteriaContainer, {alignItems: 'center', backgroundColor: '#fff', padding: 20, marginTop: "4%", padding: Platform.OS === 'ios' ? '9.5%' : undefined}]}>
+      <View style={[styles.criteriaContainer, {alignItems: 'center', backgroundColor: '#fff', marginTop: "4%", padding: Platform.OS === 'ios' ? '9.5%' : 20}]}>
           <QRCode value={QRData} size={300} />
       </View>
 
