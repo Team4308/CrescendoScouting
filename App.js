@@ -768,15 +768,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 
-  criteriaTeamNumberInput: {
-    padding: 5,
-    paddingLeft: 12,
-    marginTop: 10,
-    color: "#fff",
-    borderWidth: 1,
-    borderColor: "#fff",
-  },
-
   criteriaTextInput: {
     padding: 5,
     paddingLeft: 12,
@@ -790,12 +781,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-  },
-
-  criteriaButton: {
-    backgroundColor: "#fff",
-    padding: "3%",
-    borderRadius: 10,
   },
 
   homeTitleText: {
