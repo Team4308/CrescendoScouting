@@ -170,17 +170,17 @@ function StandsScreen() {
         setSelectedOption={setPlaystyle}
       />
 
-      <ShortTextInput
-        label="Strategy Description"
-        placeholder="Takes fed pieces and scores speaker."
-        onChangeText={setStrategyDetails}
-      />
-
       <DropdownInput
         label="Scoring Type"
         options={["Speaker", "Amp", "Both", "Neither"]}
         selectedOption={scoringType}
         setSelectedOption={setScoringType}
+      />
+
+      <ShortTextInput
+        label="Strategy Description"
+        placeholder="Takes fed pieces and scores speaker."
+        onChangeText={setStrategyDetails}
       />
 
       <DropdownInput
