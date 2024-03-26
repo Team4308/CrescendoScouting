@@ -421,7 +421,7 @@ function PitsScreen() {
 
       <ShortTextInput
         label="Auton Strategy"
-        placeholder="Takes fed pieces and scores speaker."
+        placeholder="Scores preloaded note into speaker."
         onChangeText={setAutonStrategyDetails}
       />
 
