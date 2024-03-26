@@ -9,7 +9,7 @@ import {
   Pressable,
   TextInput,
   ScrollView,
-  Vibration,
+  Platform,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
@@ -62,12 +62,13 @@ const DropdownInput = ({
       borderWidth: 1,
       borderColor: '#fff',
       marginTop: 10,
-      color: "#fff",
+      height: Platform.OS === 'ios' ? 60 : undefined,
+      overflow: Platform.OS === 'ios' ? 'hidden' : undefined,
+      justifyContent: Platform.OS === 'ios' ? 'center' : undefined,
     }}>
       <Picker
         selectedValue={selectedOption}
         onValueChange={(itemValue) => setSelectedOption(itemValue)}
-        style={{color: '#fff'}}
         dropdownIconColor={'#fff'}
       >
         {options.map((option, index) => (
@@ -75,6 +76,7 @@ const DropdownInput = ({
             key={index}
             label={option}
             value={option}
+            color={Platform.OS === 'ios' ? '#fff' : undefined}
           />
         ))}
       </Picker>
@@ -273,7 +275,7 @@ function StandsScreen() {
         />
       </View>
 
-      <View style={[styles.criteriaContainer, {alignItems: 'center', backgroundColor: '#fff', padding: 20, marginTop: "4%"}]}>
+      <View style={[styles.criteriaContainer, {alignItems: 'center', backgroundColor: '#fff', padding: 20, marginTop: "4%", padding: Platform.OS === 'ios' ? '9.5%' : undefined}]}>
           <QRCode value={QRData} size={300} />
       </View>
 
