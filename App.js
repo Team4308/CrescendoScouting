@@ -69,6 +69,7 @@ const DropdownInput = ({
       <Picker
         selectedValue={selectedOption}
         onValueChange={(itemValue) => setSelectedOption(itemValue)}
+        style={{color: '#fff'}}
         dropdownIconColor={'#fff'}
       >
         {options.map((option, index) => (
@@ -76,7 +77,7 @@ const DropdownInput = ({
             key={index}
             label={option}
             value={option}
-            color='#fff'
+            color={Platform.OS === 'ios' ? "#fff" : undefined}
           />
         ))}
       </Picker>
