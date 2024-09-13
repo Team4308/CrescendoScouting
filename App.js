@@ -1,4 +1,4 @@
-import 'react-native-gesture-handler';
+import "react-native-gesture-handler";
 import React, { createContext, useContext, useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
@@ -13,9 +13,9 @@ import {
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { Picker } from '@react-native-picker/picker';
-import QRCode from 'react-native-qrcode-svg';
-import * as Haptics from 'expo-haptics';
+import { Picker } from "@react-native-picker/picker";
+import QRCode from "react-native-qrcode-svg";
+import * as Haptics from "expo-haptics";
 
 // >>> TABLE OF CONTENTS <<<
 // COMPONENTS
@@ -58,26 +58,28 @@ const DropdownInput = ({
 }) => (
   <View style={styles.criteriaContainer}>
     <Text style={styles.criteriaText}>{label}</Text>
-    <View style={{
-      borderWidth: 1,
-      borderColor: '#fff',
-      marginTop: 10,
-      height: Platform.OS === 'ios' ? 60 : undefined,
-      overflow: Platform.OS === 'ios' ? 'hidden' : undefined,
-      justifyContent: Platform.OS === 'ios' ? 'center' : undefined,
-    }}>
+    <View
+      style={{
+        borderWidth: 1,
+        borderColor: "#fff",
+        marginTop: 10,
+        height: Platform.OS === "ios" ? 60 : undefined,
+        overflow: Platform.OS === "ios" ? "hidden" : undefined,
+        justifyContent: Platform.OS === "ios" ? "center" : undefined,
+      }}
+    >
       <Picker
         selectedValue={selectedOption}
         onValueChange={(itemValue) => setSelectedOption(itemValue)}
-        style={{color: '#fff'}}
-        dropdownIconColor={'#fff'}
+        style={{ color: "#fff" }}
+        dropdownIconColor={"#fff"}
       >
         {options.map((option, index) => (
           <Picker.Item
             key={index}
             label={option}
             value={option}
-            color={Platform.OS === 'ios' ? "#fff" : undefined}
+            color={Platform.OS === "ios" ? "#fff" : undefined}
           />
         ))}
       </Picker>
@@ -94,19 +96,21 @@ function StandsScreen() {
   const [playoffs, setPlayoffs] = useState(false);
   const [mobility, setMobility] = useState(false);
   const [autonStrategyDetails, setAutonStrategyDetails] = useState("");
-  const [playstyle, setPlaystyle] = useState("Offensive")
-  const [scoringType, setScoringType] = useState("Speaker")
+  const [playstyle, setPlaystyle] = useState("Offensive");
+  const [scoringType, setScoringType] = useState("Speaker");
   const [strategyDescription, setStrategyDetails] = useState("");
-  const [scoringAccuracy, setScoringAccuracy] = useState("Sometimes misses")
-  const [intakeAbility, setIntakeAbility] = useState("Weak intake (often fumbles)")
-  const [cycleSpeed, setCycleSpeed] = useState("Average (15s-20s)")
+  const [scoringAccuracy, setScoringAccuracy] = useState("Sometimes misses");
+  const [intakeAbility, setIntakeAbility] = useState(
+    "Weak intake (often fumbles)",
+  );
+  const [cycleSpeed, setCycleSpeed] = useState("Average (15s-20s)");
   const [driverSkill, setDriverSkill] = useState("");
   const [climb, setClimb] = useState(false);
   const [trap, setScoredTrap] = useState(false);
   const [spotlight, setSpotlight] = useState(false);
   const [comments, setComments] = useState("");
-  
-  const [QRData, setQRData] = useState("EMPTY QR")
+
+  const [QRData, setQRData] = useState("EMPTY QR");
 
   const { userName, userTeamNumber, competition } = useContext(MyContext);
 
@@ -134,38 +138,36 @@ function StandsScreen() {
 
       <Pressable
         style={[
-          styles.headerResetButton, styles.criteriaContainer,
+          styles.headerResetButton,
+          styles.criteriaContainer,
           {
             backgroundColor: playoffs ? "#007d23" : "#7d0000",
             padding: 10,
-            alignItems: 'center',
-            borderRadius: 15
+            alignItems: "center",
+            borderRadius: 15,
           },
         ]}
         onPress={() => setPlayoffs(!playoffs)}
-        android_ripple={{color: '#232323'}}
+        android_ripple={{ color: "#232323" }}
       >
-        <Text style={styles.generalText}>
-          Playoffs
-        </Text>
+        <Text style={styles.generalText}>Playoffs</Text>
       </Pressable>
 
       <Pressable
         style={[
-          styles.headerResetButton, styles.criteriaContainer,
+          styles.headerResetButton,
+          styles.criteriaContainer,
           {
             backgroundColor: mobility ? "#007d23" : "#7d0000",
             padding: 10,
-            alignItems: 'center',
-            borderRadius: 15
+            alignItems: "center",
+            borderRadius: 15,
           },
         ]}
         onPress={() => setMobility(!mobility)}
-        android_ripple={{color: '#232323'}}
+        android_ripple={{ color: "#232323" }}
       >
-        <Text style={styles.generalText}>
-          Mobility
-        </Text>
+        <Text style={styles.generalText}>Mobility</Text>
       </Pressable>
 
       <ShortTextInput
@@ -196,21 +198,37 @@ function StandsScreen() {
 
       <DropdownInput
         label="Scoring Accuracy"
-        options={["Never misses", "Rarely misses", "Sometimes misses", "Often misses", "Never scores"]}
+        options={[
+          "Never misses",
+          "Rarely misses",
+          "Sometimes misses",
+          "Often misses",
+          "Never scores",
+        ]}
         selectedOption={scoringAccuracy}
         setSelectedOption={setScoringAccuracy}
       />
 
       <DropdownInput
         label="Intake Ability"
-        options={["Quick intake (usually first try)", "Decent intake (occassional fumble)", "Weak intake (often fumbles)", "Doesn't intake"]}
+        options={[
+          "Quick intake (usually first try)",
+          "Decent intake (occassional fumble)",
+          "Weak intake (often fumbles)",
+          "Doesn't intake",
+        ]}
         selectedOption={intakeAbility}
         setSelectedOption={setIntakeAbility}
       />
 
       <DropdownInput
         label="Cycle Speed"
-        options={["Quick (<15s)", "Average (15s-20s)", "Slow (>20s)", "Doesn't cycle"]}
+        options={[
+          "Quick (<15s)",
+          "Average (15s-20s)",
+          "Slow (>20s)",
+          "Doesn't cycle",
+        ]}
         selectedOption={cycleSpeed}
         setSelectedOption={setCycleSpeed}
       />
@@ -223,47 +241,51 @@ function StandsScreen() {
 
       <Pressable
         style={[
-          styles.headerResetButton, styles.criteriaContainer,
+          styles.headerResetButton,
+          styles.criteriaContainer,
           {
             backgroundColor: climb ? "#007d23" : "#7d0000",
             padding: 10,
-            alignItems: 'center',
-            borderRadius: 15
+            alignItems: "center",
+            borderRadius: 15,
           },
         ]}
         onPress={() => setClimb(!climb)}
-        android_ripple={{color: '#232323'}}
+        android_ripple={{ color: "#232323" }}
       >
-        <Text style={styles.generalText}>
-          Climb
-        </Text>
+        <Text style={styles.generalText}>Climb</Text>
       </Pressable>
 
       <View style={styles.criteriaContainer}>
-        <View style={[styles.criteriaHorzContainer, {justifyContent: 'space-between'}]}>
+        <View
+          style={[
+            styles.criteriaHorzContainer,
+            { justifyContent: "space-between" },
+          ]}
+        >
           <Pressable
-          style={{
-            backgroundColor: trap ? "#007d23" : "#7d0000",
-            padding: 10,
-            width: '44%',
-            alignItems: 'center',
-            borderRadius: 15
-          }}
-          android_ripple={{color: '#232323'}}
-          onPress={() => setScoredTrap(!trap)}
+            style={{
+              backgroundColor: trap ? "#007d23" : "#7d0000",
+              padding: 10,
+              width: "44%",
+              alignItems: "center",
+              borderRadius: 15,
+            }}
+            android_ripple={{ color: "#232323" }}
+            onPress={() => setScoredTrap(!trap)}
           >
             <Text style={styles.generalText}>Trap</Text>
           </Pressable>
           <Pressable
-          style={{
-            backgroundColor: spotlight ? "#007d23" : "#7d0000",
-            padding: 10,
-            width: '44%',
-            alignItems: 'center',
-            borderRadius: 15
-          }}
-          android_ripple={{color: '#232323'}}
-          onPress={() => setSpotlight(!spotlight)}
+            style={{
+              backgroundColor: spotlight ? "#007d23" : "#7d0000",
+              padding: 10,
+              width: "44%",
+              alignItems: "center",
+              borderRadius: 15,
+            }}
+            android_ripple={{ color: "#232323" }}
+            onPress={() => setSpotlight(!spotlight)}
           >
             <Text style={styles.generalText}>Spotlight</Text>
           </Pressable>
@@ -283,37 +305,52 @@ function StandsScreen() {
         />
       </View>
 
-      <View style={[styles.criteriaContainer, {alignItems: 'center', backgroundColor: '#fff', marginTop: "4%", padding: Platform.OS === 'ios' ? '9.5%' : 20}]}>
-          <QRCode value={QRData} size={300} />
+      <View
+        style={[
+          styles.criteriaContainer,
+          {
+            alignItems: "center",
+            backgroundColor: "#fff",
+            marginTop: "4%",
+            padding: Platform.OS === "ios" ? "9.5%" : 20,
+          },
+        ]}
+      >
+        <QRCode value={QRData} size={300} />
       </View>
 
       <Pressable
-        style={[styles.criteriaButton2, { marginBottom: "10%", marginTop: "3%" }]}
-        onPress={
-          () => setQRData(JSON.stringify({
-            "type": "stands",
-            "scouterName": userName,
-            "scouterTeam": userTeamNumber,
-            "compName": competition,
-            "teamNum": teamNumber,
-            "matchNum": matchNumber,
-            "playoffs": playoffs,
-            "mobility": mobility,
-            "autonStrategyDetails": autonStrategyDetails,
-            "playstyle": playstyle,
-            "scoringType": scoringType,
-            "strategyDesc": strategyDescription,
-            "scoringAccuracy": scoringAccuracy,
-            "intakeAbility": intakeAbility,
-            "cycleSpeed": cycleSpeed,
-            "driverSkill": driverSkill,
-            "climb": climb,
-            "trap": trap,
-            "spotlight": spotlight,
-            "comments": comments,
-          }))
+        style={[
+          styles.criteriaButton2,
+          { marginBottom: "10%", marginTop: "3%" },
+        ]}
+        onPress={() =>
+          setQRData(
+            JSON.stringify({
+              type: "stands",
+              scouterName: userName,
+              scouterTeam: userTeamNumber,
+              compName: competition,
+              teamNum: teamNumber,
+              matchNum: matchNumber,
+              playoffs: playoffs,
+              mobility: mobility,
+              autonStrategyDetails: autonStrategyDetails,
+              playstyle: playstyle,
+              scoringType: scoringType,
+              strategyDesc: strategyDescription,
+              scoringAccuracy: scoringAccuracy,
+              intakeAbility: intakeAbility,
+              cycleSpeed: cycleSpeed,
+              driverSkill: driverSkill,
+              climb: climb,
+              trap: trap,
+              spotlight: spotlight,
+              comments: comments,
+            }),
+          )
         }
-        android_ripple={{color: '#007d23'}}
+        android_ripple={{ color: "#007d23" }}
       >
         <Text>Generate QR</Text>
       </Pressable>
@@ -326,23 +363,25 @@ function StandsScreen() {
 // >>> --> PITS SCREEN <<<
 
 function PitsScreen() {
-  const [teamNumber, setTeamNumber] = useState(0)
-  const [drivetrain, setDrivetrain] = useState("Swerve")
-  const [length, setLength] = useState(0)
-  const [width, setWidth] = useState(0)
-  const [height, setHeight] = useState(0)
-  const [scoringPreference, setScoringPreference] = useState("Speaker")
-  const [scoringAccuracy, setScoringAccuracy] = useState("Sometimes misses")
-  const [intakeAbility, setIntakeAbility] = useState("Weak intake (often fumbles)")
-  const [playstyle, setPlaystyle] = useState("Offensive")
-  const [cycleSpeed, setCycleSpeed] = useState("Average (15s-20s)")
-  const [autonStrategyDetails, setAutonStrategyDetails] = useState("")
-  const [endgameStrategyDetails, setEndgameStrategyDetails] = useState("")
-  const [canFitUnderStage, setCanFitUnderStage] = useState(false)
-  const [canHarmonize, setCanHarmonize] = useState(false)
-  const [comments, setComments] = useState("")
+  const [teamNumber, setTeamNumber] = useState(0);
+  const [drivetrain, setDrivetrain] = useState("Swerve");
+  const [length, setLength] = useState(0);
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+  const [scoringPreference, setScoringPreference] = useState("Speaker");
+  const [scoringAccuracy, setScoringAccuracy] = useState("Sometimes misses");
+  const [intakeAbility, setIntakeAbility] = useState(
+    "Weak intake (often fumbles)",
+  );
+  const [playstyle, setPlaystyle] = useState("Offensive");
+  const [cycleSpeed, setCycleSpeed] = useState("Average (15s-20s)");
+  const [autonStrategyDetails, setAutonStrategyDetails] = useState("");
+  const [endgameStrategyDetails, setEndgameStrategyDetails] = useState("");
+  const [canFitUnderStage, setCanFitUnderStage] = useState(false);
+  const [canHarmonize, setCanHarmonize] = useState(false);
+  const [comments, setComments] = useState("");
 
-  const [QRData, setQRData] = useState("EMPTY QR")
+  const [QRData, setQRData] = useState("EMPTY QR");
 
   const { userName, userTeamNumber, competition } = useContext(MyContext);
 
@@ -370,14 +409,14 @@ function PitsScreen() {
         onChangeText={setLength}
         keyboardType="numeric"
       />
-      
+
       <ShortTextInput
         label="Width"
         placeholder="40 (in inches)"
         onChangeText={setWidth}
         keyboardType="numeric"
       />
-      
+
       <ShortTextInput
         label="Height"
         placeholder="120 (in inches)"
@@ -394,14 +433,25 @@ function PitsScreen() {
 
       <DropdownInput
         label="Scoring Accuracy"
-        options={["Never misses", "Rarely misses", "Sometimes misses", "Often misses", "Never scores"]}
+        options={[
+          "Never misses",
+          "Rarely misses",
+          "Sometimes misses",
+          "Often misses",
+          "Never scores",
+        ]}
         selectedOption={scoringAccuracy}
         setSelectedOption={setScoringAccuracy}
       />
 
       <DropdownInput
         label="Intake Ability"
-        options={["Quick intake (usually first try)", "Decent intake (occassional fumble)", "Weak intake (often fumbles)", "Doesn't intake"]}
+        options={[
+          "Quick intake (usually first try)",
+          "Decent intake (occassional fumble)",
+          "Weak intake (often fumbles)",
+          "Doesn't intake",
+        ]}
         selectedOption={intakeAbility}
         setSelectedOption={setIntakeAbility}
       />
@@ -415,7 +465,12 @@ function PitsScreen() {
 
       <DropdownInput
         label="Cycle Speed"
-        options={["Quick (<15s)", "Average (15s-20s)", "Slow (>20s)", "Doesn't cycle"]}
+        options={[
+          "Quick (<15s)",
+          "Average (15s-20s)",
+          "Slow (>20s)",
+          "Doesn't cycle",
+        ]}
         selectedOption={cycleSpeed}
         setSelectedOption={setCycleSpeed}
       />
@@ -433,30 +488,36 @@ function PitsScreen() {
       />
 
       <View style={styles.criteriaContainer}>
-        <View style={[styles.criteriaHorzContainer, {marginTop: "3%"}]}>
+        <View style={[styles.criteriaHorzContainer, { marginTop: "3%" }]}>
           <Pressable
-          style={{
-            backgroundColor: canFitUnderStage ? "#007d23" : "#7d0000",
-            padding: 10,
-            width: '45%',
-            alignItems: 'center',
-            borderRadius: 15
-          }}
-          onPress={() => {setCanFitUnderStage(!canFitUnderStage); Haptics.selectionAsync()}}
-          android_ripple={{color: '#232323'}}
+            style={{
+              backgroundColor: canFitUnderStage ? "#007d23" : "#7d0000",
+              padding: 10,
+              width: "45%",
+              alignItems: "center",
+              borderRadius: 15,
+            }}
+            onPress={() => {
+              setCanFitUnderStage(!canFitUnderStage);
+              Haptics.selectionAsync();
+            }}
+            android_ripple={{ color: "#232323" }}
           >
             <Text style={styles.generalText}>Under Stage</Text>
           </Pressable>
           <Pressable
-          style={{
-            backgroundColor: canHarmonize ? "#007d23" : "#7d0000",
-            padding: 10,
-            width: '45%',
-            alignItems: 'center',
-            borderRadius: 15
-          }}
-          onPress={() => {setCanHarmonize(!canHarmonize); Haptics.selectionAsync()}}
-          android_ripple={{color: '#232323'}}
+            style={{
+              backgroundColor: canHarmonize ? "#007d23" : "#7d0000",
+              padding: 10,
+              width: "45%",
+              alignItems: "center",
+              borderRadius: 15,
+            }}
+            onPress={() => {
+              setCanHarmonize(!canHarmonize);
+              Haptics.selectionAsync();
+            }}
+            android_ripple={{ color: "#232323" }}
           >
             <Text style={styles.generalText}>Harmonize</Text>
           </Pressable>
@@ -476,36 +537,46 @@ function PitsScreen() {
         />
       </View>
 
-      <View style={[styles.criteriaContainer, {alignItems: 'center', backgroundColor: '#fff', padding: 20}]}>
-          <QRCode value={QRData} size={300} />
+      <View
+        style={[
+          styles.criteriaContainer,
+          { alignItems: "center", backgroundColor: "#fff", padding: 20 },
+        ]}
+      >
+        <QRCode value={QRData} size={300} />
       </View>
 
       <Pressable
-        style={[styles.criteriaButton2, { marginBottom: "5%", marginTop: "3%" }]}
-        onPress={
-          () => setQRData(JSON.stringify({
-            "type": "pits",
-            "scouterName": userName,
-            "scouterTeam": userTeamNumber,
-            "compName": competition,
-            "teamNum": teamNumber,
-            "drivetrain": drivetrain,
-            "length": length,
-            "width": width,
-            "height": height,
-            "scoringPreference": scoringPreference,
-            "scoringAccuracy": scoringAccuracy,
-            "intakeAbility": intakeAbility,
-            "playstyle": playstyle,
-            "cycleSpeed": cycleSpeed,
-            "autonStrategyDetails": autonStrategyDetails,
-            "endgameStrategyDetails": endgameStrategyDetails,
-            "canFitUnderStage": canFitUnderStage,
-            "canHarmonize": canHarmonize,
-            "comments": comments,
-          }))
+        style={[
+          styles.criteriaButton2,
+          { marginBottom: "5%", marginTop: "3%" },
+        ]}
+        onPress={() =>
+          setQRData(
+            JSON.stringify({
+              type: "pits",
+              scouterName: userName,
+              scouterTeam: userTeamNumber,
+              compName: competition,
+              teamNum: teamNumber,
+              drivetrain: drivetrain,
+              length: length,
+              width: width,
+              height: height,
+              scoringPreference: scoringPreference,
+              scoringAccuracy: scoringAccuracy,
+              intakeAbility: intakeAbility,
+              playstyle: playstyle,
+              cycleSpeed: cycleSpeed,
+              autonStrategyDetails: autonStrategyDetails,
+              endgameStrategyDetails: endgameStrategyDetails,
+              canFitUnderStage: canFitUnderStage,
+              canHarmonize: canHarmonize,
+              comments: comments,
+            }),
+          )
         }
-        android_ripple={{color: '#007d23'}}
+        android_ripple={{ color: "#007d23" }}
       >
         <Text>Generate QR</Text>
       </Pressable>
@@ -518,7 +589,8 @@ function PitsScreen() {
 // >>> --> SETTINGS SCREEN <<<
 
 function SettingsScreen({ navigation }) {
-  const { userName, userTeamNumber, competition, updateParams } = useContext(MyContext);
+  const { userName, userTeamNumber, competition, updateParams } =
+    useContext(MyContext);
 
   const [newParam1, setNewParam1] = useState("");
   const [newParam2, setNewParam2] = useState("");
@@ -546,18 +618,24 @@ function SettingsScreen({ navigation }) {
         keyboardType="numeric"
         maxLength={4}
         placeholder={userTeamNumber}
-        onChangeText={setNewParam2}        
+        onChangeText={setNewParam2}
       />
       <DropdownInput
         label="Competition"
-        options={["Humber College", "Centennial College", "McMaster University", "Provincial Championship", "FIRST Championship"]}
+        options={[
+          "Humber College",
+          "Centennial College",
+          "McMaster University",
+          "Provincial Championship",
+          "FIRST Championship",
+        ]}
         selectedOption={newParam3}
         setSelectedOption={setNewParam3}
       />
       <Pressable
         style={[styles.criteriaButton2, { marginTop: "5%" }]}
         onPress={updateParamsWithTextInput}
-        android_ripple={{color: '#007d23'}}
+        android_ripple={{ color: "#007d23" }}
       >
         <Text>Save Settings</Text>
       </Pressable>
@@ -593,24 +671,33 @@ function HomeScreen({ navigation }) {
       <View style={styles.homeNavigationButtonContainer}>
         <Pressable
           style={[styles.homeNavigationButton, { backgroundColor: "#c3423f" }]}
-          onPress={() => {navigation.navigate("standsScreen"); Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)}}
-          android_ripple={{color: '#000'}}
+          onPress={() => {
+            navigation.navigate("standsScreen");
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+          }}
+          android_ripple={{ color: "#000" }}
         >
           <Text style={styles.homeNavigationButtonText}>Stands</Text>
         </Pressable>
 
         <Pressable
           style={[styles.homeNavigationButton, { backgroundColor: "#5bc0eb" }]}
-          onPress={() => {navigation.navigate("pitsScreen"); Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)}}
-          android_ripple={{color: '#000'}}
+          onPress={() => {
+            navigation.navigate("pitsScreen");
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+          }}
+          android_ripple={{ color: "#000" }}
         >
           <Text style={styles.homeNavigationButtonText}>Pits</Text>
         </Pressable>
 
         <Pressable
           style={[styles.homeNavigationButton, { backgroundColor: "#959595" }]}
-          onPress={() => {navigation.navigate("settingsScreen"); Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)}}
-          android_ripple={{color: '#000'}}
+          onPress={() => {
+            navigation.navigate("settingsScreen");
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+          }}
+          android_ripple={{ color: "#000" }}
         >
           <Text style={styles.homeNavigationButtonText}>Settings</Text>
         </Pressable>
@@ -736,12 +823,12 @@ const styles = StyleSheet.create({
 
   headerResetButton: {
     backgroundColor: "#959595",
-    minHeight: '2%',
+    minHeight: "2%",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 15,
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
 
   scoutingScreenContainer: {
